@@ -3,6 +3,7 @@ from sqlmodel import Field, SQLModel
 
 
 class User(SQLModel, table=True):
+    __tablename__ = "user"
     id: int = Field(primary_key=True)
     email: str = Field(index=True)
     password: str
