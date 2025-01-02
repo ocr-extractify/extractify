@@ -1,7 +1,5 @@
 from datetime import datetime
 from sqlmodel import Field, SQLModel, Relationship, JSON, ARRAY, Column
-from sqlalchemy.dialects.postgresql import JSONB
-from _types.DetectedLanguage import DetectedLanguage
 
 
 class Filetype(SQLModel, table=True):
@@ -17,11 +15,9 @@ class Filetype(SQLModel, table=True):
 class FileExtraction(SQLModel, table=True):
     id: int = Field(primary_key=True)
     name: str = Field(index=True)
-    # text: Dict = Field(default_factory=dict, sa_type=Field(JSONB))
-    detected_languages: list[DetectedLanguage] = Field(
-        sa_column=Column(ARRAY(DetectedLanguage))
-    )
-    # extracted_data: Dict | None = Field(default=None, sa_type=Field(JSONB))
+    text: dict = Field(sa_column=Column(JSON))
+    detected_languages: list[JSON] = Field(sa_column=Column(ARRAY(JSON)))
+    extracted_data: dict | None = Field(default=None, sa_column=Column(JSON))
     is_deleted: bool = Field(default=False)
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
