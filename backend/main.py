@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from db import setup_db
+from routes.files import files_router
 
-# from routes.files import files_router
 # from routes.stats import stats_router
 # from routes.test import test_router
 from utils.middlewares import ExceptionHandlerMiddleware
@@ -17,7 +17,7 @@ app = FastAPI(
 )
 
 
-# app.include_router(files_router)
+app.include_router(files_router)
 # app.include_router(stats_router)
 # app.include_router(test_router)
 
