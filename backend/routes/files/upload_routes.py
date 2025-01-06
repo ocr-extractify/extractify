@@ -1,7 +1,4 @@
-from datetime import datetime, timedelta, timezone
 import json
-import uuid
-from constants.errors_texts import CLIENT_DAY_LIMIT_REACHED, MONTHLY_LIMIT_REACHED
 from routes.files import files_router
 from fastapi import HTTPException, UploadFile, status, Request
 from utils.documentai.analyze import analyze_file
@@ -12,7 +9,9 @@ from utils.documentai.analyze import analyze_file
     description="Upload a file.",
     status_code=status.HTTP_201_CREATED,
 )
-async def upload(file: UploadFile, request: Request):
+async def upload(
+    request: Request, file: UploadFile, extraction_config: dict | None = None
+):
     if request.client is None:
         # TODO: Add detail error message.
         raise HTTPException(status_code=400, detail="")
