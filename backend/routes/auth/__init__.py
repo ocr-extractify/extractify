@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-files_router = APIRouter(
+auth_router = APIRouter(
     prefix="/auth",
     tags=["auth"],
 )

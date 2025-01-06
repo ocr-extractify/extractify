@@ -10,7 +10,7 @@ class Filetype(SQLModel, table=True):
     created_at: datetime = Field(default=datetime.now())
     updated_at: datetime = Field(default=datetime.now())
 
-    files: list["File"] | None = Relationship(back_populates="filetype")
+    # files: list["File"] | None = Relationship(back_populates="filetype")
 
 
 class FileExtraction(SQLModel, table=True):
@@ -43,4 +43,4 @@ class File(SQLModel, table=True):
     filetype_id: int = Field(foreign_key="filetype.id")
     user_id: int = Field(foreign_key="user.id")
 
-    extractions: list["FileExtraction"] | None = Relationship(back_populates="file")
+    # extractions: list["FileExtraction"] | None = Relationship(back_populates="file")
