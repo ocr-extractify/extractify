@@ -16,7 +16,7 @@ const Base = () => {
   const filesCount = useFilesStore(
     (state: FileStoreState) => state.files.length,
   );
-  const TABS = useMemo(
+  const TABS = useMemo( 
     () => [
       {
         href: '/upload',
