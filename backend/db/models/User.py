@@ -7,7 +7,7 @@ class User(SQLModel, table=True):
     id: int = Field(primary_key=True)
     email: str = Field(index=True)
     password: str
-    is_email_valid: bool = Field(default=False)
-    is_deleted: bool = Field(default=False)
-    created_at: datetime = Field(default_factory=datetime.now)
-    updated_at: datetime = Field(default_factory=datetime.now)
+    is_email_valid: bool | None = Field(default=False)
+    is_deleted: bool | None = Field(default=False)
+    created_at: datetime | None = Field(default_factory=datetime.now)
+    updated_at: datetime | None = Field(default_factory=datetime.now)
