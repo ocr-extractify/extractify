@@ -1,21 +1,30 @@
-from fastapi import status
+from datetime import timedelta
+from typing import Annotated
+from fastapi import Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordRequestForm
 from routes.auth import auth_router
+from schemas.auth import Token
+from utils.auth import authenticate_user, create_access_token
+from config import config
+from dependencies import SessionDep
 
 
 @auth_router.post(
     "/signin/",
-    status_code=status.HTTP_204_NO_CONTENT,
+    status_code=status.HTTP_200_OK,
 )
-async def signin() -> Token:
-    user = authenticate_user(fake_users_db, form_data.username, form_data.password)
-    if not user:
+async def signin(
+    user: Annotated[OAuth2PasswordRequestForm, Depends()], session: SessionDep
+) -> Token:
+    db_user = authenticate_user(session, user.username, user.password)
+    if not db_user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token_expires = timedelta(minutes=config.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user.username}, expires_delta=access_token_expires
+        data={"sub": db_user.email}, expires_delta=access_token_expires
     )
     return Token(access_token=access_token, token_type="bearer")

@@ -4,7 +4,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from db.models import User
 from routes.auth import auth_router
 from dependencies import SessionDep
-from utils.security import get_password_hash
+from utils.auth import get_password_hash
 
 
 @auth_router.post(
@@ -20,7 +20,7 @@ async def signup(
         password=hashed_password,
     )
     session.add(db_user)
-    await session.commit()
-    await session.refresh(db_user)
+    session.commit()
+    session.refresh(db_user)
     # TODO: hide user password (probably should be done in model directly)
     return db_user

@@ -7,7 +7,7 @@ from utils.middlewares import ExceptionHandlerMiddleware
 
 
 async def on_startup():
-    await setup_db()
+    setup_db()
 
 
 app = FastAPI(
