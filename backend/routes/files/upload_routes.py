@@ -1,6 +1,8 @@
 import json
+from db.models import User
 from routes.files import files_router
-from fastapi import HTTPException, UploadFile, status, Request
+from fastapi import Depends, HTTPException, UploadFile, status, Request
+from utils.auth import get_current_user
 from utils.documentai.analyze import analyze_file
 
 
@@ -10,7 +12,10 @@ from utils.documentai.analyze import analyze_file
     status_code=status.HTTP_201_CREATED,
 )
 async def upload(
-    request: Request, file: UploadFile, extraction_config: dict | None = None
+    request: Request,
+    file: UploadFile,
+    extraction_config: dict | None = None,
+    current_user: User = Depends(get_current_user),
 ):
     if request.client is None:
         # TODO: Add detail error message.
