@@ -1,7 +1,7 @@
-export { default as FilesPage } from './FilesPage';
-export { default as FilePage } from './FilePage';
+export { default as FilesPage } from './files/FilesPage';
+export { default as FilePage } from './files/FilePage';
 export { default as StatsPage } from './StatsPage';
-export { default as UploadFilesPage } from './UploadFilesPage';
+export { default as UploadFilesPage } from './files/UploadFilesPage';
 export { default as Base } from './Base';
-export { default as SignInPage } from './SignInPage';
-export { default as SignUpPage } from './SignUpPage';
+export { default as SignInPage } from './auth/SignInPage';
+export { default as SignUpPage } from './auth/SignUpPage';

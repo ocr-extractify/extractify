@@ -1,7 +1,17 @@
 import { GalleryVerticalEnd } from "lucide-react"
 import { AuthForm } from "@/components/AuthForm"
+import { useMutation } from "@tanstack/react-query"
+import { useAuth } from "@/providers/AuthProvider"
+import { UserLogin } from "@/utils/types/api/auth"
 
 export default function SignUpPage() {
+  const { signup } = useAuth()
+  const mutation = useMutation({
+    mutationFn: async (data: UserLogin) => {
+      return signup(data)
+    }
+  })
+
   return (
     <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10">
       <div className="flex w-full max-w-sm flex-col gap-6">
@@ -11,7 +21,7 @@ export default function SignUpPage() {
           </div>
           File to text.
         </a>
-        <AuthForm type="signup" />
+        <AuthForm type="signup" mutation={mutation} />
       </div>
     </div>
   )
