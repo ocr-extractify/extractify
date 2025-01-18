@@ -1,7 +1,7 @@
 /**
  * Represents the user object to be sent to the /auth/login endpoint.
 */
-export type UserLogin = {
+export type UserAuth = {
     username: string;
     password: string;
 };

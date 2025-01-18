@@ -2,12 +2,12 @@ import { GalleryVerticalEnd } from "lucide-react"
 import { AuthForm } from "@/components/AuthForm"
 import { useMutation } from "@tanstack/react-query"
 import { useAuth } from "@/providers/AuthProvider"
-import { UserLogin } from "@/utils/types/api/auth"
+import { UserAuth } from "@/utils/types/api/auth"
 
 export default function SignUpPage() {
   const { signup } = useAuth()
   const mutation = useMutation({
-    mutationFn: async (data: UserLogin) => {
+    mutationFn: async (data: UserAuth) => {
       return signup(data)
     }
   })

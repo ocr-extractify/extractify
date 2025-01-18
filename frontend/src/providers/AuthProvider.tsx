@@ -7,7 +7,7 @@ import {
   } from 'react';
   import { useLocalStorage } from '@/hooks/useLocalStorage';
   import { httpClient } from '@/utils/request';
-  import { UserLogin, AccessToken } from '@/utils/types/api/auth';
+  import { UserAuth, AccessToken } from '@/utils/types/api/auth';
   import { AxiosResponse } from 'axios';
   import Cookies from 'js-cookie';
   import { APIUser } from '@/utils/types/api/user';
@@ -15,8 +15,8 @@ import {
   type AuthContextType = {
     isAuthenticated?: boolean | null;
     setIsAuthenticated: (value?: boolean | null) => void;
-    signin: (data: UserLogin) => Promise<void>;
-    signup: (data: UserLogin) => Promise<void>;
+    signin: (data: UserAuth) => Promise<void>;
+    signup: (data: UserAuth) => Promise<void>;
     signout: () => Promise<void>;
     user?: APIUser | null;
   };
@@ -34,25 +34,28 @@ import {
       if (isAuthenticated) {
         httpClient
           .get('/auth/me/')
-          .then((res: AxiosResponse<APIUser>) => {
-            setUser(res.data);
+          .then((res: AxiosResponse<string>) => {
+            console.log("res.data.access_token: ", res.data);
+            Cookies.set('jwt_token', res.data)
+            // setUser(res.data);
           })
           .catch(() => {
+            setUser(null);
             setIsAuthenticated(null);
             Cookies.remove('jwt_token');
           });
       }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, setUser, setIsAuthenticated]);
   
     // check if exist a cookie
     useEffect(() => {
       if (Cookies.get('jwt_token')) {
         setIsAuthenticated(true);
       }
-    }, []);
+    }, [setIsAuthenticated]);
 
     const signup = useCallback(
-        async (data: UserLogin) => {
+        async (data: UserAuth) => {
           const formData = new FormData();
           formData.append('username', data.username);
           formData.append('password', data.password);
@@ -78,7 +81,7 @@ import {
     
   
     const signin = useCallback(
-      async (data: UserLogin) => {
+      async (data: UserAuth) => {
         const formData = new FormData();
         formData.append('username', data.username);
         formData.append('password', data.password);
@@ -93,7 +96,8 @@ import {
               sameSite: 'Strict',
             });
             setIsAuthenticated(true);
-  
+            
+          console.log("token: ", token);
             httpClient.get('/auth/me/').then((res: AxiosResponse<APIUser>) => {
               setUser(res.data);
             });
@@ -122,7 +126,7 @@ import {
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
   };
   
-  // eslint-disable-next-line react-refresh/only-export-components
-  export const useAuth = () => {
-    return useContext(AuthContext);
-  };
+// eslint-disable-next-line react-refresh/only-export-components
+export const useAuth = () => {
+  return useContext(AuthContext);
+};

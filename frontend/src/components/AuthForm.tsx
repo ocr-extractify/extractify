@@ -11,10 +11,12 @@ import { Label } from "@/components/ui/label"
 import { twMerge } from "tailwind-merge"
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom"
+import { UseMutationResult } from "@tanstack/react-query"
+import { UserAuth } from "@/utils/types/api/auth"
 
 interface Props {
   type: "signin" | "signup"
-  mutation: any;
+  mutation: UseMutationResult<unknown, unknown, UserAuth, unknown>;
 }
 
 export function AuthForm({
@@ -24,7 +26,7 @@ export function AuthForm({
   ...props
 }: React.ComponentPropsWithoutRef<"div"> & Props) {
   const { t } = useTranslation();
-
+  
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     return mutation.mutateAsync({
