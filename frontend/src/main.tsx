@@ -22,7 +22,7 @@ const queryClient = new QueryClient({
 });
 
 const router = createBrowserRouter([
-  // TODO: IN FUTURE, ITS NEEDED TO SETUP AN AUTH PROVIDER TO ACCESS THE MAIN PAGES
+  // public routes
   {
     path: "/auth/signin",
     element: <SignInPage />,
@@ -31,11 +31,11 @@ const router = createBrowserRouter([
     path: "/auth/signup",
     element: <SignUpPage />,
   },
+  // private routes
   {
     path: '/',
     element: <Base />,
     children: [
-     
       {
         path: '/',
         element: <Navigate to="/upload" />,

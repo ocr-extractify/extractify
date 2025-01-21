@@ -8,8 +8,11 @@ import { useFilesStore } from '@/utils/zustandStorage';
 import { FileStoreState } from '@/utils/zustandStorage/types';
 import { useEffect, useMemo, useState } from 'react';
 import DarkModeToggle from '@/fragments/DarkModeToggle';
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '@/providers/AuthProvider';
 
 const Base = () => {
+  const { isAuthenticated } = useAuth();
   const [selectedIdx, setSelectedIdx] = useState(0);
   const nav = useNavigate();
   const location = useLocation();
@@ -43,6 +46,10 @@ const Base = () => {
       TABS.findIndex((tab) => location.pathname.includes(tab.href)),
     );
   }, [setSelectedIdx, location.pathname, TABS]);
+
+  if (!isAuthenticated) {
+    return <Navigate to="/auth/signin" />;
+  }
 
   return (
     <div className="w-full h-full bg-white dark:bg-slate-950 text-black dark:text-white overflow-x-hidden">

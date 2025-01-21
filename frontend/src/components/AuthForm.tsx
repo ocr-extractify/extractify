@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { twMerge } from "tailwind-merge"
 import { useTranslation } from 'react-i18next';
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { UseMutationResult } from "@tanstack/react-query"
 import { UserAuth } from "@/utils/types/api/auth"
 
@@ -25,14 +25,17 @@ export function AuthForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div"> & Props) {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
+  const nav = useNavigate();
   
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     return mutation.mutateAsync({
       username: e.currentTarget.email.value,
       password: e.currentTarget.password.value,
-    });
+    }).then(() => {
+      nav('/')
+    })
   }
 
   return (
