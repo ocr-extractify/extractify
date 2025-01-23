@@ -34,10 +34,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (isAuthenticated) {
       httpClient
         .get('/auth/me/')
-        .then((res: AxiosResponse<string>) => {
-          console.log("res.data.access_token: ", res.data);
-          Cookies.set('jwt_token', res.data)
-          // setUser(res.data);
+        .then((res: AxiosResponse<APIUser>) => {
+          setUser(res.data);
         })
         .catch(() => {
           setUser(null);
@@ -96,7 +94,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           });
           setIsAuthenticated(true);
           
-        console.log("token: ", token);
           httpClient.get('/auth/me/').then((res: AxiosResponse<APIUser>) => {
             setUser(res.data);
           });
