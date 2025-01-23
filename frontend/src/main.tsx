@@ -12,6 +12,9 @@ import { FilesPage, FilePage, StatsPage, UploadFilesPage, Base, SignInPage, Sign
 import '@/main.css';
 import './i18n';
 import { AuthProvider } from './providers/AuthProvider';
+import SettingsAppearancePage from './pages/settings/SettingsAppearancePage';
+import { ThemeProvider } from './providers/theme-provider';
+import { ToastProvider } from '@radix-ui/react-toast';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -56,17 +59,28 @@ const router = createBrowserRouter([
         path: '/stats',
         element: <StatsPage />,
       },
+      {
+        path: "/settings/profile",
+      },
+      {
+        path: "/settings/appearance",
+        element: <SettingsAppearancePage />,
+      }
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <AuthProvider> 
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <ToastContainer />
-      </QueryClientProvider>
-    </AuthProvider> 
+    <ThemeProvider>
+      <ToastProvider>
+        <AuthProvider> 
+            <QueryClientProvider client={queryClient}>
+              <RouterProvider router={router} />
+              <ToastContainer />
+            </QueryClientProvider>
+        </AuthProvider> 
+      </ToastProvider>
+    </ThemeProvider>
   </React.StrictMode>,
 );
