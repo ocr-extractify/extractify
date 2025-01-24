@@ -50,4 +50,9 @@ export const en_texts = {
   SIGNIN_WITH_GOOGLE: "Sign in with Google",
   SIGNUP_WITH_GOOGLE: "Sign up with Google",
   ALREADY_HAVE_AN_ACCOUNT: "Already have an account?",
+  THEME: "Theme",
+  SELECT_THEME: "Select the theme for app.",
+  LIGHT: "Light",
+  DARK: "Dark",
+  UPDATE_PREFERENCES: "Update preferences",
 };

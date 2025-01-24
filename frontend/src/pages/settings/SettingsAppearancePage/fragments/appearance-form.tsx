@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/form"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { useTheme } from "@/providers/theme-provider"
+import { useTranslation } from "react-i18next"
 
 const appearanceFormSchema = z.object({
   theme: z.enum(["light", "dark", "system"], {
@@ -25,7 +26,8 @@ type AppearanceFormValues = z.infer<typeof appearanceFormSchema>
 
 
 export function AppearanceForm() {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme();
+  const { t } = useTranslation();
   const form = useForm<AppearanceFormValues>({
     resolver: zodResolver(appearanceFormSchema),
     defaultValues: { theme: theme || 'system' },
@@ -52,9 +54,9 @@ export function AppearanceForm() {
           name="theme"
           render={({ field }) => (
             <FormItem className="space-y-1">
-              <FormLabel>Theme</FormLabel>
+              <FormLabel>{t("THEME")}</FormLabel>
               <FormDescription>
-                Select the theme for app.
+                {t("SELECT_THEME")}
               </FormDescription>
               <FormMessage />
               <RadioGroup
@@ -84,7 +86,7 @@ export function AppearanceForm() {
                       </div>
                     </div>
                     <span className="block w-full p-2 text-center font-normal">
-                      Light
+                      {t("LIGHT")}
                     </span>
                   </FormLabel>
                 </FormItem>
@@ -110,7 +112,7 @@ export function AppearanceForm() {
                       </div>
                     </div>
                     <span className="block w-full p-2 text-center font-normal">
-                      Dark
+                      {t("DARK")}
                     </span>
                   </FormLabel>
                 </FormItem>
@@ -119,7 +121,7 @@ export function AppearanceForm() {
           )}
         />
 
-        <Button type="submit">Update preferences</Button>
+        <Button type="submit">{t("UPDATE_PREFERENCES")}</Button>
       </form>
     </Form>
   )
