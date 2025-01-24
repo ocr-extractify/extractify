@@ -34,7 +34,6 @@ export function AppearanceForm() {
   })
 
   function onSubmit(data: AppearanceFormValues) {
-    console.log("data", data);
     setTheme(data.theme)
     toast({
       title: "You submitted the following values:",

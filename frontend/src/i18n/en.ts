@@ -55,4 +55,6 @@ export const en_texts = {
   LIGHT: "Light",
   DARK: "Dark",
   UPDATE_PREFERENCES: "Update preferences",
+  APPEARANCE: "Appearance",
+  SETTINGS_APPEARANCE_FORM_DESCRIPTION: "Customize the appearance of the app. Automatically switch between day and night themes."
 };
