@@ -16,12 +16,8 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
-import { useAuth } from "@/providers/AuthProvider"
-
-
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { user } = useAuth()
   const data = {
     teams: [
       {
@@ -104,7 +100,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={user!} />
+        <NavUser />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

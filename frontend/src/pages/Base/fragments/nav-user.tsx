@@ -26,14 +26,11 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { APIUser } from "@/utils/types/api/user"
 import { useTranslation } from "react-i18next"
+import { useAuth } from "@/providers/AuthProvider"
 
-export function NavUser({
-  user,
-}: {
-  user: APIUser
-}) {
+export function NavUser() {
+  const { user, signout } = useAuth()
   const { isMobile } = useSidebar()
   const { t } = useTranslation()
 
@@ -49,11 +46,11 @@ export function NavUser({
               <Avatar className="h-8 w-8 rounded-lg">
                 {/** TODO: implement avatar when API supports it. */}
                 {/* <AvatarImage src={user.avatar} alt={user.name} /> */}
-                <AvatarFallback className="rounded-lg">{user.email[0]}</AvatarFallback>
+                <AvatarFallback className="rounded-lg">{user!.email[0]}</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 {/* <span className="truncate font-semibold">{user.name}</span> */}
-                <span className="truncate text-xs">{user.email}</span>
+                <span className="truncate text-xs">{user!.email}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -69,11 +66,11 @@ export function NavUser({
                 <Avatar className="h-8 w-8 rounded-lg">
                   {/** TODO: implement avatar when API supports it. */}
                   {/* <AvatarImage src={user.avatar} alt={user.name} /> */}
-                  <AvatarFallback className="rounded-lg">{user.email[0]}</AvatarFallback>
+                  <AvatarFallback className="rounded-lg">{user!.email[0]}</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   {/* <span className="truncate font-semibold">{user.name}</span> */}
-                  <span className="truncate text-xs">{user.email}</span>
+                  <span className="truncate text-xs">{user!.email}</span>
                 </div>
               </div>
             </DropdownMenuLabel>
@@ -100,7 +97,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={signout}>
               <LogOut />
               {t("SIGN_OUT")}
             </DropdownMenuItem>

@@ -104,8 +104,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const signout = useCallback(async () => {
     setIsAuthenticated(null);
+    Cookies.remove('jwt_token');
+    setUser(null);
     window.location.reload();
-  }, [setIsAuthenticated]);
+  }, [setIsAuthenticated, setUser]);
 
   const value = useMemo(
     () => ({
