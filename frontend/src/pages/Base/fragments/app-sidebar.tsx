@@ -49,15 +49,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         items: [
           {
             title: "Upload",
-            url: "#",
+            url: "/files/upload",
           },
           {
             title: "Files",
-            url: "#",
+            url: "/files",
           },
           {
-            title: "Extraction config",
-            url: "#",
+            title: "Extraction configs",
+            url: "/files/extraction-configs",
           },
         ],
       },
@@ -84,11 +84,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           },
           {
             title: "Appearance",
-            url: "#",
+            url: "/settings/appearance",
           },
           {
             title: "Language",
-            url: "#",
+            url: "/settings/language",
           }
         ],
       },
