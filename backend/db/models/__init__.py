@@ -1,2 +1,2 @@
-from db.models.File import *
-from db.models.User import *
+from db.models.file_models import *
+from db.models.user_model import *

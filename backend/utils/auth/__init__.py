@@ -8,7 +8,7 @@ from sqlmodel import select
 from db.models import User
 from dependencies import SessionDep
 from config import config
-from schemas.auth import TokenData
+from schemas import TokenData
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")

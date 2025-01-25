@@ -2,6 +2,7 @@ from datetime import datetime
 from sqlmodel import Field, SQLModel, Relationship, JSON, ARRAY, Column
 
 
+# TODO: split this into separate files
 class Filetype(SQLModel, table=True):
     __tablename__ = "filetype"
     id: int = Field(primary_key=True)

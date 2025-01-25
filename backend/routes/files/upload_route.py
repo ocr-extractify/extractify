@@ -6,6 +6,7 @@ from utils.auth import get_current_user
 from utils.documentai.analyze import analyze_file
 
 
+# TODO: rename this file to `upload_route.py` if contains only one route.
 @files_router.post(
     "/upload/",
     description="Upload a file.",

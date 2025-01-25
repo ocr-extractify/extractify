@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from routes.auth import auth_router
-from schemas.auth import Token
+from schemas import Token
 from utils.auth import authenticate_user, create_access_token
 from config import config
 from dependencies import SessionDep
