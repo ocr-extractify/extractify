@@ -1,5 +1,5 @@
 import { VALID_MIMETYPES } from '@/constants/constraints';
-import { INVALID_MIMETYPE } from '@/constants/errorsMsgs';
+// import { INVALID_MIMETYPE } from '@/constants/errorsMsgs';
 import {
   DROP_FILES,
   FILENAME,
@@ -15,7 +15,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import { IoClose } from 'react-icons/io5';
 import IconButton from '@/components/buttons/IconButton';
 import { LuImagePlus } from 'react-icons/lu';
@@ -33,7 +33,7 @@ const FileInput = ({ id, files, setFiles, ...rest }: Props) => {
   const isValidMimetype = useCallback(
     async (mimetype: string): Promise<boolean> => {
       if (VALID_MIMETYPES.includes(mimetype)) return true;
-      toast.error(INVALID_MIMETYPE);
+      // toast.error(INVALID_MIMETYPE);
       return false;
     },
     [],

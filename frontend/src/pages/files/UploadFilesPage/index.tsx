@@ -4,7 +4,7 @@ import { VALID_MIMETYPES } from '@/constants/constraints';
 import { useMutation } from '@tanstack/react-query';
 import { httpClient } from '@/utils/axios';
 import Button from '@/components/buttons/Button';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import { useFilesStore } from '@/utils/zustandStorage';
 import { useState } from 'react';
 import { APIFile } from '@/utils/types';
@@ -39,7 +39,7 @@ function UploadFilesPage() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (files.length === 0) {
-      toast.error(NO_FILE);
+      // toast.error(NO_FILE);
       return;
     }
 
