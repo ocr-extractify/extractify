@@ -11,6 +11,8 @@ import { UserAuth, AccessToken } from '@/utils/types/api/auth';
 import { AxiosResponse } from 'axios';
 import Cookies from 'js-cookie';
 import { APIUser } from '@/utils/types/api/user';
+import { toast } from '@/hooks/use-toast';
+// import { useTranslation } from 'react-i18next';
 
 type AuthContextType = {
   isAuthenticated?: boolean | null;
@@ -24,11 +26,12 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  // const { t } = useTranslation();
   const [isAuthenticated, setIsAuthenticated] = useLocalStorage<
     boolean | null | undefined
   >('isAuthenticated', false);
   const [user, setUser] = useLocalStorage<APIUser | null>('user', null);
-
+  
   // keep user data updated
   useEffect(() => {
     if (isAuthenticated) {
@@ -97,7 +100,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           httpClient.get('/auth/me/').then((res: AxiosResponse<APIUser>) => {
             setUser(res.data);
           });
-        });
+        })
+        .catch((err) => {
+          toast({
+            title: err.response.data.detail // t("PREFERENCES_UPDATED"),
+          })
+          throw err;
+        })
     },
     [setIsAuthenticated, setUser],
   );
