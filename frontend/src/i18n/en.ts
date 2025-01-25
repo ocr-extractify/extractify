@@ -58,4 +58,9 @@ export const en_texts = {
   APPEARANCE: "Appearance",
   SETTINGS_APPEARANCE_FORM_DESCRIPTION: "Customize the appearance of the app. Automatically switch between day and night themes.",
   PREFERENCES_UPDATED: "Preferences updated successfully.",
+  UPGRADE_TO_PRO: "Upgrade to Pro",
+  ACCOUNT: "Account",
+  BILLING: "Billing",
+  NOTIFICATIONS: "Notifications",
+  SIGN_OUT: "Sign out",
 };

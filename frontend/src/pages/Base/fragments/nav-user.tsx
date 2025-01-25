@@ -27,6 +27,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { APIUser } from "@/utils/types/api/user"
+import { useTranslation } from "react-i18next"
 
 export function NavUser({
   user,
@@ -34,6 +35,7 @@ export function NavUser({
   user: APIUser
 }) {
   const { isMobile } = useSidebar()
+  const { t } = useTranslation()
 
   return (
     <SidebarMenu>
@@ -79,28 +81,28 @@ export function NavUser({
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <Sparkles />
-                Upgrade to Pro
+                {t("UPGRADE_TO_PRO")}
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <BadgeCheck />
-                Account
+                {t("ACCOUNT")}
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <CreditCard />
-                Billing
+                {t("BILLING")}
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Bell />
-                Notifications
+                {t("NOTIFICATIONS")}
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogOut />
-              Log out
+              {t("SIGN_OUT")}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

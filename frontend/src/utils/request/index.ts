@@ -60,7 +60,7 @@ httpClient.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       localStorage.setItem('isAuthenticated', 'false');
-      window.location.reload();
+      // window.location.reload();
     }
     return Promise.reject(error);
   },
