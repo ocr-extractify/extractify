@@ -1,0 +1,26 @@
+# Dependencies
+
+- Framework: REACT
+- HTTP requests: 
+  - react-query
+  - axios
+- Form
+  - react-hook-form
+  - zod (validation)
+- UI
+  - tailwindcss (classes utilities)
+  - shadcdn (styled tailwind components)
+  - radix-ui (unstyled, acessible, react primitives components)
+  - clsx (conditional classes)
+  - tw-merge (classes merging)
+  - headlessui/react (unstyled components - I'LL REMOVE IT AND KEEP ONLY RADIX-UI AND SHADCDN)
+  - lucide-react (icons)
+  - react-icons (icons - I'LL REMOVE IT AND KEEP ONLY LUCIDE-REACT) 
+  - class-variance-authority
+  - recharts
+- i18n:
+  - react-i18n
+- storage:
+  - zustand
+- cookies:
+  - js-cookies
