@@ -3,7 +3,7 @@ import FileInput from '@/components/inputs/FileInput';
 import { VALID_MIMETYPES } from '@/constants/constraints';
 import { useMutation } from '@tanstack/react-query';
 import { httpClient } from '@/utils/axios';
-import Button from '@/components/buttons/Button';
+import { Button } from '@/components/ui/button';
 // import { toast } from 'react-toastify';
 import { useFilesStore } from '@/utils/zustandStorage';
 import { useState } from 'react';
@@ -12,6 +12,7 @@ import Result from '@/fragments/Result';
 import { FileStoreState } from '@/utils/zustandStorage/types';
 import { NO_FILE } from '@/constants/errorsMsgs';
 import { BsFillFileEarmarkArrowUpFill } from "react-icons/bs";
+import { Label } from '@/components/ui/label';
 
 function UploadFilesPage() {
   const [results, setResults] = useState<null | APIFile[]>(null);
@@ -39,7 +40,7 @@ function UploadFilesPage() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (files.length === 0) {
-      // toast.error(NO_FILE);
+      toast.error(NO_FILE);
       return;
     }
 
@@ -52,12 +53,13 @@ function UploadFilesPage() {
   }
 
   return (
-    <div className="mx-auto">
+    <div className="mx-auto w-5/6 max-w-lg">
       {!results ? (
         <form
-          className="w-3/6 flex flex-col mx-auto sm:pt-10"
+          className="w-full flex flex-col sm:pt-10"
           onSubmit={handleSubmit}
         >
+          <Label>Files</Label>
           <FileInput
             id="files"
             files={files}

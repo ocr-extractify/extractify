@@ -19,6 +19,7 @@ import {
 import { IoClose } from 'react-icons/io5';
 import IconButton from '@/components/buttons/IconButton';
 import { LuImagePlus } from 'react-icons/lu';
+import { Input } from "@/components/ui/input"
 
 interface Props extends ComponentProps<'input'> {
   id: string;
@@ -26,6 +27,7 @@ interface Props extends ComponentProps<'input'> {
   setFiles: React.Dispatch<React.SetStateAction<[] | File[]>>;
 }
 
+// TODO: change component name to FilesInput
 const FileInput = ({ id, files, setFiles, ...rest }: Props) => {
   const [isDragging, setIsDragging] = useState(false);
   const dragCounter = useRef(0);
@@ -129,7 +131,7 @@ const FileInput = ({ id, files, setFiles, ...rest }: Props) => {
   });
 
   return (
-    <div>
+    <div className="w-full">
       {isDragging && (
         <div className="w-full absolute inset-0 bg-gray-300 dark:bg-gray-900 opacity-75 flex flex-col justify-center items-center z-50">
           <LuImagePlus
@@ -141,21 +143,21 @@ const FileInput = ({ id, files, setFiles, ...rest }: Props) => {
         </div>
       )}
 
-      <div>
+      <div className="w-full">
         <label>
           <div className="h-52 sm:pt-5">
             <div className="w-full h-full mt-1 sm:mt-0">
               <div className="h-full flex justify-center items-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                 <div className="space-y-1 text-center">
                   <LuImagePlus
-                    className="mx-auto w-10 h-10 sm:h-12 sm:w-12 text-gray-400"
+                    className="mx-auto w-10 h-10 sm:h-12 sm:w-12"
                     stroke="currentColor"
                     fill="none"
                   />
 
-                  <div className="flex flex-col sm:flex-row justify-center text-sm text-gray-700 dark:text-gray-100">
+                  <div className="flex flex-col sm:flex-row justify-center text-sm ">
                     <span>{UPLOAD_FILE}</span>
-                    <input
+                    <Input
                       id={id}
                       type="file"
                       className="sr-only"
@@ -165,7 +167,7 @@ const FileInput = ({ id, files, setFiles, ...rest }: Props) => {
 
                     <p className="pl-1">{OR_DRAG_AND_DROP}</p>
                   </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-300">
+                  <p className="text-xs">
                     {FILE_INPUT_MIMETYPES}
                   </p>
                 </div>
@@ -177,7 +179,7 @@ const FileInput = ({ id, files, setFiles, ...rest }: Props) => {
           {files.map((file) => (
             <li
               key={file.name}
-              className="flex flex-col justify-between border rounded-md p-2 font-medium relative pr-10 text-gray-900 dark:text-gray-300"
+              className="flex flex-col justify-between border rounded-md p-2 font-medium relative pr-10"
             >
               <span className="w-full flex justify-between">
                 <span>{FILENAME}</span>
