@@ -5,3 +5,5 @@ export { default as UploadFilesPage } from './files/UploadFilesPage';
 export { default as Base } from './Base';
 export { default as SignInPage } from './auth/SignInPage';
 export { default as SignUpPage } from './auth/SignUpPage';
+export { default as SettingsAppearancePage } from './settings/SettingsAppearancePage';
+export { default as NotFoundPage } from './errors/NotFoundPage';
