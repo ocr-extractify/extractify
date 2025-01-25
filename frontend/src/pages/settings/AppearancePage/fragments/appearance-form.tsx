@@ -16,18 +16,15 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { useTheme } from "@/providers/theme-provider"
 import { useTranslation } from "react-i18next"
 
-const appearanceFormSchema = z.object({
-  theme: z.enum(["light", "dark", "system"], {
-    required_error: "Please select a theme.",
-  }),
-})
-
-type AppearanceFormValues = z.infer<typeof appearanceFormSchema>
-
-
 export function AppearanceForm() {
   const { theme, setTheme } = useTheme();
   const { t } = useTranslation();
+  const appearanceFormSchema = z.object({
+    theme: z.enum(["light", "dark", "system"], {
+      required_error: t("PLEASE_SELECT_A_THEME"),
+    }),
+  })
+  type AppearanceFormValues = z.infer<typeof appearanceFormSchema>
   const form = useForm<AppearanceFormValues>({
     resolver: zodResolver(appearanceFormSchema),
     defaultValues: { theme: theme || 'system' },

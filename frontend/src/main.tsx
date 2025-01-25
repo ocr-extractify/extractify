@@ -6,7 +6,7 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from 'react-router-dom';
-import { FilesPage, FilePage, StatsPage, UploadFilesPage, Base, SignInPage, SignUpPage, NotFoundPage, SettingsAppearancePage } from '@/pages';
+import { FilesPage, FilePage, StatsPage, UploadFilesPage, Base, SignInPage, SignUpPage, NotFoundPage, AppearancePage, UserLanguagePage } from '@/pages';
 import '@/main.css';
 import '@/i18n';
 import { AuthProvider } from '@/providers/AuthProvider';
@@ -61,8 +61,12 @@ const router = createBrowserRouter([
         path: "/settings/profile",
       },
       {
+        path: "/settings/language",
+        element: <UserLanguagePage />
+      },
+      {
         path: "/settings/appearance",
-        element: <SettingsAppearancePage />,
+        element: <AppearancePage />,
       },
       // 404 fallback for private routes
       {

@@ -64,4 +64,12 @@ export const en_texts = {
   NOTIFICATIONS: "Notifications",
   SIGN_OUT: "Sign out",
   PAGE_NOT_FOUND: "The page you are looking for does not exist.",
+  LANGUAGE: "Language",
+  SETTINGS_LANGUAGE_FORM_DESCRIPTION: "Change the language of the app.",
+  PLEASE_SELECT_A_THEME: "Please select a theme.",
+  PLEASE_SELECT_A_LANGUAGE: "Please select a language.",
+  ENGLISH: "English",
+  PORTUGUESE: "Portuguese",
+  SELECT_A_LANGUAGE: "Select a language",
+  SELECT_YOUR_PREFERRED_LANGUAGE: "Select your preferred language.",
 };
