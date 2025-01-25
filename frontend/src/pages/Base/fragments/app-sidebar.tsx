@@ -1,12 +1,10 @@
 import * as React from "react"
 import {
   AudioWaveform,
-  BookOpen,
-  Bot,
   Command,
   GalleryVerticalEnd,
   Settings2,
-  SquareTerminal,
+  FileText,
 } from "lucide-react"
 import { NavMain } from "@/pages/Base/fragments/nav-main"
 import { NavUser } from "@/pages/Base/fragments/nav-user"
@@ -46,7 +44,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       {
         title: "Files",
         url: "#",
-        icon: SquareTerminal,
+        icon: FileText,
         isActive: true,
         items: [
           {
