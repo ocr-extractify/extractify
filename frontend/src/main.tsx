@@ -6,11 +6,10 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from 'react-router-dom';
-import { FilesPage, FilePage, StatsPage, UploadFilesPage, Base, SignInPage, SignUpPage } from '@/pages';
+import { FilesPage, FilePage, StatsPage, UploadFilesPage, Base, SignInPage, SignUpPage, NotFoundPage, SettingsAppearancePage } from '@/pages';
 import '@/main.css';
 import '@/i18n';
 import { AuthProvider } from '@/providers/AuthProvider';
-import SettingsAppearancePage from '@/pages/settings/SettingsAppearancePage';
 import { ThemeProvider } from '@/providers/theme-provider';
 import { ToastProvider, } from '@/components/ui/toast';
 import { Toaster } from "@/components/ui/toaster"
@@ -43,7 +42,7 @@ const router = createBrowserRouter([
         element: <Navigate to="/upload" />,
       },
       {
-        path: '/upload',
+        path: '/files/upload',
         element: <UploadFilesPage />,
       },
       {
@@ -64,8 +63,18 @@ const router = createBrowserRouter([
       {
         path: "/settings/appearance",
         element: <SettingsAppearancePage />,
-      }
+      },
+      // 404 fallback for private routes
+      {
+        path: '*',
+        element: <NotFoundPage />,
+      },
     ],
+  },
+  // 404 fallback for pubic routes
+  {
+    path: '*',
+    element: <NotFoundPage />,
   },
 ]);
 
