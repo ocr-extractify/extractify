@@ -9,7 +9,6 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
-  // TODO: remove headlessui/react
   "dependencies": {
     "@headlessui/react": "^2.1.8",
     "@hookform/resolvers": "^3.10.0",
