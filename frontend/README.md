@@ -18,6 +18,7 @@
   - react-icons (icons - I'LL REMOVE IT AND KEEP ONLY LUCIDE-REACT) 
   - class-variance-authority
   - recharts
+  - react-dropzone
 - i18n:
   - react-i18n
 - storage:
