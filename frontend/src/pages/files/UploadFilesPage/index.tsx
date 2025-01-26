@@ -1,6 +1,6 @@
 import { SUBMIT_BUTTON } from '@/constants/uiTexts';
-import FileInput from '@/components/inputs/FileInput';
-import { VALID_MIMETYPES } from '@/constants/constraints';
+// import FileInput from '@/components/inputs/FileInput';
+// import { VALID_MIMETYPES } from '@/constants/constraints';
 import { useMutation } from '@tanstack/react-query';
 import { httpClient } from '@/utils/axios';
 import { Button } from '@/components/ui/button';
@@ -13,6 +13,7 @@ import { FileStoreState } from '@/utils/zustandStorage/types';
 import { NO_FILE } from '@/constants/errorsMsgs';
 import { BsFillFileEarmarkArrowUpFill } from "react-icons/bs";
 import { Label } from '@/components/ui/label';
+import { FileUploader } from '@/components/ui/file-uploader';
 
 function UploadFilesPage() {
   const [results, setResults] = useState<null | APIFile[]>(null);
@@ -53,19 +54,24 @@ function UploadFilesPage() {
   }
 
   return (
-    <div className="mx-auto w-5/6 max-w-lg">
+    <div className="mx-auto w-full">
       {!results ? (
         <form
-          className="w-full flex flex-col sm:pt-10"
+          className="w-full flex flex-col"
           onSubmit={handleSubmit}
         >
-          <Label>Files</Label>
-          <FileInput
+          <Label className='mb-2'>Files</Label>
+          {/* <FileInput
             id="files"
             files={files}
             setFiles={setFiles}
             multiple
             accept={VALID_MIMETYPES.join(',')}
+          /> */}
+          <FileUploader
+            value={files}
+            onValueChange={setFiles}
+            multiple
           />
           <Button
             className="w-fit mt-2 mx-auto space-x-2 flex items-center"
