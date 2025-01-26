@@ -8,18 +8,20 @@ from utils.documentai.analyze import analyze_file
 
 @files_router.post(
     "/upload/",
-    description="Upload a file.",
+    description="Upload a file to remote storage (firebase)",
     status_code=status.HTTP_201_CREATED,
 )
-async def upload(
+async def upload_file(
     request: Request,
     file: UploadFile,
     extraction_config: dict | None = None,
     current_user: User = Depends(get_current_user),
 ):
-    if request.client is None:
-        # TODO: Add detail error message.
-        raise HTTPException(status_code=400, detail="")
+    pass
+
+    # if request.client is None:
+    #     # TODO: Add detail error message.
+    #     raise HTTPException(status_code=400, detail="")
 
     # check if there the quota per month is reached.
     # if current_month_uploads_qty >= config.MONTHLY_UPLOADS_LIMIT:
@@ -35,9 +37,9 @@ async def upload(
     #     if client_daily_uploads_qty >= config.DAILY_UPLOADS_BY_IP_LIMIT:
     #         raise HTTPException(status_code=400, detail=CLIENT_DAY_LIMIT_REACHED)
 
-    analyzed_file = await analyze_file(file, request)
-    with open("sample_analysis.json", "w", encoding="utf-8") as json_file:
-        json.dump(analyzed_file, json_file, indent=4, ensure_ascii=False)
+    # analyzed_file = await analyze_file(file, request)
+    # with open("sample_analysis.json", "w", encoding="utf-8") as json_file:
+    #     json.dump(analyzed_file, json_file, indent=4, ensure_ascii=False)
 
     #  analyzed_file = await clean_document_ai_analysis(analyzed_file)
 
