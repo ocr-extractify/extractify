@@ -90,7 +90,7 @@ export function AuthForm({
                   </div>
                   <Input id="password" type="password" required />
                 </div>
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full" isLoading={mutation.isPending || true}>
                   {type === 'signup' ? t("SIGN_UP") : t("SIGN_IN")}
                 </Button>
               </div>
