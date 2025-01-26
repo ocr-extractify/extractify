@@ -13,7 +13,7 @@ export const FILE_INPUT_MIMETYPES: string = `${VALID_MIMETYPES.join(', ')
   1024 /
   1024
 ).toString()}MB`;
-export const SUBMIT_BUTTON: string = 'Convert to text';
+export const UPLOAD: string = 'Upload';
 export const FILENAME: string = 'Filename';
 export const FILESIZE: string = 'Filesize';
 export const RESULT: string = 'Result';
