@@ -1,11 +1,12 @@
-import json
+from sqlalchemy import select
 from config import config
-from db.models import User
+from constants.errors_texts import UNSUPPORTED_FILE_TYPE
+from db.models import User, File, FileMimetype
 from routes.files import files_router
-from fastapi import Depends, HTTPException, UploadFile, status, Request
+from fastapi import Depends, UploadFile, status, Request
 from utils.auth import get_current_user
-from utils.documentai.analyze import analyze_file
 from utils.firebase import upload
+from dependencies import SessionDep
 
 
 @files_router.post(
@@ -16,41 +17,25 @@ from utils.firebase import upload
 async def upload_file(
     request: Request,
     file: UploadFile,
-    extraction_config: dict | None = None,
+    session: SessionDep,
     current_user: User = Depends(get_current_user),
 ):
-    file_url = await upload(file, config.FIREBASE_TMP_FOLDER)
-    return {"file_url": file_url}
-    # if request.client is None:
-    #     # TODO: Add detail error message.
-    #     raise HTTPException(status_code=400, detail="")
+    db_stmt = select(FileMimetype).filter(FileMimetype.name == file.content_type)
+    db_file_mimetype = session.exec(db_stmt).scalar_one_or_none()
 
-    # check if there the quota per month is reached.
-    # if current_month_uploads_qty >= config.MONTHLY_UPLOADS_LIMIT:
-    #     raise HTTPException(status_code=400, detail=MONTHLY_LIMIT_REACHED)
+    if not db_file_mimetype:
+        raise ValueError(UNSUPPORTED_FILE_TYPE)
 
-    # check if user day quota is reached
-    # is_client_restricted = request.client.host not in config.UNRESTRICTED_IPS
-    # if is_client_restricted:
-    #     start_of_day = datetime(now.year, now.month, now.day)
-    #     client_daily_uploads_qty = await files_collection.count_documents(
-    #         {"client_ip": request.client.host, "created_at": {"$gte": start_of_day}}
-    #     )
-    #     if client_daily_uploads_qty >= config.DAILY_UPLOADS_BY_IP_LIMIT:
-    #         raise HTTPException(status_code=400, detail=CLIENT_DAY_LIMIT_REACHED)
+    file_uri = await upload(file, config.FIREBASE_TMP_FOLDER)
+    db_file = File(
+        name=file.filename,
+        client_ip=request.client.host,
+        user_id=current_user.id,
+        uri=file_uri,
+        file_mimetype_id=db_file_mimetype.id,
+    )
+    session.add(db_file)
+    session.commit()
+    session.refresh(db_file)
 
-    # analyzed_file = await analyze_file(file, request)
-    # with open("sample_analysis.json", "w", encoding="utf-8") as json_file:
-    #     json.dump(analyzed_file, json_file, indent=4, ensure_ascii=False)
-
-    #  analyzed_file = await clean_document_ai_analysis(analyzed_file)
-
-    # file_model = FileModel(
-    #     name=file.filename or str(uuid.uuid4()),
-    #     analysis=analyzed_file,
-    #     client_ip=request.client.host,
-    # )
-    # file_dict = file_model.model_dump(by_alias=True, exclude={"id"})
-    # new_db_file = await files_collection.insert_one(file_dict)
-    # created_file = await files_collection.find_one({"_id": new_db_file.inserted_id})
-    # return created_file
+    return db_file

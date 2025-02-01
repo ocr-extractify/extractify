@@ -1,10 +1,11 @@
 from datetime import datetime
 from sqlmodel import Field, SQLModel, Relationship, JSON, ARRAY, Column
+import uuid
 
 
 # TODO: split this into separate files
-class Filetype(SQLModel, table=True):
-    __tablename__ = "filetype"
+class FileMimetype(SQLModel, table=True):
+    __tablename__ = "file_mimetype"
     id: int = Field(primary_key=True)
     name: str = Field(index=True)
     is_deleted: bool = Field(default=False)
@@ -34,14 +35,15 @@ class FileExtraction(SQLModel, table=True):
 
 class File(SQLModel, table=True):
     __tablename__ = "file"
-    id: int = Field(primary_key=True)
+    id: uuid.UUID = Field(primary_key=True, default_factory=uuid.uuid4)
     name: str = Field(index=True)
     client_ip: str | None = Field(default=None)
+    uri: str = Field()
     is_deleted: bool = Field(default=False)
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
 
-    filetype_id: int = Field(foreign_key="filetype.id")
+    file_mimetype_id: int = Field(foreign_key="file_mimetype.id")
     user_id: int = Field(foreign_key="user.id")
 
     # extractions: list["FileExtraction"] | None = Relationship(back_populates="file")
