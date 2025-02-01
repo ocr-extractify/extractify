@@ -7,7 +7,7 @@ from utils.documentai.analyze import analyze_file
 
 
 @files_router.post(
-    "/files/:id/extract/",
+    "/files/:id/extract_data/",
     description="Extract data from a file",
     status_code=status.HTTP_201_CREATED,
 )
