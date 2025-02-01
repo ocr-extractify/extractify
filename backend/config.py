@@ -28,6 +28,11 @@ class Config(BaseSettings):
     POSTGRES_PORT: int
     POSTGRES_HOST: str
 
+    # RESTRICITON LIMITS
+    MONTHLY_UPLOADS_LIMIT: int
+    DAILY_UPLOADS_BY_IP_LIMIT: int
+    UNRESTRICTED_IPS: str
+
     @computed_field
     @property
     def SQLALCHEMY_DATABASE_URI(self) -> PostgresDsn:
@@ -39,11 +44,6 @@ class Config(BaseSettings):
             port=self.POSTGRES_PORT,
             path=self.POSTGRES_DB,
         )
-
-    # RESTRICITON LIMITS
-    MONTHLY_UPLOADS_LIMIT: int
-    DAILY_UPLOADS_BY_IP_LIMIT: int
-    UNRESTRICTED_IPS: str
 
     model_config = SettingsConfigDict(env_file=".env", extra="allow")
 
