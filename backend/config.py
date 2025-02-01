@@ -33,6 +33,9 @@ class Config(BaseSettings):
     DAILY_UPLOADS_BY_IP_LIMIT: int
     UNRESTRICTED_IPS: str
 
+    # FIREBASE
+    FIREBASE_TMP_FOLDER: str = "/tmp/"
+
     @computed_field
     @property
     def SQLALCHEMY_DATABASE_URI(self) -> PostgresDsn:

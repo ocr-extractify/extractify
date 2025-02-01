@@ -1,17 +1,22 @@
 from fastapi import FastAPI
+from fastapi.concurrency import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 from db import setup_db
 from routes.auth import auth_router
 from routes.files import files_router
+from utils.firebase import setup_firebase
 from utils.middlewares import ExceptionHandlerMiddleware
 
 
-async def on_startup():
+@asynccontextmanager
+async def on_startup(app: FastAPI):
     setup_db()
+    setup_firebase()
+    yield
 
 
 app = FastAPI(
-    title="File to text", version="1.0.0", root_path="/api", on_startup=[on_startup]
+    title="File to text", version="1.0.0", root_path="/api", lifespan=on_startup
 )
 
 

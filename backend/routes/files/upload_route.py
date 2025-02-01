@@ -1,9 +1,11 @@
 import json
+from config import config
 from db.models import User
 from routes.files import files_router
 from fastapi import Depends, HTTPException, UploadFile, status, Request
 from utils.auth import get_current_user
 from utils.documentai.analyze import analyze_file
+from utils.firebase import upload
 
 
 @files_router.post(
@@ -17,8 +19,8 @@ async def upload_file(
     extraction_config: dict | None = None,
     current_user: User = Depends(get_current_user),
 ):
-    pass
-
+    file_url = await upload(file, config.FIREBASE_TMP_FOLDER)
+    return {"file_url": file_url}
     # if request.client is None:
     #     # TODO: Add detail error message.
     #     raise HTTPException(status_code=400, detail="")
