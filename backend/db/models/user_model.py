@@ -1,10 +1,10 @@
-from datetime import datetime
-from sqlmodel import Field, SQLModel
 import uuid
+from datetime import datetime
+from sqlmodel import Field
+from db.models._sqlmodel import SQLModel
 
 
 class User(SQLModel, table=True):
-    __tablename__ = "user"
     id: uuid.UUID = Field(primary_key=True, default_factory=uuid.uuid4)
     email: str = Field(index=True)
     password: str

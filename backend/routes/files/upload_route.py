@@ -1,6 +1,10 @@
-from sqlalchemy import select
+from sqlmodel import select
 from config import config
-from constants.errors_texts import UNSUPPORTED_FILE_TYPE
+from constants.errors_texts import (
+    CLIENT_IP_NOT_IN_REQUEST,
+    INVALID_FILE,
+    UNSUPPORTED_FILE_TYPE,
+)
 from db.models import User, File, FileMimetype
 from routes.files import files_router
 from fastapi import Depends, UploadFile, status, Request
@@ -20,8 +24,14 @@ async def upload_file(
     session: SessionDep,
     current_user: User = Depends(get_current_user),
 ):
-    db_stmt = select(FileMimetype).filter(FileMimetype.name == file.content_type)
-    db_file_mimetype = session.exec(db_stmt).scalar_one_or_none()
+    if not request.client:
+        raise ValueError(CLIENT_IP_NOT_IN_REQUEST)
+
+    if not file.content_type or not file.filename:
+        raise ValueError(INVALID_FILE)
+
+    db_stmt = select(FileMimetype).where(FileMimetype.name == file.content_type)
+    db_file_mimetype = session.exec(db_stmt).first()
 
     if not db_file_mimetype:
         raise ValueError(UNSUPPORTED_FILE_TYPE)

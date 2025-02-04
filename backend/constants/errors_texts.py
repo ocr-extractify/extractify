@@ -12,3 +12,5 @@ RESOURCE_NOT_FOUND: str = "Resource not found"
 GOOGLE_DOCUMENT_AI_PROCESSOR_NOT_FOUND: str = (
     "Google document AI processor not found. Please check the environment variable: G_DOCUMENT_AI_PROCESSOR"
 )
+INVALID_FILE = "The file is invalid"
+CLIENT_IP_NOT_IN_REQUEST = "Client IP not found in request"

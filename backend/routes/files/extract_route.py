@@ -1,4 +1,4 @@
-from sqlalchemy import select
+from sqlmodel import select
 from constants.errors_texts import RESOURCE_NOT_FOUND
 from db.models import User, File, FileExtraction
 from routes.files import files_router
@@ -21,22 +21,22 @@ async def extract_file_data(
     # extraction_config: dict | None = None,
     current_user: User = Depends(get_current_user),
 ):
-    db_file = session.exec(select(File).filter(File.id == id)).scalar_one_or_none()
+    db_file = session.exec(select(File).where(File.id == id)).first()
 
     if not db_file:
         raise LookupError(RESOURCE_NOT_FOUND)
 
     db_file_extraction = session.exec(
-        select(FileExtraction).filter(FileExtraction.file_id == id)
-    ).scalar_one_or_none()
+        select(FileExtraction).where(FileExtraction.file_id == id)
+    ).first()
 
     # don't extract if the file is already extracted (save google-document-ai usage)
     if db_file_extraction:
         return db_file_extraction
 
-    firebase_file_bytes = download(db_file.uri)
+    firebase_file_bytes = await download(db_file.uri)
     analyzed_file = await analyze_file(
-        file=firebase_file_bytes, content_type=file.mimetype, request=request
+        file_bytes=firebase_file_bytes, content_type=db_file.mimetype, request=request
     )
     new_file_extraction = FileExtraction(
         name=db_file.name,
