@@ -1,0 +1,15 @@
+[project]
+name = "extractify"
+dynamic = ["version"]
+description = "extract data from images and pdfs"
+readme = "README.md"
+authors = [
+    { name = "Vitor Schirmer", email = "vitor.roberto3022@gmail.com" },
+]
+
+[tool.mypy]
+ignore_missing_imports = false
+warn_unused_configs = true
+disallow_any_generics = true
+disallow_subclassing_any = true
+# explicit_package_bases = false
