@@ -16,7 +16,9 @@ async def on_startup(app: FastAPI):
 
 
 app = FastAPI(
-    title="File to text", version="1.0.0", root_path="/api", lifespan=on_startup
+    title="File to text",
+    version="1.0.0",
+    lifespan=on_startup,  # root_path="/api"
 )
 
 

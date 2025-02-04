@@ -26,8 +26,8 @@ class FileExtraction(SQLModel, table=True):
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
 
-    file_id: int = Field(foreign_key="file.id")
-    user_id: int = Field(foreign_key="user.id")
+    file_id: uuid.UUID = Field(foreign_key="file.id")
+    user_id: uuid.UUID = Field(foreign_key="user.id")
 
     class Config:
         arbitrary_types_allowed = True
@@ -44,6 +44,6 @@ class File(SQLModel, table=True):
     updated_at: datetime = Field(default_factory=datetime.now)
 
     file_mimetype_id: int = Field(foreign_key="file_mimetype.id")
-    user_id: int = Field(foreign_key="user.id")
+    user_id: uuid.UUID = Field(foreign_key="user.id")
 
     # extractions: list["FileExtraction"] | None = Relationship(back_populates="file")

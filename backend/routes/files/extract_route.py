@@ -1,22 +1,56 @@
-import json
-from db.models import User
+from sqlalchemy import select
+from constants.errors_texts import RESOURCE_NOT_FOUND
+from db.models import User, File, FileExtraction
 from routes.files import files_router
-from fastapi import Depends, HTTPException, UploadFile, status, Request
+from fastapi import Depends, status, Request
 from utils.auth import get_current_user
 from utils.documentai.analyze import analyze_file
+from dependencies import SessionDep
+from utils.firebase import download
 
 
 @files_router.post(
-    "/files/:id/extract_data/",
-    description="Extract data from a file",
+    "/{id}/extract_data/",
+    description="Extract data from an existing file",
     status_code=status.HTTP_201_CREATED,
 )
 async def extract_file_data(
+    id: str,
     request: Request,
-    extraction_config: dict | None = None,
+    session: SessionDep,
+    # extraction_config: dict | None = None,
     current_user: User = Depends(get_current_user),
 ):
-    pass
+    db_file = session.exec(select(File).filter(File.id == id)).scalar_one_or_none()
+
+    if not db_file:
+        raise LookupError(RESOURCE_NOT_FOUND)
+
+    db_file_extraction = session.exec(
+        select(FileExtraction).filter(FileExtraction.file_id == id)
+    ).scalar_one_or_none()
+
+    # don't extract if the file is already extracted (save google-document-ai usage)
+    if db_file_extraction:
+        return db_file_extraction
+
+    firebase_file_bytes = download(db_file.uri)
+    analyzed_file = await analyze_file(
+        file=firebase_file_bytes, content_type=file.mimetype, request=request
+    )
+    new_file_extraction = FileExtraction(
+        name=db_file.name,
+        text=analyzed_file["text"],
+        detected_languages=analyzed_file["detected_languages"],
+        extracted_data=analyzed_file["extracted_data"],
+        file_id=db_file.id,
+        user_id=current_user.id,
+    )
+    session.add(new_file_extraction)
+    session.commit()
+    session.refresh(new_file_extraction)
+    return new_file_extraction
+
     # if request.client is None:
     #     # TODO: Add detail error message.
     #     raise HTTPException(status_code=400, detail="")

@@ -1,13 +1,16 @@
 import json
-from fastapi import Request, UploadFile
+from fastapi import Request
 from google.api_core.client_options import ClientOptions
 from google.cloud import documentai_v1 as documentai
 from config import config
-from constants.errors_texts import INVALID_FILE_MIMETYPE
+from constants.errors_texts import (
+    GOOGLE_DOCUMENT_AI_PROCESSOR_NOT_FOUND,
+    INVALID_FILE_MIMETYPE,
+)
 from utils.google_auth.production_auth import get_production_creds
 
 
-async def analyze_file(file: UploadFile, request: Request):
+async def analyze_file(file_bytes: bytes, content_type: str, request: Request):
     """
     Extracts data from a file using Google Cloud Document AI.
 
@@ -17,7 +20,7 @@ async def analyze_file(file: UploadFile, request: Request):
     Returns:
         str: The extracted data from the PDF file.
     """
-    if file.content_type not in config.VALID_MIMETYPES.split(","):
+    if content_type not in config.VALID_MIMETYPES.split(","):
         raise TypeError(INVALID_FILE_MIMETYPE)
 
     opts = ClientOptions(
@@ -41,12 +44,9 @@ async def analyze_file(file: UploadFile, request: Request):
         None,
     )
     if not processor:
-        # TODO: Store the error message in a constant
-        raise LookupError("No processor")
+        raise LookupError(GOOGLE_DOCUMENT_AI_PROCESSOR_NOT_FOUND)
 
-    raw_document = documentai.RawDocument(
-        content=file.file.read(), mime_type=file.content_type
-    )
+    raw_document = documentai.RawDocument(content=file_bytes, mime_type=content_type)
 
     documentai_request = documentai.ProcessRequest(
         name=processor.name,
