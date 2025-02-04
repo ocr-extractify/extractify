@@ -2,9 +2,7 @@
     "python.languageServer": "Pylance",
     "python.analysis.typeCheckingMode": "strict",
     // LINT (you must install pylint vscode extension)
-    "mypy-type-checker.args": [
-        "--config-file=${workspaceFolder}/pyproject.toml"
-    ],
+    "mypy.configFile": "${workspaceFolder}/pyproject.toml",
     // FORMATTER (you must install black-formatter vscode extension)
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
