@@ -4,6 +4,5 @@ venv
 .env.local
 g_document_ai_creds_*.json 
 application_default_credentials.json
-.vscode
 node_modules
 .vite

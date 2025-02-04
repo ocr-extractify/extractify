@@ -1,0 +1,17 @@
+{
+    "version": "1.0.0",
+    "configurations": [
+        {
+            "name": "FASTAPI DEBUG",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "main:app",
+                "--reload",
+                "--port",
+                "8000"
+            ]
+        }
+    ]
+}
