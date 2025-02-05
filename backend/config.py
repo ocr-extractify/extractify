@@ -31,9 +31,10 @@ class Config(BaseSettings):
     MONTHLY_UPLOADS_LIMIT: int
     DAILY_UPLOADS_BY_IP_LIMIT: int
     UNRESTRICTED_IPS: str
+    PAGINATION_LIMIT: int = 100
 
     # FIREBASE
-    FIREBASE_TMP_FOLDER: str = "/tmp/"
+    FIREBASE_TMP_FOLDER: str = "tmp"
 
     @computed_field
     @property
