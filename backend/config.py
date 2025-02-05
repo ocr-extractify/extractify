@@ -1,5 +1,4 @@
-from typing import Any, Optional
-from pydantic import PostgresDsn, computed_field, model_validator
+from pydantic import PostgresDsn, computed_field
 from pydantic_core import MultiHostUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from dotenv import load_dotenv
@@ -51,4 +50,4 @@ class Config(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="allow")
 
 
-config = Config()
+config = Config()  # type: ignore

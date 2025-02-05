@@ -1,6 +1,8 @@
 import uuid
 from datetime import datetime
-from sqlmodel import Field
+
+# issue from sqlmodel. see: https://github.com/fastapi/sqlmodel/discussions/797
+from sqlmodel import Field  # type: ignore[reportUnknownVariableType]
 from db.models._sqlmodel import SQLModel
 
 

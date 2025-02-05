@@ -36,7 +36,9 @@ async def extract_file_data(
 
     firebase_file_bytes = await download(db_file.uri)
     analyzed_file = await analyze_file(
-        file_bytes=firebase_file_bytes, content_type=db_file.mimetype, request=request
+        file_bytes=firebase_file_bytes,
+        content_type=db_file.file_mimetype.name,
+        request=request,
     )
     new_file_extraction = FileExtraction(
         name=db_file.name,
