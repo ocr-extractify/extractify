@@ -1,4 +1,5 @@
 from firebase_admin.storage import bucket  # type: ignore
+from urllib.parse import urlparse
 
 
 async def download(file_uri: str) -> bytes:
@@ -9,6 +10,13 @@ async def download(file_uri: str) -> bytes:
     Returns:
         bytes: The file content.
     """
-    bkt = bucket()
-    blob = bkt.blob(file_uri)
-    return blob.download_as_bytes()
+    parsed = urlparse(file_uri)
+
+    # Extract path parts: ['', 'bucket-name', 'path', 'to', 'file']
+    path_parts = parsed.path.strip("/").split("/")
+    bucket_name = path_parts[0]
+    blob_path = "/".join(path_parts[1:])
+
+    bkt = bucket(bucket_name)
+    blob = bkt.blob(blob_path)  # type: ignore
+    return blob.download_as_bytes()  # type: ignore
