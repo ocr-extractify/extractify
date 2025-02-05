@@ -1,7 +1,7 @@
 import json
 from fastapi import Request
 from google.api_core.client_options import ClientOptions
-from google.cloud import documentai_v1 as documentai
+from google.cloud import documentai_v1 as documentai  # type: ignore
 from config import config
 from constants.errors_texts import (
     GOOGLE_DOCUMENT_AI_PROCESSOR_NOT_FOUND,
