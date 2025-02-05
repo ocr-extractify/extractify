@@ -14,3 +14,7 @@ GOOGLE_DOCUMENT_AI_PROCESSOR_NOT_FOUND: str = (
 )
 INVALID_FILE = "The file is invalid"
 CLIENT_IP_NOT_IN_REQUEST = "Client IP not found in request"
+PDF_TOO_MANY_PAGES = "PDF file has more pages than allowed"
+FILE_CONTENT_TYPE_IS_REQUIRED_IF_FILE_IS_BYTES = (
+    "File content type is required if file is bytes"
+)

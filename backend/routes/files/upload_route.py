@@ -1,8 +1,11 @@
+from io import BytesIO
+from PyPDF2 import PdfReader
 from sqlmodel import select
 from config import config
 from constants.errors_texts import (
     CLIENT_IP_NOT_IN_REQUEST,
     INVALID_FILE,
+    PDF_TOO_MANY_PAGES,
     UNSUPPORTED_FILE_TYPE,
 )
 from db.models import User, File, FileMimetype
@@ -36,7 +39,18 @@ async def upload_file(
     if not db_file_mimetype:
         raise ValueError(UNSUPPORTED_FILE_TYPE)
 
-    file_uri = await upload(file, config.FIREBASE_TMP_FOLDER)
+    file_bytes = await file.read()
+    if file.content_type == "application/pdf":
+        pdf = PdfReader(BytesIO(file_bytes))
+        if len(pdf.pages) > config.PDF_PAGE_LIMIT:
+            raise ValueError(PDF_TOO_MANY_PAGES)
+    # TODO: not allow pdf with more than one page.
+
+    file_uri = await upload(
+        file=file_bytes,
+        firebase_folder=config.FIREBASE_TMP_FOLDER,
+        content_type=file.content_type,
+    )
     db_file = File(
         name=file.filename,
         client_ip=request.client.host,

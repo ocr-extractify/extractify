@@ -32,6 +32,7 @@ class Config(BaseSettings):
     DAILY_UPLOADS_BY_IP_LIMIT: int
     UNRESTRICTED_IPS: str
     PAGINATION_LIMIT: int = 100
+    PDF_PAGE_LIMIT: int = 1
 
     # FIREBASE
     FIREBASE_TMP_FOLDER: str = "tmp"
