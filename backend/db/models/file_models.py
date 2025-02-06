@@ -30,6 +30,8 @@ class FileExtraction(SQLModel, table=True):
     file_id: uuid.UUID = Field(foreign_key="file.id")
     user_id: uuid.UUID = Field(foreign_key="user.id")
 
+    file: "File" = Relationship(back_populates="extractions")
+
     class Config:
         arbitrary_types_allowed = True
 
@@ -47,5 +49,4 @@ class File(SQLModel, table=True):
     user_id: uuid.UUID = Field(foreign_key="user.id")
 
     file_mimetype: FileMimetype = Relationship(back_populates="files")
-
-    # extractions: list["FileExtraction"] | None = Relationship(back_populates="file")
+    extractions: list["FileExtraction"] | None = Relationship(back_populates="file")
