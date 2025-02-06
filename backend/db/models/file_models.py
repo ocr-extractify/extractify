@@ -49,4 +49,7 @@ class File(SQLModel, table=True):
     user_id: uuid.UUID = Field(foreign_key="user.id")
 
     file_mimetype: FileMimetype = Relationship(back_populates="files")
-    extractions: list["FileExtraction"] | None = Relationship(back_populates="file")
+    extractions: list["FileExtraction"] | None = Relationship(
+        back_populates="file",
+        sa_relationship_kwargs={"lazy": "selectin"},
+    )
