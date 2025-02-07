@@ -36,7 +36,7 @@ class FileExtraction(SQLModel, table=True):
         arbitrary_types_allowed = True
 
 
-class File(SQLModel, table=True):
+class FileBase(SQLModel):
     id: uuid.UUID = Field(primary_key=True, default_factory=uuid.uuid4)
     name: str = Field(index=True)
     client_ip: str | None = Field(default=None)
@@ -45,11 +45,16 @@ class File(SQLModel, table=True):
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
 
+
+class File(FileBase, table=True):
     file_mimetype_id: int = Field(foreign_key="file_mimetype.id")
     user_id: uuid.UUID = Field(foreign_key="user.id")
 
     file_mimetype: FileMimetype = Relationship(back_populates="files")
-    extractions: list["FileExtraction"] | None = Relationship(
+    extractions: list["FileExtraction"] = Relationship(
         back_populates="file",
-        sa_relationship_kwargs={"lazy": "selectin"},
     )
+
+
+class FileWithExtractions(FileBase):
+    extractions: list[FileExtraction] = []
