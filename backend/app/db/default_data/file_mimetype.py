@@ -1,8 +1,9 @@
+from sqlmodel import Session
 from app.db.models import FileMimetype
 
 
 def add_file_mimetype_records(
-    session,
+    session: Session,
 ):
     session.add_all(
         [
