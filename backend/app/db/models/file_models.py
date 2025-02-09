@@ -19,10 +19,9 @@ class FileMimetype(SQLModel, table=True):
 
 class FileExtraction(SQLModel, table=True):
     id: uuid.UUID = Field(primary_key=True, default_factory=uuid.uuid4)
-    name: str = Field(index=True)
     text: str = Field()
     detected_languages: list[JSON] = Field(sa_column=Column(ARRAY(JSON)))
-    extracted_data: dict | None = Field(default=None, sa_column=Column(JSON))
+    # extracted_data: dict | None = Field(default=None, sa_column=Column(JSON))
     is_deleted: bool = Field(default=False)
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)

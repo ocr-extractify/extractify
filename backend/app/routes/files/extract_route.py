@@ -41,7 +41,6 @@ async def extract_file_data(
         request=request,
     )
     new_file_extraction = FileExtraction(
-        name=db_file.name,
         text=analyzed_file["text"],
         # all pdf have only one page. (bussiness rule)
         detected_languages=analyzed_file["pages"][0]["detectedLanguages"],
