@@ -1,7 +1,7 @@
 from sqlmodel import select
 from app.routes.files import files_router
 from fastapi import Query, status
-from app.db.models import File, FileWithExtractions
+from app.db.models import File, FileWithOcrExtractions
 from app.dependencies import SessionDep
 from config import config
 
@@ -10,7 +10,7 @@ from config import config
     "/",
     description="get all files",
     status_code=status.HTTP_200_OK,
-    response_model=list[FileWithExtractions],
+    response_model=list[FileWithOcrExtractions],
 )
 async def get_files(
     session: SessionDep,

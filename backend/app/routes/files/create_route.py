@@ -17,7 +17,7 @@ from app.dependencies import SessionDep
 
 
 @files_router.post(
-    "/upload/",
+    "/",
     description="Upload a file to remote storage (firebase)",
     status_code=status.HTTP_201_CREATED,
 )
@@ -44,7 +44,6 @@ async def upload_file(
         pdf = PdfReader(BytesIO(file_bytes))
         if len(pdf.pages) > config.PDF_PAGE_LIMIT:
             raise ValueError(PDF_TOO_MANY_PAGES)
-    # TODO: not allow pdf with more than one page.
 
     file_uri = await upload(
         file=file_bytes,

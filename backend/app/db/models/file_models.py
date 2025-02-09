@@ -17,11 +17,10 @@ class FileMimetype(SQLModel, table=True):
     files: list["File"] | None = Relationship(back_populates="file_mimetype")
 
 
-class FileExtraction(SQLModel, table=True):
+class FileOcrExtraction(SQLModel, table=True):
     id: uuid.UUID = Field(primary_key=True, default_factory=uuid.uuid4)
     text: str = Field()
     detected_languages: list[JSON] = Field(sa_column=Column(ARRAY(JSON)))
-    # extracted_data: dict | None = Field(default=None, sa_column=Column(JSON))
     is_deleted: bool = Field(default=False)
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
@@ -29,7 +28,7 @@ class FileExtraction(SQLModel, table=True):
     file_id: uuid.UUID = Field(foreign_key="file.id")
     user_id: uuid.UUID = Field(foreign_key="user.id")
 
-    file: "File" = Relationship(back_populates="extractions")
+    file: "File" = Relationship(back_populates="ocr_extractions")
 
     class Config:
         arbitrary_types_allowed = True
@@ -50,10 +49,10 @@ class File(FileBase, table=True):
     user_id: uuid.UUID = Field(foreign_key="user.id")
 
     file_mimetype: FileMimetype = Relationship(back_populates="files")
-    extractions: list["FileExtraction"] = Relationship(
+    ocr_extractions: list["FileOcrExtraction"] = Relationship(
         back_populates="file",
     )
 
 
-class FileWithExtractions(FileBase):
-    extractions: list[FileExtraction] = []
+class FileWithOcrExtractions(FileBase):
+    ocr_extractions: list[FileOcrExtraction] = []
