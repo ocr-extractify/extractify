@@ -17,5 +17,5 @@ async def get_files(
     offset: int = 0,
     limit: int = Query(default=config.PAGINATION_LIMIT, le=config.PAGINATION_LIMIT),
 ):
-    db_files = session.exec(select(File).offset(offset).limit(limit)).all()
-    return db_files
+    db_result = session.exec(select(File).offset(offset).limit(limit)).all()
+    return db_result
