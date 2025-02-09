@@ -14,8 +14,8 @@ from app.dependencies import SessionDep
     response_model=FileWithOcrExtractions,
 )
 async def get_file(id: str, session: SessionDep):
-    db_file = session.exec(select(File).where(File.id == id)).first()
-    if not db_file:
+    db_result = session.exec(select(File).where(File.id == id)).first()
+    if not db_result:
         raise LookupError(RESOURCE_NOT_FOUND)
 
-    return db_file
+    return db_result
