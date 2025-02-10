@@ -1,9 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { httpClient } from '@/utils/axios';
 import { Button } from '@/components/ui/button';
-import { useFilesStore } from '@/utils/zustandStorage';
 import { useState } from 'react';
-import { FileStoreState } from '@/utils/zustandStorage/types';
 import { NO_FILE } from '@/constants/errorsMsgs';
 import { Label } from '@/components/ui/label';
 import { FileUploader } from '@/components/ui/file-uploader';
@@ -11,12 +9,13 @@ import { Separator } from '@radix-ui/react-separator';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '@/hooks/use-toast';
 import RegexForm from './fragments/RegexForm';
+import { DataExtractionRegexField } from '@/utils/constants/dataExtractionRegexFields';
 
 function UploadFilesPage() {
   const { t } = useTranslation();
   const { toast } = useToast();
   const [files, setFiles] = useState<File[] | []>([]);
-  const addFile = useFilesStore((state: FileStoreState) => state.add);
+  const [regexFields, setRegexFields] = useState<DataExtractionRegexField[]>([]);
   const uploadFileMutation = useMutation({
     mutationFn: async (file: File) => {
       const formData = new FormData();
@@ -25,9 +24,6 @@ function UploadFilesPage() {
       return httpClient
         .post('/files/upload/', formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
-        })
-        .then((res) => {
-          addFile(res.data);
         })
         .catch((err) => {
           toast({ title: err.response.data.detail });
@@ -62,7 +58,10 @@ function UploadFilesPage() {
           
           <Separator />
 
-          <RegexForm />
+          <RegexForm 
+            regexFields={regexFields}
+            setRegexFields={setRegexFields}
+          />
 
           <form
             className="w-full flex flex-col"
