@@ -10,6 +10,7 @@ import { FileUploader } from '@/components/ui/file-uploader';
 import { Separator } from '@radix-ui/react-separator';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '@/hooks/use-toast';
+import RegexForm from './fragments/RegexForm';
 
 function UploadFilesPage() {
   const { t } = useTranslation();
@@ -61,23 +62,19 @@ function UploadFilesPage() {
           
           <Separator />
 
+          <RegexForm />
+
           <form
             className="w-full flex flex-col"
             onSubmit={handleSubmit}
           >
             <Label className='mb-2'>Files</Label>
-            {/* <FileInput
-              id="files"
-              files={files}
-              setFiles={setFiles}
-              multiple
-              accept={VALID_MIMETYPES.join(',')}
-            /> */}
             <FileUploader
               value={files}
               onValueChange={setFiles}
               multiple
             />
+            
             <Button
               className="w-fit mt-4 flex items-center"
               isLoading={uploadFileMutation.isPending}
