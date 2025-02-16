@@ -17,19 +17,19 @@ const regexFormSchema = z.object({
       regex: z.string().min(1, "Regex is required"),
     })
   )
-  // .transform((value) => uniqBy(value, 'name'));
-  .superRefine((fields, ctx) => {
-    const names = fields.map(field => field.name);
-    const duplicates = names.filter((name, index) => names.indexOf(name) !== index);
-    console.log("dupl", duplicates);
-    duplicates.forEach((name, index) => {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: `Names must be unique. Remove the field: ${name}`,
-        path: [index, "name"],
+    // .transform((value) => uniqBy(value, 'name'));
+    .superRefine((fields, ctx) => {
+      const names = fields.map(field => field.name);
+      const duplicates = names.filter((name, index) => names.indexOf(name) !== index);
+      console.log("dupl", duplicates);
+      duplicates.forEach((name, index) => {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `Names must be unique. Remove the field: ${name}`,
+          path: [index, "name"],
+        });
       });
-    });
-  })
+    })
 });
 
 interface Props {
@@ -79,9 +79,9 @@ const RegexForm = ({ regexFields, setRegexFields }: Props) => {
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input 
-                        placeholder="Field name" 
-                        {...field} 
+                      <Input
+                        placeholder="Field name"
+                        {...field}
                         onChange={(e) => {
                           field.onChange(e);
                           setRegexFields(form.getValues().fields);
@@ -126,7 +126,7 @@ const RegexForm = ({ regexFields, setRegexFields }: Props) => {
                 )}
               />
             </div>
-            
+
             <Button
               type="button"
               variant="ghost"
