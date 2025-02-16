@@ -28,7 +28,7 @@ const regexFormSchema = z.object({
       if (seenNames.has(field.name)) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: `Name must be unique. "${field.name}" is already used.`,
+          message: `Name must be unique.`,
           path: [index, "name"],
         });
       } else {
@@ -39,7 +39,7 @@ const regexFormSchema = z.object({
       if (seenRegexes.has(field.regex)) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: `Regex must be unique. "${field.regex}" is already used.`,
+          message: `Regex must be unique.`,
           path: [index, "regex"],
         });
       } else {
@@ -83,7 +83,7 @@ const RegexForm = ({ regexFields, setRegexFields }: Props) => {
     <Form {...form}>
       <div className="space-y-4">
         {fields.map((field, index) => (
-          <div key={field.id} className="flex gap-4 items-end">
+          <div key={field.id} className="flex gap-4 border border-input p-4 rounded-md">
             <div className="flex-1 grid gap-4 grid-cols-2">
               <FormField
                 control={form.control}
@@ -135,7 +135,7 @@ const RegexForm = ({ regexFields, setRegexFields }: Props) => {
               type="button"
               variant="ghost"
               size="sm"
-              className="mb-1"
+              className="mb-1 "
               onClick={() => handleRemoveField(index)}
             >
               <X className="h-4 w-4" />
