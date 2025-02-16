@@ -8,46 +8,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 // TODO: the .superRefine should be a reusable function of avoiding duplicate data in an array 
-const regexFormSchema = z.object({
-  fields: z.array(
-    z.object({
-      name: z.string()
-        .min(1, "Name is required")
-        .max(64, "Name too long (max 64 characters)"),
-      regex: z.string().min(1, "Regex is required"),
-    })
-  ).superRefine((fields, ctx) => {
-    // Track seen names and regexes
-    const seenNames = new Set<string>();
-    const seenRegexes = new Set<string>();
 
-    fields.forEach((field, index) => {
-      // Check for duplicate names
-      if (seenNames.has(field.name)) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: `Name must be unique.`,
-          path: [index, "name"],
-        });
-      } else {
-        seenNames.add(field.name);
-      }
-
-      // Check for duplicate regexes
-      if (seenRegexes.has(field.regex)) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: `Regex must be unique.`,
-          path: [index, "regex"],
-        });
-      } else {
-        seenRegexes.add(field.regex);
-      }
-    });
-  })
-});
 
 interface Props {
   regexFields: DataExtractionRegexField[];
@@ -55,6 +19,45 @@ interface Props {
 }
 
 const RegexForm = ({ regexFields, setRegexFields }: Props) => {
+  const { t } = useTranslation();
+  const regexFormSchema = z.object({
+    fields: z.array(
+      z.object({
+        name: z.string()
+          .min(1, `${t("NAME")} ${t("IS_REQUIRED")}`)
+          .max(64, `${t("NAME")} ${t("TOO_LONG")}`),
+        regex: z.string().min(1, `${t("REGEX")} ${t("IS_REQUIRED")}`),
+      })
+    ).superRefine((fields, ctx) => {
+      // Track seen names and regexes
+      const seenNames = new Set<string>();
+      const seenRegexes = new Set<string>();
+
+      fields.forEach((field, index) => {
+        // Check for duplicate names
+        if (seenNames.has(field.name)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: `${t("NAME")} ${t("MUST_BE_UNIQUE")}.`,
+            path: [index, "name"],
+          });
+        } else {
+          seenNames.add(field.name);
+        }
+
+        // Check for duplicate regexes
+        if (seenRegexes.has(field.regex)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: `${t("REGEX")} ${t("MUST_BE_UNIQUE")}.`,
+            path: [index, "regex"],
+          });
+        } else {
+          seenRegexes.add(field.regex);
+        }
+      });
+    })
+  });
   const form = useForm<z.infer<typeof regexFormSchema>>({
     resolver: zodResolver(regexFormSchema),
     mode: "onChange",
@@ -78,7 +81,6 @@ const RegexForm = ({ regexFields, setRegexFields }: Props) => {
   const handleAddField = () => append({ name: "", regex: "a" });
   const handleRemoveField = (index: number) => remove(index);
 
-  console.log("regexFields", regexFields);
   return (
     <Form {...form}>
       <div className="space-y-4">
@@ -90,7 +92,7 @@ const RegexForm = ({ regexFields, setRegexFields }: Props) => {
                 name={`fields.${index}.name`}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>{t("NAME")}</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Field name"
@@ -108,7 +110,7 @@ const RegexForm = ({ regexFields, setRegexFields }: Props) => {
                 name={`fields.${index}.regex`}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Regex</FormLabel>
+                    <FormLabel>{t("REGEX")}</FormLabel>
                     <Select
                       {...field}
                       onValueChange={field.onChange}
@@ -149,7 +151,7 @@ const RegexForm = ({ regexFields, setRegexFields }: Props) => {
           className="w-full"
           onClick={handleAddField}
         >
-          Add Regex Field
+          {t("ADD_REGEX_FIELD")}
         </Button>
       </div>
     </Form >
