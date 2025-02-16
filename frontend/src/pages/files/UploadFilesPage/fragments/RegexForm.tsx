@@ -45,7 +45,6 @@ const RegexForm = ({ regexFields, setRegexFields }: Props) => {
       fields: regexFields
     }
   });
-
   const { fields, append, remove } = useFieldArray({
     control: form.control,
     name: "fields",
@@ -105,17 +104,14 @@ const RegexForm = ({ regexFields, setRegexFields }: Props) => {
                         field.onChange(value);
                         setRegexFields(form.getValues().fields);
                       }}
-                      value={field.value}
                     >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a regex" />
-                        </SelectTrigger>
-                      </FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a regex" />
+                      </SelectTrigger>
+
                       <SelectContent>
-                        <SelectItem value="a">Select a regex</SelectItem>
                         {dataExtractionRegexFields.map((regexItem) => (
-                          <SelectItem key={regexItem.name} value={regexItem.regex}>
+                          <SelectItem key={regexItem.name} value={regexItem.name}>
                             {regexItem.label}
                           </SelectItem>
                         ))}

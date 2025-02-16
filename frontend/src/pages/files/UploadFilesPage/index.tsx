@@ -11,11 +11,15 @@ import { useToast } from '@/hooks/use-toast';
 import RegexForm from './fragments/RegexForm';
 import { DataExtractionRegexField } from '@/utils/constants/dataExtractionRegexFields';
 
+const DEFAULT_REGEX_FIELDS: DataExtractionRegexField[] = [
+  { name: 'Email', regex: 'email' },
+];
+
 function UploadFilesPage() {
   const { t } = useTranslation();
   const { toast } = useToast();
   const [files, setFiles] = useState<File[] | []>([]);
-  const [regexFields, setRegexFields] = useState<DataExtractionRegexField[]>([]);
+  const [regexFields, setRegexFields] = useState<DataExtractionRegexField[]>(DEFAULT_REGEX_FIELDS);
   const uploadFileMutation = useMutation({
     mutationFn: async (file: File) => {
       const formData = new FormData();
@@ -34,7 +38,7 @@ function UploadFilesPage() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (files.length === 0) {
-      toast({ title: NO_FILE});
+      toast({ title: NO_FILE });
       return;
     }
 
@@ -49,38 +53,38 @@ function UploadFilesPage() {
   return (
     <div className="mx-auto w-full">
       <div className="space-y-6">
-          <div>
-            <h3 className="text-lg font-medium">{t("UPLOAD")}</h3>
-            <p className="text-sm text-muted-foreground">
-              {t("UPLOAD_FILES_FORM_DESCRIPTION")}
-            </p>
-          </div>
-          
-          <Separator />
+        <div>
+          <h3 className="text-lg font-medium">{t("UPLOAD")}</h3>
+          <p className="text-sm text-muted-foreground">
+            {t("UPLOAD_FILES_FORM_DESCRIPTION")}
+          </p>
+        </div>
 
-          <RegexForm 
-            regexFields={regexFields}
-            setRegexFields={setRegexFields}
+        <Separator />
+
+        <RegexForm
+          regexFields={regexFields}
+          setRegexFields={setRegexFields}
+        />
+
+        <form
+          className="w-full flex flex-col"
+          onSubmit={handleSubmit}
+        >
+          <Label className='mb-2'>Files</Label>
+          <FileUploader
+            value={files}
+            onValueChange={setFiles}
+            multiple
           />
 
-          <form
-            className="w-full flex flex-col"
-            onSubmit={handleSubmit}
+          <Button
+            className="w-fit mt-4 flex items-center"
+            isLoading={uploadFileMutation.isPending}
           >
-            <Label className='mb-2'>Files</Label>
-            <FileUploader
-              value={files}
-              onValueChange={setFiles}
-              multiple
-            />
-            
-            <Button
-              className="w-fit mt-4 flex items-center"
-              isLoading={uploadFileMutation.isPending}
-            >
-              <span className='uppercase font-medium'>{t("UPLOAD")}</span>
-            </Button>
-          </form>
+            <span className='uppercase font-medium'>{t("UPLOAD")}</span>
+          </Button>
+        </form>
       </div>
     </div>
   );
