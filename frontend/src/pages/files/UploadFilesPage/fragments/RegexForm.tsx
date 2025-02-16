@@ -7,7 +7,9 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
+import { useEffect } from 'react';
 
+// TODO: the .superRefine should be a reusable function of avoiding duplicate data in an array 
 const regexFormSchema = z.object({
   fields: z.array(
     z.object({
@@ -16,20 +18,35 @@ const regexFormSchema = z.object({
         .max(64, "Name too long (max 64 characters)"),
       regex: z.string().min(1, "Regex is required"),
     })
-  )
-    // .transform((value) => uniqBy(value, 'name'));
-    .superRefine((fields, ctx) => {
-      const names = fields.map(field => field.name);
-      const duplicates = names.filter((name, index) => names.indexOf(name) !== index);
-      console.log("dupl", duplicates);
-      duplicates.forEach((name, index) => {
+  ).superRefine((fields, ctx) => {
+    // Track seen names and regexes
+    const seenNames = new Set<string>();
+    const seenRegexes = new Set<string>();
+
+    fields.forEach((field, index) => {
+      // Check for duplicate names
+      if (seenNames.has(field.name)) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: `Names must be unique. Remove the field: ${name}`,
+          message: `Name must be unique. "${field.name}" is already used.`,
           path: [index, "name"],
         });
-      });
-    })
+      } else {
+        seenNames.add(field.name);
+      }
+
+      // Check for duplicate regexes
+      if (seenRegexes.has(field.regex)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `Regex must be unique. "${field.regex}" is already used.`,
+          path: [index, "regex"],
+        });
+      } else {
+        seenRegexes.add(field.regex);
+      }
+    });
+  })
 });
 
 interface Props {
@@ -50,21 +67,18 @@ const RegexForm = ({ regexFields, setRegexFields }: Props) => {
     name: "fields",
   });
 
-  const handleAddField = () => {
-    append({ name: "", regex: "" });
-    setRegexFields([...regexFields, { name: "", regex: "" }]);
-  };
+  useEffect(() => {
+    const subscription = form.watch((values) => {
+      const _fields = values.fields?.filter((field): field is DataExtractionRegexField => field !== undefined && field.name !== undefined && field.regex !== undefined) || [];
+      setRegexFields(_fields);
+    });
+    return () => subscription.unsubscribe();
+  }, [form, setRegexFields]);
 
-  const handleRemoveField = (index: number) => {
-    remove(index);
-    const updatedFields = [...regexFields];
-    updatedFields.splice(index, 1);
-    setRegexFields(updatedFields);
-  };
+  const handleAddField = () => append({ name: "", regex: "a" });
+  const handleRemoveField = (index: number) => remove(index);
 
-  console.log("values", form.getValues());
-  console.log("errors", form.formState.errors);
-
+  console.log("regexFields", regexFields);
   return (
     <Form {...form}>
       <div className="space-y-4">
@@ -81,10 +95,7 @@ const RegexForm = ({ regexFields, setRegexFields }: Props) => {
                       <Input
                         placeholder="Field name"
                         {...field}
-                        onChange={(e) => {
-                          field.onChange(e);
-                          setRegexFields(form.getValues().fields);
-                        }}
+                        onChange={field.onChange}
                       />
                     </FormControl>
                     <FormMessage />
@@ -100,10 +111,7 @@ const RegexForm = ({ regexFields, setRegexFields }: Props) => {
                     <FormLabel>Regex</FormLabel>
                     <Select
                       {...field}
-                      onValueChange={(value) => {
-                        field.onChange(value);
-                        setRegexFields(form.getValues().fields);
-                      }}
+                      onValueChange={field.onChange}
                     >
                       <SelectTrigger>
                         <SelectValue placeholder="Select a regex" />
@@ -144,7 +152,7 @@ const RegexForm = ({ regexFields, setRegexFields }: Props) => {
           Add Regex Field
         </Button>
       </div>
-    </Form>
+    </Form >
   );
 };
 
