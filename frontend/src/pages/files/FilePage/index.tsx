@@ -1,4 +1,4 @@
-import Result from '@/fragments/Result';
+// import Result from '@/fragments/Result';
 import { httpClient } from '@/utils/axios';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
@@ -11,10 +11,11 @@ const FilePage = () => {
   });
 
   return (
-    <Result
-      result={analyzedFile.data?.data}
-      isLoading={analyzedFile.isLoading}
-    />
+    <p>under dev</p>
+    // <Result
+    //   result={analyzedFile.data?.data}
+    //   isLoading={analyzedFile.isLoading}
+    // />
   );
 };
 

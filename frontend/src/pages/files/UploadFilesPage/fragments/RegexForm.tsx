@@ -2,7 +2,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { DataExtractionRegexField, dataExtractionRegexFields } from '@/utils/constants/dataExtractionRegexFields';
+import { DataExtractionRegexField, dataExtractionRegexFields } from '@/constants/dataExtractionRegexFields';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';

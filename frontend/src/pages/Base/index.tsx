@@ -17,6 +17,7 @@ import { useAuth } from "@/providers/AuthProvider"
 import { Navigate } from "react-router-dom"
 import { Outlet } from "react-router"
 import { useTranslation } from "react-i18next"
+import { APP_NAME } from "@/constants/ui"
 
 export default function Base() {
   const { t } = useTranslation();
@@ -38,7 +39,7 @@ export default function Base() {
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
                   <BreadcrumbLink href="#">
-                    File to text
+                    {APP_NAME}
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />

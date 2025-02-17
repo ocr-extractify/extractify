@@ -9,10 +9,10 @@ export const OR_DRAG_AND_DROP: string = 'or drag and drop';
 export const FILE_INPUT_MIMETYPES: string = `${VALID_MIMETYPES.join(', ')
   .replaceAll('image/', '')
   .replaceAll('application/', '')} up to ${(
-  MAX_FILE_SIZE /
-  1024 /
-  1024
-).toString()}MB`;
+    MAX_FILE_SIZE /
+    1024 /
+    1024
+  ).toString()}MB`;
 export const UPLOAD: string = 'Upload';
 export const FILENAME: string = 'Filename';
 export const FILESIZE: string = 'Filesize';

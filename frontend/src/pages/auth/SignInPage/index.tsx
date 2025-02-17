@@ -3,6 +3,7 @@ import { AuthForm } from "@/components/AuthForm"
 import { useAuth } from "@/providers/AuthProvider"
 import { useMutation } from "@tanstack/react-query"
 import { UserAuth } from "@/utils/types/api/auth"
+import { APP_NAME } from "@/constants/ui"
 
 export default function SignInPage() {
   const { signin } = useAuth()
@@ -19,7 +20,7 @@ export default function SignInPage() {
           <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
             <GalleryVerticalEnd className="size-4" />
           </div>
-          File to text.
+          {APP_NAME}.
         </a>
         <AuthForm type="signin" mutation={mutation} />
       </div>

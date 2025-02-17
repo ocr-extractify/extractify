@@ -9,7 +9,7 @@ import { Separator } from '@radix-ui/react-separator';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '@/hooks/use-toast';
 import RegexForm from './fragments/RegexForm';
-import { DataExtractionRegexField } from '@/utils/constants/dataExtractionRegexFields';
+import { DataExtractionRegexField } from '@/constants/dataExtractionRegexFields';
 
 const DEFAULT_REGEX_FIELDS: DataExtractionRegexField[] = [
   { name: 'Email', regex: 'email' },
@@ -72,6 +72,8 @@ function UploadFilesPage() {
           onSubmit={handleSubmit}
         >
           <Label className='mb-2'>Files</Label>
+
+          {/** TODO: use user limits to set FileUploader constraints. */}
           <FileUploader
             value={files}
             onValueChange={setFiles}
