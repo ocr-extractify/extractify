@@ -72,4 +72,11 @@ export const en_texts = {
   PORTUGUESE: "Portuguese",
   SELECT_A_LANGUAGE: "Select a language",
   SELECT_YOUR_PREFERRED_LANGUAGE: "Select your preferred language.",
+  UPLOAD: "Upload",
+  UPLOAD_FILES_FORM_DESCRIPTION: "Upload files to convert to text. Use the regex form to improve the data extraction.",
+  NAME: "Name",
+  REGEX: "Regex",
+  ADD_REGEX_FIELD: "Add regex field",
+  MUST_BE_UNIQUE: "must be unique",
+  IS_REQUIRED: "is required",
 };
