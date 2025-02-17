@@ -22,10 +22,10 @@ export function FileUploader(props: FileUploaderProps) {
       "image/*": [],
       "application/pdf": [],
     },
-    maxSize = 1024 * 1024 * 2,
-    maxFileCount = 1,
-    multiple = false,
-    disabled = false,
+    maxSize = props.maxSize || 1024 * 1024 * 2, // 2MB
+    maxFileCount = props.maxFileCount || 5,
+    multiple = props.multiple || false,
+    disabled = props.disabled || false,
     className,
     ...dropzoneProps
   } = props
