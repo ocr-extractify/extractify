@@ -79,4 +79,5 @@ export const en_texts = {
   ADD_REGEX_FIELD: "Add regex field",
   MUST_BE_UNIQUE: "must be unique",
   IS_REQUIRED: "is required",
+  PLATFORM: "Platform",
 };

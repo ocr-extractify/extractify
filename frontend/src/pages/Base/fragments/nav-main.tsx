@@ -16,6 +16,7 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
 import { Link } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
 export function NavMain({
   items,
@@ -31,9 +32,11 @@ export function NavMain({
     }[]
   }[]
 }) {
+  const { t } = useTranslation();
+
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel>{t("PLATFORM")}</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <Collapsible

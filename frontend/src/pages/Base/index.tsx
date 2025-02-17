@@ -16,8 +16,10 @@ import {
 import { useAuth } from "@/providers/AuthProvider"
 import { Navigate } from "react-router-dom"
 import { Outlet } from "react-router"
+import { useTranslation } from "react-i18next"
 
 export default function Base() {
+  const { t } = useTranslation();
   const { isAuthenticated } = useAuth();
 
   if (!isAuthenticated) {
@@ -41,7 +43,7 @@ export default function Base() {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Upload</BreadcrumbPage>
+                  <BreadcrumbPage>{t("UPLOAD")}</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
