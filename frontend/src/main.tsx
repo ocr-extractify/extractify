@@ -13,7 +13,7 @@ import { AuthProvider } from '@/providers/AuthProvider';
 import { ThemeProvider } from '@/providers/theme-provider';
 import { ToastProvider, } from '@/components/ui/toast';
 import { Toaster } from "@/components/ui/toaster"
- 
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -86,12 +86,12 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeProvider>
       <ToastProvider>
-        <AuthProvider> 
-            <QueryClientProvider client={queryClient}>
-              <RouterProvider router={router} />
-              <Toaster />
-            </QueryClientProvider>
-        </AuthProvider> 
+        <AuthProvider>
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+            <Toaster />
+          </QueryClientProvider>
+        </AuthProvider>
       </ToastProvider>
     </ThemeProvider>
   </React.StrictMode>,
