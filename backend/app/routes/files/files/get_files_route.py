@@ -1,7 +1,8 @@
 from sqlmodel import select
 from app.routes.files import files_router
 from fastapi import Query, status
-from app.db.models import File, FileWithOcrExtractions
+from app.db.models import File
+from app.schemas import FileWithOcrExtractions
 from app.dependencies import SessionDep
 from config import config
 

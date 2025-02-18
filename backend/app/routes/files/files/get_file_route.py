@@ -1,5 +1,5 @@
 from app.constants.errors_texts import RESOURCE_NOT_FOUND
-from app.db.models.file_models import FileWithOcrExtractions
+from app.schemas import FileWithOcrExtractions
 from app.routes.files import files_router
 from sqlmodel import select
 from fastapi import status
