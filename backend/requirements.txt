@@ -72,7 +72,7 @@ SQLAlchemy==2.0.36
 sqlmodel==0.0.22
 starlette==0.40.0
 tomli==2.2.1
-typer==0.12.3
+typer==0.15.1
 typing_extensions==4.12.2
 ujson==5.10.0
 uritemplate==4.1.1
