@@ -1,9 +1,9 @@
 import {
-    useMemo,
-    createContext,
-    useContext,
-    useCallback,
-    useEffect,
+  useMemo,
+  createContext,
+  useContext,
+  useCallback,
+  useEffect,
 } from 'react';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { httpClient } from '@/utils/request';
@@ -12,7 +12,6 @@ import { AxiosResponse } from 'axios';
 import Cookies from 'js-cookie';
 import { APIUser } from '@/utils/types/api/user';
 import { toast } from '@/hooks/use-toast';
-// import { useTranslation } from 'react-i18next';
 
 type AuthContextType = {
   isAuthenticated?: boolean | null;
@@ -22,7 +21,7 @@ type AuthContextType = {
   signout: () => Promise<void>;
   user?: APIUser | null;
 };
-  
+
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -31,7 +30,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     boolean | null | undefined
   >('isAuthenticated', false);
   const [user, setUser] = useLocalStorage<APIUser | null>('user', null);
-  
+
   // keep user data updated
   useEffect(() => {
     if (isAuthenticated) {
@@ -46,7 +45,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           Cookies.remove('jwt_token');
         });
     }
-  }, [isAuthenticated, setUser, setIsAuthenticated]);
+  }, [isAuthenticated]);
 
   // check if exist a cookie
   useEffect(() => {
@@ -56,29 +55,29 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [setIsAuthenticated]);
 
   const signup = useCallback(
-      async (data: UserAuth) => {
-        const formData = new FormData();
-        formData.append('username', data.username);
-        formData.append('password', data.password);
-  
-        return httpClient
-          .post('/auth/signup/', formData)
-          .then((res: AxiosResponse<AccessToken>) => {
-            const token = res.data.access_token;
-  
-            Cookies.set('jwt_token', token, {
-              secure: true,
-              sameSite: 'Strict',
-            });
-            setIsAuthenticated(true);
-  
-            httpClient.get('/auth/me/').then((res: AxiosResponse<APIUser>) => {
-              setUser(res.data);
-            });
+    async (data: UserAuth) => {
+      const formData = new FormData();
+      formData.append('username', data.username);
+      formData.append('password', data.password);
+
+      return httpClient
+        .post('/auth/signup/', formData)
+        .then((res: AxiosResponse<AccessToken>) => {
+          const token = res.data.access_token;
+
+          Cookies.set('jwt_token', token, {
+            secure: true,
+            sameSite: 'Strict',
           });
-      },
-      [setIsAuthenticated, setUser],
-    );
+          setIsAuthenticated(true);
+
+          httpClient.get('/auth/me/').then((res: AxiosResponse<APIUser>) => {
+            setUser(res.data);
+          });
+        });
+    },
+    [setIsAuthenticated, setUser],
+  );
 
   const signin = useCallback(
     async (data: UserAuth) => {
@@ -96,7 +95,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             sameSite: 'Strict',
           });
           setIsAuthenticated(true);
-          
+
           httpClient.get('/auth/me/').then((res: AxiosResponse<APIUser>) => {
             setUser(res.data);
           });

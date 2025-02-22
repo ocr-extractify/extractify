@@ -8,8 +8,8 @@ import { FileUploader } from '@/components/ui/file-uploader';
 import { Separator } from '@radix-ui/react-separator';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '@/hooks/use-toast';
-import RegexForm from './fragments/RegexForm';
 import { DataExtractionRegexField } from '@/constants/dataExtractionRegexFields';
+import RegexForm from './fragments/RegexForm';
 
 const DEFAULT_REGEX_FIELDS: DataExtractionRegexField[] = [
   { name: 'Email', regex: 'email' },
@@ -22,16 +22,26 @@ function UploadFilesPage() {
   const [regexFields, setRegexFields] = useState<DataExtractionRegexField[]>(DEFAULT_REGEX_FIELDS);
   const uploadFileMutation = useMutation({
     mutationFn: async (file: File) => {
+      console.log("file", file)
+
       const formData = new FormData();
       formData.append('file', file);
 
-      return httpClient
-        .post('/files/upload/', formData, {
+      const api_file = await httpClient
+        .post('/files/', formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         })
-        .catch((err) => {
-          toast({ title: err.response.data.detail });
-        });
+      const api_ocr_extraction = await httpClient.post(`/files/${api_file.id}/ocr_extractions`)
+
+      console.log("api_file", api_file)
+      console.log("api_ocr_extraction", api_ocr_extraction)
+      // return httpClient
+      //   .post('/files/', formData, {
+      //     headers: { 'Content-Type': 'multipart/form-data' },
+      //   })
+      //   .catch((err) => {
+      //     toast({ title: err.response.data.detail });
+      //   })
     },
   });
 
