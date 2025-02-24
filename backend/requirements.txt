@@ -3,7 +3,7 @@ anyio==4.8.0
 async-timeout==5.0.1
 asyncpg==0.30.0
 CacheControl==0.14.2
-cachetools==5.3.3
+cachetools==5.5.2
 certifi==2025.1.31
 cffi==1.17.1
 charset-normalizer==3.4.1
