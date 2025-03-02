@@ -22,26 +22,28 @@ function UploadFilesPage() {
   const [regexFields, setRegexFields] = useState<DataExtractionRegexField[]>(DEFAULT_REGEX_FIELDS);
   const uploadFileMutation = useMutation({
     mutationFn: async (file: File) => {
-      console.log("file", file)
-
       const formData = new FormData();
       formData.append('file', file);
 
       const api_file = await httpClient
         .post('/files/', formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
-        })
-      const api_ocr_extraction = await httpClient.post(`/files/${api_file.id}/ocr_extractions`)
+        });
+      console.log("api_file", api_file);
 
-      console.log("api_file", api_file)
-      console.log("api_ocr_extraction", api_ocr_extraction)
-      // return httpClient
-      //   .post('/files/', formData, {
-      //     headers: { 'Content-Type': 'multipart/form-data' },
-      //   })
-      //   .catch((err) => {
-      //     toast({ title: err.response.data.detail });
-      //   })
+      const api_ocr_extraction = await httpClient.post(`/files/${api_file.data.id}/ocr_extractions`);
+      console.log("api_ocr_extraction", api_ocr_extraction);
+
+      return api_file.data.id;
+    },
+  });
+  const createFileSetMutation = useMutation({
+    mutationFn: async (file_ids: string[]) => {
+      const api_file_set = await httpClient.post('/files/set/', {
+        name: "File Set - " + new Date().toLocaleString(),
+        file_ids: file_ids,
+      });
+      console.log("api_file_set", api_file_set)
     },
   });
 
@@ -52,12 +54,16 @@ function UploadFilesPage() {
       return;
     }
 
+    const filesIds: string[] = [];
     const filesArray: File[] = Array.from(files);
-    Promise.all(
-      filesArray.map((file: File) => {
-        return uploadFileMutation.mutateAsync(file);
+    await Promise.all(
+      filesArray.map(async (file: File) => {
+        const file_id = await uploadFileMutation.mutateAsync(file);
+        filesIds.push(file_id);
       }),
     );
+
+    createFileSetMutation.mutateAsync(filesIds);
   }
 
   return (
