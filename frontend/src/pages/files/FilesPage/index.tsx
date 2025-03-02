@@ -1,11 +1,51 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Card, CardHeader, CardContent } from "@/components/ui/card"
+import { useQuery } from '@tanstack/react-query';
+import { httpClient } from '@/utils/axios';
+import { FileText } from 'lucide-react';
 
 const FilesPage = () => {
   const [query, setQuery] = useState('');
   const nav = useNavigate();
+  const filesSet = useQuery({
+    queryKey: ['files', { query }],
+    queryFn: () => httpClient.get('/files/set/'),
+  })
 
-  return
+  console.log("filesSet", filesSet)
+  return (
+    <div className="grid sm:grid-cols-3 gap-4 w-full max-w-4xl mx-auto p-4">
+
+      {/**TODO: type apiFile properly */}
+      {filesSet?.data?.data?.map((apiFileSet: any) => (
+        <Card>
+          <CardHeader>
+            {apiFileSet.files?.[0]?.file?.mimetype?.name === "application/pdf" ? (
+              <FileText className="size-10 text-muted-foreground" aria-hidden="true" />
+            ) : (
+              <img
+                src={apiFileSet.files?.[0]?.file?.uri}
+                alt="Image 1"
+                className="aspect-square object-cover border border-gray-200 w-full rounded-lg overflow-hidden dark:border-gray-800"
+                width="300"
+                height="300"
+              />
+            )}
+          </CardHeader>
+          <CardContent>
+            <h2 className="text-lg font-bold">{apiFileSet.name}</h2>
+            <div className="flex items-center space-x-2 mt-2">
+              <a href="#" className="text-blue-500 hover:underline" >
+                View more
+              </a>
+            </div>
+          </CardContent>
+        </Card>
+      ))}
+
+    </div>
+  )
 
   // return (
   //   <div className="space-y-4 mt-4">
