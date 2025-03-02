@@ -21,11 +21,11 @@ class FileBase(SQLModel):
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
 
-
-class File(FileBase, table=True):
     file_mimetype_id: int = Field(foreign_key="file_mimetype.id")
     user_id: uuid.UUID = Field(foreign_key="user.id")
 
+
+class File(FileBase, table=True):
     file_mimetype: "FileMimetype" = Relationship(back_populates="files")
     ocr_extractions: list["FileOcrExtraction"] = Relationship(
         back_populates="file",

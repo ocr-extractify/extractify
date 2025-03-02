@@ -12,3 +12,5 @@ from app.routes.files.files.delete_file_route import *
 from app.routes.files.ocr_extractions.create_ocr_extraction_route import *
 from app.routes.files.ocr_extractions.get_ocr_extraction_route import *
 from app.routes.files.ocr_extractions.extract_data_route import *
+from app.routes.files.file_set.create_file_set_route import *
+from app.routes.files.file_set.get_file_set_route import *

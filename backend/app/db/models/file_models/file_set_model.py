@@ -17,18 +17,20 @@ class FileSetBase(SQLModel):
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
 
-
-class FileSet(FileSetBase, table=True):
     user_id: uuid.UUID = Field(foreign_key="user.id")
 
+
+class FileSet(FileSetBase, table=True):
     files: list["FileSetLink"] = Relationship(
         back_populates="file_set",
     )
 
 
-class FileSetLink(SQLModel, table=True):
+class FileSetLinkBase(SQLModel):
     file_id: uuid.UUID = Field(foreign_key="file.id", primary_key=True)
     file_set_id: uuid.UUID = Field(foreign_key="file_set.id", primary_key=True)
 
+
+class FileSetLink(FileSetLinkBase, table=True):
     file: "File" = Relationship(back_populates="file_set_link")
     file_set: "FileSet" = Relationship(back_populates="files")
