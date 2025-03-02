@@ -1,8 +1,6 @@
 import * as React from "react"
 import {
-  AudioWaveform,
   Command,
-  GalleryVerticalEnd,
   Settings2,
   FileText,
 } from "lucide-react"
