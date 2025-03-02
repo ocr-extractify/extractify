@@ -1,3 +1,4 @@
+from uuid import UUID
 from app.constants.errors_texts import RESOURCE_NOT_FOUND
 from app.db.models import FileOcrExtraction
 from app.routes.files import files_router
@@ -11,7 +12,7 @@ from app.dependencies import SessionDep
     description="get a file ocr extraction by id",
     status_code=status.HTTP_200_OK,
 )
-async def get_file(id: str, session: SessionDep):
+async def get_file(id: UUID, session: SessionDep):
     db_result = session.exec(
         select(FileOcrExtraction).where(FileOcrExtraction.id == id)
     ).first()

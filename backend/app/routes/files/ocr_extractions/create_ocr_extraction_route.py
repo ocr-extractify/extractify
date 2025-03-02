@@ -1,4 +1,5 @@
 from sqlmodel import select
+from uuid import UUID
 from app.constants.errors_texts import RESOURCE_NOT_FOUND
 from app.db.models import User, File, FileOcrExtraction
 from app.routes.files import files_router
@@ -15,7 +16,7 @@ from app.utils.firebase import download
     status_code=status.HTTP_201_CREATED,
 )
 async def extract_file_data(
-    id: str,
+    id: UUID,
     request: Request,
     session: SessionDep,
     current_user: User = Depends(get_current_user),
