@@ -1,8 +1,9 @@
-from app.db.models import FileSetBase, FileSetLinkBase, File
+from app.db.models import FileSetBase, FileSetLinkBase
+from app.schemas.file_schemas import FileWithMimeType
 
 
 class FileSetLinkWithFile(FileSetLinkBase):
-    file: File
+    file: FileWithMimeType
 
 
 class FileSetWithFiles(FileSetBase):

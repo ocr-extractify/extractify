@@ -55,7 +55,7 @@ async def upload_file(
         client_ip=request.client.host,
         user_id=current_user.id,
         uri=file_uri,
-        file_mimetype_id=db_file_mimetype.id,
+        mimetype_id=db_file_mimetype.id,
     )
     session.add(db_file)
     session.commit()
