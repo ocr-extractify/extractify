@@ -2,7 +2,7 @@ from typing import TYPE_CHECKING
 from datetime import datetime
 
 # issue from sqlmodel. see: https://github.com/fastapi/sqlmodel/discussions/797
-from sqlmodel import Field, Relationship, SQLModel, JSON, ARRAY, Column  # type: ignore[reportUnknownVariableType]
+from sqlmodel import Field, Relationship, JSON, ARRAY, Column  # type: ignore[reportUnknownVariableType]
 import uuid
 from app.db.models._sqlmodel import SQLModel
 
