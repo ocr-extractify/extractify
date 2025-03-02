@@ -9,6 +9,7 @@ from app.db.models._sqlmodel import SQLModel
 if TYPE_CHECKING:
     from app.db.models.file_models.file_mimetype_model import FileMimetype
     from app.db.models.file_models.file_ocr_extraction_model import FileOcrExtraction
+    from app.db.models.file_models.file_set_model import FileSetLink
 
 
 class FileBase(SQLModel):
@@ -29,3 +30,8 @@ class File(FileBase, table=True):
     ocr_extractions: list["FileOcrExtraction"] = Relationship(
         back_populates="file",
     )
+    file_set_link: "FileSetLink" = Relationship(
+        back_populates="file",
+    )
+
+    # file: "File" = Relationship(back_populates="file_set_links")
