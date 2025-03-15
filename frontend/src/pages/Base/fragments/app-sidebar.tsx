@@ -1,6 +1,5 @@
 import * as React from "react"
 import {
-  Command,
   Settings2,
   FileText,
 } from "lucide-react"
@@ -14,13 +13,15 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
+// TODO: use absolute path for the /public folder
+import TuiutiLogo from "../../../../public/tuiuti_logo.jpeg"
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const data = {
     teams: [
       {
-        name: "Default Team",
-        logo: Command,
+        name: "Tuiuti",
+        logo: TuiutiLogo,
         plan: "Free",
       },
     ],
