@@ -9,12 +9,12 @@ from config import config
 
 
 @files_router.get(
-    "/set/",
-    description="Get all file sets",
+    "/sets/",
+    description="Get all files sets",
     status_code=status.HTTP_200_OK,
     response_model=list[FileSetWithFiles],
 )
-async def get_file_sets(
+async def get_files_sets(
     session: SessionDep,
     current_user: User = Depends(get_current_user),
     offset: int = 0,
