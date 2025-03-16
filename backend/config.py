@@ -1,3 +1,4 @@
+from typing import Literal
 from pydantic import computed_field
 from pydantic_core import MultiHostUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -36,6 +37,9 @@ class Config(BaseSettings):
 
     # FIREBASE
     FIREBASE_TMP_FOLDER: str = "tmp"
+
+    # STORAGE
+    STORAGE_TYPE: Literal["local", "firebase"] = "local"
 
     @computed_field
     @property

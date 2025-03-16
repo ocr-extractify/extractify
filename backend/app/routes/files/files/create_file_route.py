@@ -18,7 +18,7 @@ from app.dependencies import SessionDep
 
 @files_router.post(
     "/",
-    description="Upload a file to remote storage (firebase)",
+    description="Upload a file to storage (local or firebase)",
     status_code=status.HTTP_201_CREATED,
 )
 async def upload_file(

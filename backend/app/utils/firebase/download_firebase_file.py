@@ -2,7 +2,7 @@ from firebase_admin.storage import bucket  # type: ignore
 from urllib.parse import urlparse
 
 
-async def download(file_uri: str) -> bytes:
+async def download_firebase_file(file_uri: str) -> bytes:
     """
     Downloads a file from Firebase storage.
     Args:

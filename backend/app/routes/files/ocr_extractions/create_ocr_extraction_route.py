@@ -7,7 +7,7 @@ from fastapi import Depends, status, Request
 from app.utils.auth import get_current_user
 from app.utils.documentai.analyze import analyze_file
 from app.dependencies import SessionDep
-from app.utils.firebase import download
+from app.utils.firebase import download_firebase_file
 
 
 @files_router.post(
@@ -34,9 +34,12 @@ async def extract_file_data(
     if db_file_extraction:
         return db_file_extraction
 
-    firebase_file_bytes = await download(db_file.uri)
+    # TODO: add storage_type column to File model
+    if db_file.storage_type == "firebase":
+        file_bytes = await download_firebase_file(db_file.uri)
+
     analyzed_file = await analyze_file(
-        file_bytes=firebase_file_bytes,
+        file_bytes=file_bytes,
         content_type=db_file.file_mimetype.name,
         request=request,
     )
