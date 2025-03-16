@@ -17,6 +17,7 @@ class FileBase(SQLModel):
     name: str = Field(index=True)
     client_ip: str | None = Field(default=None)
     uri: str = Field()
+    storage_type: str = Field(default="firebase")
     is_deleted: bool = Field(default=False)
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)

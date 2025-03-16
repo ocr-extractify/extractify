@@ -1,6 +1,6 @@
 from sqlmodel import select
 from uuid import UUID
-from app.constants.errors_texts import RESOURCE_NOT_FOUND
+from app.constants.errors_texts import RESOURCE_NOT_FOUND, STORAGE_TYPE_INVALID
 from app.db.models import User, File, FileOcrExtraction
 from app.routes.files import files_router
 from fastapi import Depends, status, Request
@@ -35,8 +35,17 @@ async def extract_file_data(
         return db_file_extraction
 
     # TODO: add storage_type column to File model
+    file_bytes = None
+
     if db_file.storage_type == "firebase":
         file_bytes = await download_firebase_file(db_file.uri)
+
+    if db_file.storage_type == "local":
+        with open(db_file.uri, "rb") as f:
+            file_bytes = f.read()
+
+    if not file_bytes:
+        raise LookupError(STORAGE_TYPE_INVALID)
 
     analyzed_file = await analyze_file(
         file_bytes=file_bytes,
