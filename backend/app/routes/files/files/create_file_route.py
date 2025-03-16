@@ -2,6 +2,7 @@ from io import BytesIO
 from PyPDF2 import PdfReader
 from sqlmodel import select
 from config import config
+from features_flags import features_flags
 from app.constants.errors_texts import (
     CLIENT_IP_NOT_IN_REQUEST,
     INVALID_FILE,
@@ -12,7 +13,7 @@ from app.db.models import User, File, FileMimetype
 from app.routes.files import files_router
 from fastapi import Depends, UploadFile, status, Request
 from app.utils.auth import get_current_user
-from app.utils.firebase import upload
+from app.utils.storage import upload
 from app.dependencies import SessionDep
 
 
@@ -56,6 +57,7 @@ async def upload_file(
         user_id=current_user.id,
         uri=file_uri,
         mimetype_id=db_file_mimetype.id,
+        storage_type=features_flags.STORAGE_TYPE,
     )
     session.add(db_file)
     session.commit()

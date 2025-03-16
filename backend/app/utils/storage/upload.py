@@ -6,7 +6,7 @@ from app.constants.errors_texts import (
     FILE_CONTENT_TYPE_IS_REQUIRED_IF_FILE_IS_BYTES,
 )
 from firebase_admin.storage import bucket  # type: ignore
-from config import config
+from features_flags import features_flags
 from pathlib import Path
 
 LOCAL_STORAGE_PATH = Path("app/storage")
@@ -38,7 +38,7 @@ async def upload(
 
     # unique id avoid user replace files in firebase and we can keep duplicated filenames in database
     fuuid = uuid.uuid4()
-    if config.STORAGE_TYPE == "firebase":
+    if features_flags.STORAGE_TYPE == "firebase":
         filename = f"{firebase_folder}/{fuuid}"
         bkt: Any = bucket()
         blob = bkt.blob(blob_name=filename)
@@ -51,7 +51,7 @@ async def upload(
         blob.make_public()
         return blob.public_url
 
-    if config.STORAGE_TYPE == "local":
+    if features_flags.STORAGE_TYPE == "local":
         LOCAL_STORAGE_PATH.mkdir(parents=True, exist_ok=True)
         file_path = LOCAL_STORAGE_PATH / str(fuuid)
 

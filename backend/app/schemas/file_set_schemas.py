@@ -1,3 +1,4 @@
+from typing import Optional
 from app.db.models import FileSetBase, FileSetLinkBase
 from app.schemas.file_schemas import FileWithMimeType
 
@@ -7,4 +8,4 @@ class FileSetLinkWithFile(FileSetLinkBase):
 
 
 class FileSetWithFiles(FileSetBase):
-    files: list[FileSetLinkWithFile] = []
+    files: Optional[list[FileSetLinkWithFile]] = []

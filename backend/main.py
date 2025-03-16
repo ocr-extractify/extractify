@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.db import setup_db
 from app.routes.auth import auth_router
 from app.routes.files import files_router
-from app.utils.firebase import setup_firebase
+from app.utils.storage import setup_firebase
 from app.utils.middlewares import ExceptionHandlerMiddleware
 
 
