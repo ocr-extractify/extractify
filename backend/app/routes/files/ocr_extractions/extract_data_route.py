@@ -20,30 +20,26 @@ from app.schemas.ocr_extraction_schemas import (
 async def extract_data_with_regex(
     id: str, data: list[OcrExtractionWithRegex], session: SessionDep
 ):
-    db_result = session.exec(
+    db_file_ocr_extraction = session.exec(
         select(FileOcrExtraction).where(FileOcrExtraction.id == id)
     ).first()
-    if not db_result:
+    if not db_file_ocr_extraction:
         raise LookupError(RESOURCE_NOT_FOUND)
 
     extracted_data: list[OcrExtractionWithRegexResult] = []
-    ocr_text = db_result.text  # Assuming this is the OCR text stored in the model
+    ocr_text = db_file_ocr_extraction.text
 
     for item in data:
         try:
-            # Compile the regex pattern
             pattern = re.compile(item.regex)
         except re.error as e:
-            # Handle invalid regex syntax
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=f"Invalid regex pattern for '{item.name}': {str(e)}",
             )
 
-        # Search for the pattern in the OCR text
         match = pattern.search(ocr_text)
         if match:
-            # Use the first capturing group if available, otherwise the entire match
             if match.groups():
                 value = match.group(1)
             else:
@@ -52,5 +48,10 @@ async def extract_data_with_regex(
             value = ""
 
         extracted_data.append(OcrExtractionWithRegexResult(name=item.name, value=value))
+
+    extracted_data_as_dicts = [item.model_dump() for item in extracted_data]
+    db_file_ocr_extraction.regex_extractions = extracted_data_as_dicts
+    session.add(db_file_ocr_extraction)
+    session.commit()
 
     return extracted_data
