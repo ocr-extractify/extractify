@@ -1,19 +1,17 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Card, CardHeader, CardContent } from "@/components/ui/card"
 import { useQuery } from '@tanstack/react-query';
 import { httpClient } from '@/utils/axios';
 import { FileText } from 'lucide-react';
 
-const FilesPage = () => {
+const FilesSetsPage = () => {
   const [query, setQuery] = useState('');
-  const nav = useNavigate();
   const filesSet = useQuery({
     queryKey: ['files', { query }],
-    queryFn: () => httpClient.get('/files/set/'),
+    queryFn: () => httpClient.get('/files/sets/'),
   })
 
-  console.log("filesSet", filesSet)
   return (
     <div className="grid sm:grid-cols-3 gap-4 w-full max-w-4xl mx-auto p-4">
 
@@ -36,9 +34,9 @@ const FilesPage = () => {
           <CardContent>
             <h2 className="text-lg font-bold">{apiFileSet.name}</h2>
             <div className="flex items-center space-x-2 mt-2">
-              <a href="#" className="text-blue-500 hover:underline" >
+              <Link to={`/files/sets/${apiFileSet.id}`} className="text-blue-500 hover:underline" >
                 View more
-              </a>
+              </Link>
             </div>
           </CardContent>
         </Card>
@@ -97,4 +95,4 @@ const FilesPage = () => {
   // );
 };
 
-export default FilesPage;
+export default FilesSetsPage;

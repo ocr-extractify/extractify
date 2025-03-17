@@ -1,4 +1,5 @@
-export { default as FilesPage } from './files/FilesPage';
+export { default as FilesSetsPage } from './files/FilesSetsPage';
+export { default as FilesSetPage } from './files/FilesSetPage';
 export { default as FilePage } from './files/FilePage';
 export { default as StatsPage } from './StatsPage';
 export { default as UploadFilesPage } from './files/UploadFilesPage';

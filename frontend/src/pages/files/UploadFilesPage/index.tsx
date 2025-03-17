@@ -37,6 +37,12 @@ function UploadFilesPage() {
       return api_file.data.id;
     },
   });
+  const createFileOcrExtractionMutation = useMutation({
+    mutationFn: async (file_id: string) => {
+      const api_ocr_extraction = await httpClient.post(`/files/${file_id}/ocr_extractions`);
+      console.log("api_ocr_extraction", api_ocr_extraction);
+    }
+  });
   const createFileSetMutation = useMutation({
     mutationFn: async (file_ids: string[]) => {
       const api_file_set = await httpClient.post('/files/set/', {
@@ -59,6 +65,7 @@ function UploadFilesPage() {
     await Promise.all(
       filesArray.map(async (file: File) => {
         const file_id = await uploadFileMutation.mutateAsync(file);
+        createFileOcrExtractionMutation.mutateAsync(file_id);
         filesIds.push(file_id);
       }),
     );

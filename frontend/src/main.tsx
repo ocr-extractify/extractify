@@ -6,7 +6,7 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from 'react-router-dom';
-import { FilesPage, FilePage, StatsPage, UploadFilesPage, Base, SignInPage, SignUpPage, NotFoundPage, AppearancePage, UserLanguagePage } from '@/pages';
+import { FilesSetsPage, FilePage, StatsPage, UploadFilesPage, Base, SignInPage, SignUpPage, NotFoundPage, AppearancePage, UserLanguagePage, FilesSetPage } from '@/pages';
 import '@/main.css';
 import '@/i18n';
 import { AuthProvider } from '@/providers/AuthProvider';
@@ -46,12 +46,12 @@ const router = createBrowserRouter([
         element: <UploadFilesPage />,
       },
       {
-        path: '/files',
-        element: <FilesPage />,
+        path: '/files/sets',
+        element: <FilesSetsPage />,
       },
       {
-        path: '/files/:id',
-        element: <FilePage />,
+        path: '/files/sets/:id',
+        element: <FilesSetPage />,
       },
       {
         path: '/stats',

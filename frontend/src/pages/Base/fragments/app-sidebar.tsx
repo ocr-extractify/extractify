@@ -38,7 +38,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           },
           {
             title: "Files",
-            url: "/files",
+            url: "/files/sets",
           },
           {
             title: "Extraction configs",
