@@ -1,10 +1,10 @@
 from typing import Optional
 from app.db.models import FileSetBase, FileSetLinkBase
-from app.schemas.file_schemas import FileWithMimeType
+from app.schemas.file_schemas import FileWithMimeTypeAndOcrExtractions
 
 
 class FileSetLinkWithFile(FileSetLinkBase):
-    file: FileWithMimeType
+    file: FileWithMimeTypeAndOcrExtractions
 
 
 class FileSetWithFiles(FileSetBase):

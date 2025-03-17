@@ -50,7 +50,7 @@ async def extract_data_with_regex(
         extracted_data.append(OcrExtractionWithRegexResult(name=item.name, value=value))
 
     extracted_data_as_dicts = [item.model_dump() for item in extracted_data]
-    db_file_ocr_extraction.regex_extractions = extracted_data_as_dicts
+    db_file_ocr_extraction.regex_extractions = extracted_data_as_dicts  # type: ignore
     session.add(db_file_ocr_extraction)
     session.commit()
 

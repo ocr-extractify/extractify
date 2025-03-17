@@ -38,7 +38,6 @@ async def create_ocr_extraction(
     if db_file_extraction:
         return db_file_extraction
 
-    # TODO: add storage_type column to File model
     file_bytes = None
 
     if db_file.storage_type == "firebase":
@@ -62,6 +61,7 @@ async def create_ocr_extraction(
         detected_languages=analyzed_file["pages"][0]["detectedLanguages"],
         file_id=db_file.id,
         user_id=current_user.id,
+        regex_extractions=[],
     )
     session.add(new_file_extraction)
     session.commit()

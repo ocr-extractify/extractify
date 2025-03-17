@@ -39,7 +39,9 @@ function UploadFilesPage() {
   });
   const createFileOcrExtractionMutation = useMutation({
     mutationFn: async (file_id: string) => {
-      const api_ocr_extraction = await httpClient.post(`/files/${file_id}/ocr_extractions`);
+      const api_ocr_extraction = await httpClient.post(`/files/${file_id}/ocr_extractions`, {
+        extraction_regex_config: regexFields,
+      });
       console.log("api_ocr_extraction", api_ocr_extraction);
     }
   });

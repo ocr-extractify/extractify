@@ -9,3 +9,8 @@ class FileWithMimeType(FileBase):
 
 class FileWithOcrExtractions(FileBase):
     ocr_extractions: list[FileOcrExtraction] = []
+
+
+class FileWithMimeTypeAndOcrExtractions(FileBase):
+    mimetype: FileMimetype
+    ocr_extractions: list[FileOcrExtraction] = []
