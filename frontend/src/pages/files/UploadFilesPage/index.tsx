@@ -12,7 +12,7 @@ import { DataExtractionRegexField } from '@/constants/dataExtractionRegexFields'
 import RegexForm from './fragments/RegexForm';
 
 const DEFAULT_REGEX_FIELDS: DataExtractionRegexField[] = [
-  { name: 'Email', regex: 'email' },
+  { name: 'Email', regex: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" },
 ];
 
 function UploadFilesPage() {
@@ -39,15 +39,16 @@ function UploadFilesPage() {
   });
   const createFileOcrExtractionMutation = useMutation({
     mutationFn: async (file_id: string) => {
-      const api_ocr_extraction = await httpClient.post(`/files/${file_id}/ocr_extractions`, {
-        extraction_regex_config: regexFields,
-      });
+      const api_ocr_extraction = await httpClient.post(
+        `/files/${file_id}/ocr_extractions/`,
+        regexFields,
+      );
       console.log("api_ocr_extraction", api_ocr_extraction);
     }
   });
   const createFileSetMutation = useMutation({
     mutationFn: async (file_ids: string[]) => {
-      const api_file_set = await httpClient.post('/files/set/', {
+      const api_file_set = await httpClient.post('/files/sets/', {
         name: "File Set - " + new Date().toLocaleString(),
         file_ids: file_ids,
       });

@@ -13,7 +13,7 @@ class FileSetSchema(BaseModel):
 
 
 @files_router.post(
-    "/set/",
+    "/sets/",
     description="Create a set of existing files",
     status_code=status.HTTP_201_CREATED,
 )
