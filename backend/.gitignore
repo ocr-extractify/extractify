@@ -2,3 +2,4 @@
 .env*.local
 firebase.json
 ./app/storage/*
+venv
