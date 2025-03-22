@@ -1,5 +1,5 @@
 from fastapi import Depends, Query, status
-from sqlmodel import select
+from sqlmodel import select, and_
 from app.db.models import User, FileSet
 from app.routes.files import files_router
 from app.schemas import FileSetWithFiles
@@ -22,7 +22,7 @@ async def get_files_sets(
 ):
     db_file_sets = session.exec(
         select(FileSet)
-        .where(FileSet.user_id == current_user.id)
+        .where(and_(FileSet.user_id == current_user.id, FileSet.is_deleted == False))
         .offset(offset)
         .limit(limit)
     ).all()
