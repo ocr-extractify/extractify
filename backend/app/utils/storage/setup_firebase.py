@@ -1,6 +1,5 @@
 from firebase_admin import credentials, initialize_app, _apps  # type: ignore
 
-
 def setup_firebase():
     if not _apps:  # type: ignore
         print("initializing firebase")

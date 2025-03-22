@@ -35,6 +35,7 @@ class Config(BaseSettings):
     PDF_PAGE_LIMIT: int = 1
 
     # FIREBASE
+    IS_FIREBASE_ENABLED: bool = False
     FIREBASE_TMP_FOLDER: str = "tmp"
 
     @computed_field

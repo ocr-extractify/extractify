@@ -6,12 +6,13 @@ from app.routes.auth import auth_router
 from app.routes.files import files_router
 from app.utils.storage import setup_firebase
 from app.utils.middlewares import ExceptionHandlerMiddleware
-
+from config import config
 
 @asynccontextmanager
 async def on_startup(app: FastAPI):
     setup_db()
-    setup_firebase()
+    if config.IS_FIREBASE_ENABLED:
+        setup_firebase()
     yield
 
 
