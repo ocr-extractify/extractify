@@ -6,7 +6,7 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from 'react-router-dom';
-import { FilesSetsPage, FilePage, StatsPage, UploadFilesPage, Base, SignInPage, SignUpPage, NotFoundPage, AppearancePage, UserLanguagePage, FilesSetPage } from '@/pages';
+import { FilesSetsPage, FilePage, UploadFilesPage, Base, SignInPage, SignUpPage, NotFoundPage, AppearancePage, UserLanguagePage, FilesSetPage } from '@/pages';
 import '@/main.css';
 import '@/i18n';
 import { AuthProvider } from '@/providers/AuthProvider';
@@ -53,10 +53,10 @@ const router = createBrowserRouter([
         path: '/files/sets/:id',
         element: <FilesSetPage />,
       },
-      {
-        path: '/stats',
-        element: <StatsPage />,
-      },
+      // {
+      //   path: '/stats',
+      //   element: <StatsPage />,
+      // },
       {
         path: "/settings/profile",
       },
