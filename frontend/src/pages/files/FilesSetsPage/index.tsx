@@ -4,6 +4,7 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card"
 import { useQuery } from '@tanstack/react-query';
 import { httpClient } from '@/utils/axios';
 import { FileText } from 'lucide-react';
+import EmptyState from '@/components/ui/empty-state';
 
 const FilesSetsPage = () => {
   const [query, setQuery] = useState('');
@@ -12,9 +13,12 @@ const FilesSetsPage = () => {
     queryFn: () => httpClient.get('/files/sets/'),
   })
 
+  if(filesSet?.data?.data.length === 0) { 
+    return <EmptyState />
+  }
+
   return (
     <div className="grid sm:grid-cols-3 gap-4 w-full max-w-4xl mx-auto p-4">
-
       {/**TODO: type apiFile properly */}
       {filesSet?.data?.data?.map((apiFileSet: any) => (
         <Card>
@@ -41,7 +45,6 @@ const FilesSetsPage = () => {
           </CardContent>
         </Card>
       ))}
-
     </div>
   )
 
