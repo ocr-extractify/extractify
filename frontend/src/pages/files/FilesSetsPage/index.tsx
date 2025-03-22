@@ -1,23 +1,34 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardHeader, CardContent } from "@/components/ui/card"
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { httpClient } from '@/utils/axios';
-import { FileText } from 'lucide-react';
+import { FileText, Trash2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const FilesSetsPage = () => {
   const [query, setQuery] = useState('');
   const filesSet = useQuery({
     queryKey: ['files', { query }],
     queryFn: () => httpClient.get('/files/sets/'),
+  });
+  const deleteMutation = useMutation({
+    mutationKey: ['delete-fileset'],
+    mutationFn: (id: string) => httpClient.delete(`/files/sets/${id}`),
+    onSuccess: () => {
+      filesSet.refetch();
+    }
   })
 
   return (
     <div className="grid sm:grid-cols-3 gap-4 w-full max-w-4xl mx-auto p-4">
-
       {/**TODO: type apiFile properly */}
       {filesSet?.data?.data?.map((apiFileSet: any) => (
-        <Card>
+        <Card className='relative'>
+          <Button variant="outline" className='absolute right-2 top-2' onClick={() => deleteMutation.mutateAsync(apiFileSet.id)}>
+            <Trash2 className="size-10 text-muted-foreground" aria-hidden="true" />
+          </Button>
+
           <CardHeader>
             {apiFileSet.files?.[0]?.file?.mimetype?.name === "application/pdf" ? (
               <FileText className="size-10 text-muted-foreground" aria-hidden="true" />
@@ -31,6 +42,7 @@ const FilesSetsPage = () => {
               />
             )}
           </CardHeader>
+
           <CardContent>
             <h2 className="text-lg font-bold">{apiFileSet.name}</h2>
             <div className="flex items-center space-x-2 mt-2">
@@ -44,55 +56,6 @@ const FilesSetsPage = () => {
 
     </div>
   )
-
-  // return (
-  //   <div className="space-y-4 mt-4">
-  //     <SearchInput setQuery={setQuery} />
-
-  //     {files.length === 0 && (
-  //       <div className="flex flex-col justify-center items-center sm:pt-20">
-  //         <LuImagePlus className="h-12 w-12 text-gray-400" />
-  //         <h2 className="text-gray-900 dark:text-gray-100 mt-2 text-sm font-medium ">
-  //           {NO_FILES}
-  //         </h2>
-  //         <h3 className="text-gray-500 dark:text-gray-300 mt-1 text-sm">
-  //           {GET_STARTED}
-  //         </h3>
-
-  //         <Button
-  //           className="mt-2 flex items-center"
-  //           onClick={() => nav('/upload')}
-  //         >
-  //           <FaPlus className="w-3 h-3 mr-2" />
-  //           <span>Upload a file</span>
-  //         </Button>
-  //       </div>
-  //     )}
-
-  //     {files.map((file: APIFile) => (
-  //       <div
-  //         key={file._id}
-  //         className="flex justify-between bg-white dark:bg-slate-900 mt-4 rounded-md p-2 shadow-sm"
-  //       >
-  //         <span className="font-medium truncate">{file.name}</span>
-
-  //         <div className="flex">
-  //           <IconButton
-  //             onClick={() => {
-  //               deleteMutation.mutateAsync(file._id);
-  //             }}
-  //           >
-  //             <RiDeleteBinLine className="w-5 h-5" />
-  //           </IconButton>
-
-  //           <IconButton onClick={() => nav(`/files/${file._id}`)}>
-  //             <LiaExternalLinkAltSolid className="w-5 h-5" />
-  //           </IconButton>
-  //         </div>
-  //       </div>
-  //     ))}
-  //   </div>
-  // );
 };
 
 export default FilesSetsPage;

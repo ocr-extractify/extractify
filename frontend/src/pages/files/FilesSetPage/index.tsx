@@ -22,7 +22,6 @@ const FilesSetPage = () => {
 
           <h3>Dados extraídos</h3>
 
-
           <div>
             {file.file.ocr_extractions?.map((ocrExtraction: any) => (
               <div className='space-y-5'>
