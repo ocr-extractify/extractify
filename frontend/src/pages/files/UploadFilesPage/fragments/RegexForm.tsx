@@ -11,9 +11,6 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import unique from '@/utils/zod/unique';
 
-// TODO: the .superRefine should be a reusable function of avoiding duplicate data in an array 
-
-
 interface Props {
   regexFields: DataExtractionRegexField[];
   setRegexFields: React.Dispatch<React.SetStateAction<DataExtractionRegexField[]>>;
@@ -21,6 +18,7 @@ interface Props {
 
 const RegexForm = ({ regexFields, setRegexFields }: Props) => {
   const { t } = useTranslation();
+  // TODO: the .superRefine should be a reusable function of avoiding duplicate data in an array 
   const regexFormSchema = z.object({
     fields: z.array(
       z.object({

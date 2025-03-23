@@ -8,18 +8,14 @@ import { FileUploader } from '@/components/ui/file-uploader';
 import { Separator } from '@radix-ui/react-separator';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '@/hooks/use-toast';
-import { DataExtractionRegexField } from '@/constants/dataExtractionRegexFields';
+import { DataExtractionRegexField, defaultRegexFields } from '@/constants/dataExtractionRegexFields';
 import RegexForm from './fragments/RegexForm';
-
-const DEFAULT_REGEX_FIELDS: DataExtractionRegexField[] = [
-  { name: 'Email', regex: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" },
-];
 
 function UploadFilesPage() {
   const { t } = useTranslation();
   const { toast } = useToast();
   const [files, setFiles] = useState<File[] | []>([]);
-  const [regexFields, setRegexFields] = useState<DataExtractionRegexField[]>(DEFAULT_REGEX_FIELDS);
+  const [regexFields, setRegexFields] = useState<DataExtractionRegexField[]>(defaultRegexFields);
   const uploadFileMutation = useMutation({
     mutationFn: async (file: File) => {
       const formData = new FormData();
@@ -74,6 +70,7 @@ function UploadFilesPage() {
     createFileSetMutation.mutateAsync(filesIds);
   }
 
+  console.log("regexFields", regexFields);
   return (
     <div className="mx-auto w-full">
       <div className="space-y-6">
