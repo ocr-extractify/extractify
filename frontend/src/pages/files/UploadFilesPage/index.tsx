@@ -29,11 +29,6 @@ function UploadFilesPage() {
         .post('/files/', formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
-      console.log("api_file", api_file);
-
-      const api_ocr_extraction = await httpClient.post(`/files/${api_file.data.id}/ocr_extractions`);
-      console.log("api_ocr_extraction", api_ocr_extraction);
-
       return api_file.data.id;
     },
   });
