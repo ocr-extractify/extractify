@@ -1,6 +1,6 @@
+from uuid import UUID
 from typing import Any, Optional
 from sqlmodel import select
-from uuid import UUID
 from app.constants.errors_texts import RESOURCE_NOT_FOUND, STORAGE_TYPE_INVALID
 from app.db.models import User, File, FileOcrExtraction
 from app.routes.files import files_router
