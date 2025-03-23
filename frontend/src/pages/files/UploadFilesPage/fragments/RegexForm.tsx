@@ -100,7 +100,7 @@ const RegexForm = ({ regexFields, setRegexFields }: Props) => {
 
                       <SelectContent>
                         {dataExtractionRegexFields.map((regexItem) => (
-                          <SelectItem key={regexItem.name} value={regexItem.name}>
+                          <SelectItem key={regexItem.name} value={regexItem.regex}>
                             {regexItem.label}
                           </SelectItem>
                         ))}
