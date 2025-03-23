@@ -7,13 +7,6 @@ authors = [
     { name = "Vitor Schirmer", email = "vitor.roberto3022@gmail.com" },
 ]
 
-[tool.mypy]
-ignore_missing_imports = false
-warn_return_any = true
-warn_unused_configs = true
-disallow_any_generics = true
-disallow_subclassing_any = true
-
 [tool.ruff]
 # Same as Black.
 line-length = 88
