@@ -12,6 +12,10 @@ authors = [
 line-length = 88
 indent-width = 4
 
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F403", "E402"]
+"*" = ["E712"] # not warns of sqlmodel where (Vehicle.is_del == False).
+
 [tool.ruff.lint]
 # Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
 # Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
