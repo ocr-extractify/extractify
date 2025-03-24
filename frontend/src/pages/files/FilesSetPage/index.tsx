@@ -1,6 +1,8 @@
 import { httpClient } from '@/utils/axios';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/flat-tabs"
+import ExtractionResult from './fragments/ExtractionResult';
 
 // TODO: add types to filesSet
 const FilesSetPage = () => {
@@ -13,34 +15,23 @@ const FilesSetPage = () => {
   console.log("filesSet", filesSet);
   return (
     <>
-      <h1>{filesSet.data?.data?.name}</h1>
+      <h1 className="text-2xl">{filesSet.data?.data?.name}</h1>
 
-      {filesSet.data?.data?.files?.map((file: any) => (
-        <div key={file.id}>
-          <h2>{file.file.name}</h2>
 
-          <h3>Dados extraídos</h3>
 
-          <div>
-            {file.file.ocr_extractions?.map((ocrExtraction: any) => (
-              <div className='space-y-5'>
-                <div>
-                  <p>text: </p>
-                  <p>{ocrExtraction.text}</p>
-                </div>
-                <ul>
-                  {ocrExtraction.regex_extractions?.map((regexExtraction: any) => (
-                    <li key={regexExtraction.field}>
-                      {regexExtraction.field}: {regexExtraction.value}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
+      <Tabs defaultValue="extraction_result">
+        <TabsList >
+          <TabsTrigger value="extraction_result">Extraction result</TabsTrigger>
+          <TabsTrigger value="extraction_config">Extraction config</TabsTrigger>
+        </TabsList>
 
+        <TabsContent value="extraction_result">
+          <ExtractionResult />
+        </TabsContent>
+        <TabsContent value="extraction_config">
+          aaa
+        </TabsContent>
+      </Tabs>
     </>
   );
 };
