@@ -80,4 +80,5 @@ export const en_texts = {
   MUST_BE_UNIQUE: "must be unique",
   IS_REQUIRED: "is required",
   PLATFORM: "Platform",
+  BRL_CURRENCY: "BRL Currency",
 };

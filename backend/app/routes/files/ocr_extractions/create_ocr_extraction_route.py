@@ -1,5 +1,5 @@
 from uuid import UUID
-from typing import Any, Optional
+from typing import Optional
 from sqlmodel import select
 from app.constants.errors_texts import RESOURCE_NOT_FOUND, STORAGE_TYPE_INVALID
 from app.db.models import User, File, FileOcrExtraction
@@ -57,15 +57,15 @@ async def create_ocr_extraction(
 
     print("request", await request.body())
     print("extraction_config", extraction_config)
-    # analyzed_file = await analyze_file(
-    #     file_bytes=file_bytes,
-    #     content_type=db_file.mimetype.name,
-    #     request=request,
-    # )
-    analyzed_file: Any = {
-        "text": "email: example@gmail.com",
-        "pages": [{"detectedLanguages": ["en"]}],
-    }  # mock
+    analyzed_file = await analyze_file(
+        file_bytes=file_bytes,
+        content_type=db_file.mimetype.name,
+        request=request,
+    )
+    # analyzed_file: Any = {
+    #     "text": "email: example@gmail.com",
+    #     "pages": [{"detectedLanguages": ["en"]}],
+    # }  # mock
 
     new_file_extraction = FileOcrExtraction(
         text=analyzed_file["text"],

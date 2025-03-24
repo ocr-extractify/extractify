@@ -11,7 +11,6 @@ const FilesSetPage = () => {
   });
 
   console.log("filesSet", filesSet);
-
   return (
     <>
       <h1>{filesSet.data?.data?.name}</h1>
