@@ -17,8 +17,6 @@ const FilesSetPage = () => {
     <>
       <h1 className="text-2xl">{filesSet.data?.data?.name}</h1>
 
-
-
       <Tabs defaultValue="extraction_result">
         <TabsList >
           <TabsTrigger value="extraction_result">Extraction result</TabsTrigger>
