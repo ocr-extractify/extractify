@@ -3,9 +3,12 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/flat-tabs"
 import ExtractionResult from './fragments/ExtractionResult';
+import ExtractionConfig from './fragments/ExtractionConfig';
+import { useTranslation } from 'react-i18next';
 
 // TODO: add types to filesSet
 const FilesSetPage = () => {
+  const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const filesSet = useQuery({
     queryKey: ['filesSet', id],
@@ -19,15 +22,15 @@ const FilesSetPage = () => {
 
       <Tabs defaultValue="extraction_result">
         <TabsList >
-          <TabsTrigger value="extraction_result">Extraction result</TabsTrigger>
-          <TabsTrigger value="extraction_config">Extraction config</TabsTrigger>
+          <TabsTrigger value="extraction_result">{t('EXTRACTION_RESULT')}</TabsTrigger>
+          <TabsTrigger value="extraction_config">{t('EXTRACTION_CONFIG')}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="extraction_result">
           <ExtractionResult />
         </TabsContent>
         <TabsContent value="extraction_config">
-          aaa
+          <ExtractionConfig />
         </TabsContent>
       </Tabs>
     </>

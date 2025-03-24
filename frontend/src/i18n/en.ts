@@ -81,4 +81,7 @@ export const en_texts = {
   IS_REQUIRED: "is required",
   PLATFORM: "Platform",
   BRL_CURRENCY: "BRL Currency",
+  EXTRACTION_RESULT: "Extraction result",
+  EXTRACTION_CONFIG: "Extraction config",
+  EXTRACTION_CONFIG_TAB_DESCRIPTION: "This is your extraction configuration for this file set, you can refine it and process the extraction again.",
 };
