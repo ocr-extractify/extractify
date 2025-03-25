@@ -18,7 +18,7 @@ fastapi-cli==0.0.7
 firebase-admin==6.6.0
 google-api-core==2.19.1
 google-api-python-client==2.160.0
-google-auth==2.30.0
+google-auth==2.38.0
 google-auth-httplib2==0.2.0
 google-cloud-core==2.4.1
 google-cloud-documentai==3.2.0
