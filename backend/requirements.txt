@@ -16,7 +16,7 @@ exceptiongroup==1.2.1
 fastapi==0.115.8
 fastapi-cli==0.0.7
 firebase-admin==6.6.0
-google-api-core==2.19.1
+google-api-core==2.24.2
 google-api-python-client==2.160.0
 google-auth==2.30.0
 google-auth-httplib2==0.2.0
