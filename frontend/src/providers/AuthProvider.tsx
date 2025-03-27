@@ -117,6 +117,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     window.location.reload();
   }, [setIsAuthenticated, setUser]);
 
+  console.log("user", user)
   const value = useMemo(
     () => ({
       isAuthenticated,
