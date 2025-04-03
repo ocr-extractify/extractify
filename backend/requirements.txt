@@ -43,7 +43,9 @@ mdurl==0.1.2
 motor==3.4.0
 msgpack==1.1.0
 orjson==3.10.5
+packaging==24.2
 passlib==1.7.4
+pillow==11.1.0
 proto-plus==1.26.0
 protobuf==5.29.3
 psycopg==3.2.5
@@ -58,6 +60,7 @@ PyJWT==2.10.1
 pymongo==4.11.1
 pyparsing==3.2.1
 PyPDF2==3.0.1
+pytesseract==0.3.13
 python-dotenv==1.0.1
 python-multipart==0.0.18
 PyYAML==6.0.1
