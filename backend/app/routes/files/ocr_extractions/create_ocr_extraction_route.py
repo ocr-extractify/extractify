@@ -12,7 +12,7 @@ from app.utils.documentai.analyze import analyze_file
 from app.dependencies import SessionDep
 from app.utils.storage import download_firebase_file
 from pydantic import BaseModel
-
+from features_flags import features_flags
 
 class ExtractionConfig(BaseModel):
     regex_fields: Optional[list[OcrExtractionWithRegex]]
@@ -67,17 +67,19 @@ async def create_ocr_extraction(
     #     "pages": [{"detectedLanguages": ["en"]}],
     # }  # mock
 
-    new_file_extraction = FileOcrExtraction(
-        text=analyzed_file["text"],
-        # all pdf have only one page. (bussiness rule)
-        detected_languages=analyzed_file["pages"][0]["detectedLanguages"],
-        file_id=db_file.id,
-        user_id=current_user.id,
-        regex_extractions=[],
-    )
-    session.add(new_file_extraction)
-    session.commit()
-    session.refresh(new_file_extraction)
+    if features_flags.OCR_EXTRACTION_TYPE == "google_document_ai": 
+        new_file_extraction = FileOcrExtraction(
+            text=analyzed_file["text"],
+            # all pdf have only one page. (bussiness rule)
+            detected_languages=analyzed_file["pages"][0]["detectedLanguages"],
+            file_id=db_file.id,
+            user_id=current_user.id,
+            regex_extractions=[],
+        )
+    else if features_flags.OCR_EXTRACTION_TYPE == "pytesseract": 
+        session.add(new_file_extraction)
+        session.commit()
+        session.refresh(new_file_extraction)
 
     if extraction_config and extraction_config.regex_fields:
         return await extract_data_with_regex(
