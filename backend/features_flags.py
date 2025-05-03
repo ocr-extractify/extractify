@@ -9,6 +9,9 @@ class FeaturesFlags(BaseSettings):
     )
     OCR_PROCESSING_ENABLED: bool = True
     STORAGE_TYPE: Literal["local", "firebase"] = "local"
-    OCR_EXTRACTION_TYPE: Literal['google_document_ai', 'pytesseract'] = 'pytesseract'
+    OCR_EXTRACTION_TYPE: Literal["google_document_ai", "pytesseract"] = (
+        "google_document_ai"
+    )
+
 
 features_flags = FeaturesFlags()  # type: ignore
