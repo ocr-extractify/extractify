@@ -3,7 +3,7 @@ from fastapi import status
 from sqlmodel import select, and_
 from app.constants.errors_texts import RESOURCE_NOT_FOUND
 from app.db.models import FileSet
-from app.routes.files import files_router
+from app.routes.v1.files import files_router
 from app.schemas import FileSetWithFiles
 from app.dependencies import SessionDep
 

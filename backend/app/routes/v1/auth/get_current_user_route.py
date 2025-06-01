@@ -1,6 +1,6 @@
 from fastapi import Depends, status
 from app.db.models import User
-from app.routes.auth import auth_router
+from app.routes.v1.auth import auth_router
 from app.utils.auth import get_current_user
 
 

@@ -1,7 +1,7 @@
 from fastapi import Depends, Query, status
 from sqlmodel import desc, select, and_
 from app.db.models import User, FileSet
-from app.routes.files import files_router
+from app.routes.v1.files import files_router
 from app.schemas import FileSetWithFiles
 from app.utils.auth import get_current_user
 from app.dependencies import SessionDep

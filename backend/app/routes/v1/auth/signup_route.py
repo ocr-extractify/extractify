@@ -2,7 +2,7 @@ from typing import Annotated
 from fastapi import Depends, status
 from fastapi.security import OAuth2PasswordRequestForm
 from app.db.models import User
-from app.routes.auth import auth_router
+from app.routes.v1.auth import auth_router
 from app.dependencies import SessionDep
 from app.utils.auth import get_password_hash
 

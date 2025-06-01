@@ -1,7 +1,7 @@
 from uuid import UUID
 from pydantic import BaseModel
 from app.db.models import User, FileSet, FileSetLink
-from app.routes.files import files_router
+from app.routes.v1.files import files_router
 from fastapi import Depends, status
 from app.utils.auth import get_current_user
 from app.dependencies import SessionDep

@@ -10,7 +10,7 @@ from app.constants.errors_texts import (
     UNSUPPORTED_FILE_TYPE,
 )
 from app.db.models import User, File, FileMimetype
-from app.routes.files import files_router
+from app.routes.v1.files import files_router
 from fastapi import Depends, UploadFile, status, Request
 from app.utils.auth import get_current_user
 from app.utils.storage import upload

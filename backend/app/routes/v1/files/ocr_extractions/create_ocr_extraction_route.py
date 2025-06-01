@@ -3,9 +3,11 @@ from typing import Optional
 from sqlmodel import select
 from app.constants.errors_texts import RESOURCE_NOT_FOUND, STORAGE_TYPE_INVALID
 from app.db.models import User, File, FileOcrExtraction
-from app.routes.files import files_router
+from app.routes.v1.files import files_router
 from fastapi import Depends, status, Request
-from app.routes.files.ocr_extractions.extract_data_route import extract_data_with_regex
+from app.routes.v1.files.ocr_extractions.extract_data_route import (
+    extract_data_with_regex,
+)
 from app.schemas.ocr_extraction_schemas import OcrExtractionWithRegex
 from app.utils.auth import get_current_user
 from app.utils.documentai.analyze import analyze_file

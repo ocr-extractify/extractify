@@ -2,7 +2,7 @@ from datetime import timedelta
 from typing import Annotated
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
-from app.routes.auth import auth_router
+from app.routes.v1.auth import auth_router
 from app.schemas import Token
 from app.utils.auth import authenticate_user, create_access_token
 from config import config

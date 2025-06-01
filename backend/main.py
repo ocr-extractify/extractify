@@ -2,8 +2,8 @@ from fastapi import FastAPI
 from fastapi.concurrency import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 from app.db import setup_db
-from app.routes.auth import auth_router
-from app.routes.files import files_router
+from app.routes.v1.auth import auth_router
+from app.routes.v1.files import files_router
 from app.utils.storage import setup_firebase
 from app.utils.middlewares import ExceptionHandlerMiddleware
 from config import config
@@ -17,6 +17,7 @@ async def on_startup(app: FastAPI):
     yield
 
 
+# For v1 API, the prefix /v1 is omitted. for future api releases, its will be configured under /<version-number>
 app = FastAPI(
     title="extractify",
     root_path="/api" if config.MODE == "prod" else "",
@@ -27,8 +28,6 @@ app = FastAPI(
 
 app.include_router(auth_router)
 app.include_router(files_router)
-# app.include_router(stats_router)
-# app.include_router(test_router)
 
 app.add_middleware(
     CORSMiddleware,

@@ -1,7 +1,7 @@
 import re
 from app.constants.errors_texts import RESOURCE_NOT_FOUND
 from app.db.models import FileOcrExtraction
-from app.routes.files import files_router
+from app.routes.v1.files import files_router
 from sqlmodel import select
 from fastapi import HTTPException, status
 from app.dependencies import SessionDep

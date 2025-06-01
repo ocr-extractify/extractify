@@ -1,5 +1,5 @@
 from sqlmodel import select
-from app.routes.files import files_router
+from app.routes.v1.files import files_router
 from fastapi import Query, status
 from app.db.models import File
 from app.schemas import FileWithOcrExtractions
