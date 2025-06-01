@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           const token = res.data.access_token;
 
           Cookies.set('jwt_token', token, {
-            secure: true,
+            secure: false,
             sameSite: 'Strict',
           });
           setIsAuthenticated(true);
@@ -91,7 +91,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           const token = res.data.access_token;
 
           Cookies.set('jwt_token', token, {
-            secure: true,
+            secure: false,
             sameSite: 'Strict',
           });
           setIsAuthenticated(true);
