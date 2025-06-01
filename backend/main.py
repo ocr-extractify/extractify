@@ -8,6 +8,7 @@ from app.utils.storage import setup_firebase
 from app.utils.middlewares import ExceptionHandlerMiddleware
 from config import config
 
+
 @asynccontextmanager
 async def on_startup(app: FastAPI):
     setup_db()
@@ -17,7 +18,8 @@ async def on_startup(app: FastAPI):
 
 
 app = FastAPI(
-    title="File to text",
+    title="extractify",
+    root_path="/api" if config.MODE == "prod" else "",
     version="1.0.0",
     lifespan=on_startup,  # root_path="/api"
 )
