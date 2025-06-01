@@ -6,3 +6,4 @@ g_document_ai_creds_*.json
 application_default_credentials.json
 node_modules
 .vite
+.gittoken

@@ -11,10 +11,12 @@ main() {
             setup_filesystem
         else
             git clone "$PROJECT_REPO" "$PROJECT_PATH"
-            cd "$PROJECT_PATH/$PROJECT_NAME"
+            cd "$PROJECT_PATH/$PROJECT_NAME/dist"
             mv * ../
         fi
     }
+
+    setup_filesystem
 }
 
 main
