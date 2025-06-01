@@ -56,8 +56,6 @@ async def create_ocr_extraction(
     if not file_bytes:
         raise LookupError(STORAGE_TYPE_INVALID)
 
-    print("request", await request.body())
-    print("extraction_config", extraction_config)
     analyzed_file = await analyze_file(
         file_bytes=file_bytes,
         content_type=db_file.mimetype.name,
@@ -80,6 +78,7 @@ async def create_ocr_extraction(
     elif features_flags.OCR_EXTRACTION_TYPE == "pytesseract":
         # TODO: process file with pytesseract here.
         pass
+
     session.add(new_file_extraction)
     session.commit()
     session.refresh(new_file_extraction)

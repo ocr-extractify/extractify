@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, Any, Optional
 from datetime import datetime
 
 # issue from sqlmodel. see: https://github.com/fastapi/sqlmodel/discussions/797
@@ -13,8 +13,10 @@ if TYPE_CHECKING:
 class FileOcrExtraction(SQLModel, table=True):
     id: uuid.UUID = Field(primary_key=True, default_factory=uuid.uuid4)
     text: str = Field()
-    detected_languages: list[JSON] = Field(sa_column=Column(ARRAY(JSON)))
-    regex_extractions: Optional[list[JSON]] = Field(sa_column=Column(ARRAY(JSON)))
+    detected_languages: list[dict[str, Any]] = Field(sa_column=Column(ARRAY(JSON)))
+    regex_extractions: Optional[list[dict[str, Any]]] = Field(
+        sa_column=Column(ARRAY(JSON))
+    )
     is_deleted: bool = Field(default=False)
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
