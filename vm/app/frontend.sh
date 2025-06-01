@@ -11,8 +11,16 @@ main() {
             setup_filesystem
         else
             git clone "$PROJECT_REPO" "$PROJECT_PATH"
-            cd "$PROJECT_PATH/$PROJECT_NAME/dist"
+            cd "$PROJECT_PATH/"
+            find ./ -mindepth 1 ! -regex "^./$PROJECT_NAME\(/.*\)?" -delete
+            cd $PROJECT_NAME 
             mv * ../
+            cd ..
+            find ./ -mindepth 1 ! -regex "^./dist\(/.*\)?" -delete
+            cd dist
+            mv * ../
+            cd ..
+            rm -rf dist
         fi
     }
 
