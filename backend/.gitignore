@@ -3,3 +3,5 @@
 firebase.json
 app/storage
 venv
+.uv.lock
+.venv

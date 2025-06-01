@@ -90,5 +90,12 @@ Requires-Dist: uvloop==0.20.0
 Requires-Dist: watchfiles==0.22.0
 Requires-Dist: websockets==15.0
 
-# TODO: add folder_structure doc section
-# TODO: add dependencies doc section
+# Setup
+
+## Requirements
+
+- You need to have installed:
+  - python3
+  - uv
+
+1. `uv sync`
