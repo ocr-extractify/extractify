@@ -7,3 +7,4 @@ application_default_credentials.json
 node_modules
 .vite
 .gittoken
+.obsidian
