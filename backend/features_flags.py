@@ -12,6 +12,7 @@ class FeaturesFlags(BaseSettings):
     OCR_EXTRACTION_TYPE: Literal["google_document_ai", "pytesseract"] = (
         "google_document_ai"
     )
+    CLOUD_PROVIDER: Literal["vercel", "vm"] = "vm"
 
 
 features_flags = FeaturesFlags()  # type: ignore

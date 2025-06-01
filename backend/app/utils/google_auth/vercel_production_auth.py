@@ -1,10 +1,10 @@
 import os
 from fastapi import Request
-from app.utils.google_auth.oidc import CustomOIDCCredentials
+from app.utils.google_auth.vercel_oidc import CustomOIDCCredentials
 from config import config
 
 
-async def get_production_creds(request: Request) -> CustomOIDCCredentials | None:
+async def get_vercel_production_creds(request: Request) -> CustomOIDCCredentials | None:
     """
     Retrieves production credentials for Google authentication.
 

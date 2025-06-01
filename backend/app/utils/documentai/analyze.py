@@ -7,7 +7,7 @@ from app.constants.errors_texts import (
     GOOGLE_DOCUMENT_AI_PROCESSOR_NOT_FOUND,
     INVALID_FILE_MIMETYPE,
 )
-from app.utils.google_auth.production_auth import get_production_creds
+from .creds import get_prod_creds
 
 
 async def analyze_file(file_bytes: bytes, content_type: str, request: Request):
@@ -28,7 +28,7 @@ async def analyze_file(file_bytes: bytes, content_type: str, request: Request):
     )
 
     # if production is None, use the local ADC login.
-    prod_creds = await get_production_creds(request)
+    prod_creds = get_prod_creds()
     client = documentai.DocumentProcessorServiceClient(
         client_options=opts, credentials=prod_creds
     )

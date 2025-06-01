@@ -4,3 +4,4 @@ firebase.json
 app/storage
 venv
 .venv
+creds
