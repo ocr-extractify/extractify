@@ -137,4 +137,6 @@ docstring-code-format = false
 # enabled.
 docstring-code-line-length = "dynamic"
 
-# uv pip compile requirements.txt --extra uv
+# allow multiple top-level packages
+[tool.setuptools]
+py-modules = []
