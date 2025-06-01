@@ -28,7 +28,7 @@ async def analyze_file(file_bytes: bytes, content_type: str, request: Request):
     )
 
     # if production is None, use the local ADC login.
-    prod_creds = get_prod_creds()
+    prod_creds = await get_prod_creds(request)
     client = documentai.DocumentProcessorServiceClient(
         client_options=opts, credentials=prod_creds
     )
