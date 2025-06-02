@@ -6,4 +6,4 @@ venv
 .venv
 creds
 uv.lock 
-extracify.egg-info
+extractify.egg-info
