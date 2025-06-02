@@ -4,6 +4,7 @@ export const en_texts = {
   TITLE: 'Extractify',
   FREE: "Free",
   FILES: "Files",
+  FILES_SET: "Files set",
   DESCRIPTION: 'Simple app to convert all your files to text.',
   FILES_INPUT_LABEL: 'Files',
   UPLOAD_FILE: 'Upload a file',

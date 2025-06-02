@@ -15,12 +15,12 @@ export const dataExtractionRegexFields: DataExtractionRegexFieldSample[] = [
     {
         label: "Email",
         name: "email",
-        regex: "[a-z0-9_.+-]+@[a-z0-9-]+\.[a-z0-9-.]+",
+        regex: "[a-z0-9_.+-]+@[a-z0-9-]+\\.[a-z0-9-.]+",  // Note the double backslash
     },
     {
         label: 'BRL Currency',
         name: "brl_currency",
-        regex: "R\$\s?\d{1,3}(\.\d{3})*,\d{2}",
+        regex: "(?:R\\$|\\$|€|£|¥|₩)\\s?\\d{1,3}(?:[\\.,]\\d{3})*(?:[\\.,]\\d{2})?",
     }
 ];
 

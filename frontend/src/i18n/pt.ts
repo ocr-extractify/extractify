@@ -4,6 +4,7 @@ export const pt_texts = {
   TITLE: 'Arquivo para texto',
   FREE: "Grátis",
   FILES: "Arquivos",
+  FILES_SET: "Grupo de arquivos",
   DESCRIPTION: 'Aplicativo simples para converter todos os seus arquivos em texto.',
   FILES_INPUT_LABEL: 'Arquivos',
   UPLOAD_FILE: 'Enviar um arquivo',
