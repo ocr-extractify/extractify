@@ -1,6 +1,7 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import { en_texts } from "./i18n/en";
+import { pt_texts } from "./i18n/pt";
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 const resources = {
@@ -8,9 +9,7 @@ const resources = {
     translation: en_texts
   },
   pt: {
-    translation: {
-      "Welcome to React": "Bienvenue à React et react-i18next"
-    }
+    translation: pt_texts
   }
 };
 
