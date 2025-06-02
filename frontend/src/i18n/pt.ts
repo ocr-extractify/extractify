@@ -2,6 +2,8 @@ import { MAX_FILE_SIZE, VALID_MIMETYPES } from '@/constants/constraints';
 
 export const pt_texts = {
   TITLE: 'Arquivo para texto',
+  FREE: "Grátis",
+  FILES: "Arquivos",
   DESCRIPTION: 'Aplicativo simples para converter todos os seus arquivos em texto.',
   FILES_INPUT_LABEL: 'Arquivos',
   UPLOAD_FILE: 'Enviar um arquivo',

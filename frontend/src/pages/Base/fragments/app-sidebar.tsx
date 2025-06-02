@@ -15,35 +15,37 @@ import {
 } from "@/components/ui/sidebar"
 // TODO: use absolute path for the /public folder
 import TuiutiLogo from "../../../../public/tuiuti_logo.jpeg"
+import { useTranslation } from "react-i18next"
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const data = {
+  const { t } = useTranslation();
+  const data = { 
     teams: [
       {
         name: "Tuiuti",
         logo: TuiutiLogo,
-        plan: "Free",
+        plan: t("FREE"),
       },
     ],
     navMain: [
       {
-        title: "Files",
+        title: t("FILES"),
         url: "#",
         icon: FileText,
         isActive: true,
         items: [
           {
-            title: "Upload",
+            title: t("UPLOAD"),
             url: "/files/upload",
           },
           {
-            title: "Files",
+            title: t("FILES"),
             url: "/files/sets",
           },
-          {
-            title: "Extraction configs",
-            url: "/files/extraction-configs",
-          },
+          // {
+          //   title: "Extraction configs",
+          //   url: "/files/extraction-configs",
+          // },
         ],
       },
       {
@@ -52,11 +54,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         icon: Settings2,
         items: [
           {
-            title: "Appearance",
+            title: t('APPEARANCE'),
             url: "/settings/appearance",
           },
           {
-            title: "Language",
+            title: t("LANGUAGE"),
             url: "/settings/language",
           }
         ],

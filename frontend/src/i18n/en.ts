@@ -1,7 +1,9 @@
 import { MAX_FILE_SIZE, VALID_MIMETYPES } from '@/constants/constraints';
 
 export const en_texts = {
-  TITLE: 'File to text',
+  TITLE: 'Extractify',
+  FREE: "Free",
+  FILES: "Files",
   DESCRIPTION: 'Simple app to convert all your files to text.',
   FILES_INPUT_LABEL: 'Files',
   UPLOAD_FILE: 'Upload a file',
