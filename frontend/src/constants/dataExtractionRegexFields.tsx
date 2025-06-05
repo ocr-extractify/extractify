@@ -18,14 +18,24 @@ export const dataExtractionRegexFields: DataExtractionRegexFieldSample[] = [
         regex: "[a-z0-9_.+-]+@[a-z0-9-]+\\.[a-z0-9-.]+",  // Note the double backslash
     },
     {
-        label: 'BRL Currency',
+        label: 'Valor (dinheiro)',
         name: "brl_currency",
         regex: "(?:R\\$|\\$|€|£|¥|₩)\\s?\\d{1,3}(?:[\\.,]\\d{3})*(?:[\\.,]\\d{2})?",
     },
     {
-        label: 'Date',
+        label: 'Data',
         name: 'date',
         regex: '(?:\\d{4}[/-]\\d{1,2}[/-]\\d{1,2})|(?:\\d{1,2}[/-]\\d{1,2}[/-]\\d{4})|(?:\\d{1,2}\\s+[A-Z]{3}\\s+\\d{4})'
+    },
+    {
+        label: "Código de barras",
+        name: "barcode",
+        regex: "(?:\\d{11}\\s*){4}\\d{1,5}\\b|\\b\\d{47,48}\\b"
+    },
+    {
+        label: "CPF/CNPJ",
+        name: "cpf_cnpj",
+        regex: "(\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}|\\d{11})|(\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2}|\\d{14})"
     }
 ];
 
