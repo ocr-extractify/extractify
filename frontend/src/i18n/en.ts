@@ -87,4 +87,7 @@ export const en_texts = {
   EXTRACTION_RESULT: "Extraction result",
   EXTRACTION_CONFIG: "Extraction config",
   EXTRACTION_CONFIG_TAB_DESCRIPTION: "This is your extraction configuration for this file set, you can refine it and process the extraction again.",
+  RAW_TEXT: "Raw text",
+  RAW_TEXT_RESULT_MODAL_TITLE: "Extraction result (raw text)",
+  RAW_TEXT_RESULT_MODAL_DESC: "Raw text result of the OCR extraction"
 };

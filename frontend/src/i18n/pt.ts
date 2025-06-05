@@ -75,7 +75,7 @@ export const pt_texts = {
   PORTUGUESE: 'Português',
   SELECT_A_LANGUAGE: 'Selecione um idioma',
   SELECT_YOUR_PREFERRED_LANGUAGE: 'Selecione seu idioma preferido.',
-  UPLOAD: 'Enviar',
+  UPLOAD: 'Upload',
   UPLOAD_FILES_FORM_DESCRIPTION: 'Envie arquivos para converter em texto. Use o formulário de regex para melhorar a extração de dados.',
   NAME: 'Nome',
   REGEX: 'Regex',

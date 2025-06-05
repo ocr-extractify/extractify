@@ -1,9 +1,37 @@
 import { httpClient } from '@/utils/axios';
 import { useQuery } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Button } from '@/components/ui/button';
 
 // TODO: add types to filesSet
 const ExtractionResult = () => {
+  const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const filesSet = useQuery({
     queryKey: ['filesSet', id],
@@ -13,28 +41,43 @@ const ExtractionResult = () => {
   return (
     <>
       {filesSet.data?.data?.files?.map((file: any) => (
-        <div key={file.id}>
-          <h2>{file.file.name}</h2>
-
-          <h3>Dados extraídos</h3>
-
-          <div>
-            {file.file.ocr_extractions?.map((ocrExtraction: any) => (
-              <div className='space-y-5'>
-                <div>
-                  <p>text: </p>
-                  <p>{ocrExtraction.text}</p>
-                </div>
-                <ul>
+        <div key={file.id} className="*:my-4">
+          {file.file.ocr_extractions?.map((ocrExtraction: any) => (
+            <Card>
+              <CardHeader className="flex justify-between items-center">
+                <CardTitle className='truncate'>{file.file.name}</CardTitle>
+                {/* <CardDescription>Card Description</CardDescription> */}
+                <CardAction>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button>
+                        {t('RAW_TEXT')}
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[425px]">
+                      <DialogHeader>
+                        <DialogTitle>{t('RAW_TEXT_RESULT_MODAL_TITLE')}</DialogTitle>
+                        <DialogDescription>
+                          {t('RAW_TEXT_RESULT_MODAL_DESC')}
+                        </DialogDescription>
+                      </DialogHeader>
+                      {ocrExtraction.text}
+                    </DialogContent>
+                  </Dialog>
+                </CardAction>
+              </CardHeader>
+              <CardContent>
+                <ul className="*:py-2 divide-y-2 divide-accent">
                   {ocrExtraction.regex_extractions?.map((regexExtraction: any) => (
-                    <li key={regexExtraction.field}>
-                      {regexExtraction.field}: {regexExtraction.value}
+                    <li key={regexExtraction.field} className="flex justify-between">
+                      <span>{regexExtraction.name}</span>
+                      <span>{regexExtraction.value}</span>
                     </li>
                   ))}
                 </ul>
-              </div>
-            ))}
-          </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       ))}
     </>

@@ -21,6 +21,11 @@ export const dataExtractionRegexFields: DataExtractionRegexFieldSample[] = [
         label: 'BRL Currency',
         name: "brl_currency",
         regex: "(?:R\\$|\\$|€|£|¥|₩)\\s?\\d{1,3}(?:[\\.,]\\d{3})*(?:[\\.,]\\d{2})?",
+    },
+    {
+        label: 'Date',
+        name: 'date',
+        regex: '(?:\\d{4}[/-]\\d{1,2}[/-]\\d{1,2})|(?:\\d{1,2}[/-]\\d{1,2}[/-]\\d{4})|(?:\\d{1,2}\\s+[A-Z]{3}\\s+\\d{4})'
     }
 ];
 
