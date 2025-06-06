@@ -85,7 +85,7 @@ async def create_ocr_extraction(
     session.commit()
     session.refresh(new_file_extraction)
 
-    if extraction_config and extraction_config.regex_fields:
+    if extraction_config and extraction_config.regex_fields and new_file_extraction:
         return await extract_data_with_regex(
             id=str(new_file_extraction.id),
             data=extraction_config.regex_fields,

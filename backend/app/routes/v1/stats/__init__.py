@@ -6,4 +6,4 @@ stats_router = APIRouter(
 )
 
 
-from routes.stats.get_routes import *
+from .get_stats_routes import *
