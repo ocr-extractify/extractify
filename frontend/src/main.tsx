@@ -39,7 +39,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Navigate to="/upload" />,
+        element: <Navigate to="/files/upload" />,
       },
       {
         path: '/files/upload',
