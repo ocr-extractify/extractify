@@ -38,15 +38,18 @@ async def extract_data_with_regex(
                 detail=f"Invalid regex pattern for '{item.name}': {str(e)}",
             )
 
-        match = pattern.search(ocr_text)
-        if match:
-            if match.groups():
-                value = match.group(1)
-            else:
-                value = match.group(0)
-        else:
-            value = ""
+        all_matches: list[str] = []
+        for m in pattern.finditer(ocr_text):
+            groups = m.groups()
 
+            if groups:
+                for g in groups:
+                    if g:
+                        all_matches.append(g)
+            else:
+                all_matches.append(m.group(0))
+
+        value = ",".join(all_matches)
         extracted_data.append(OcrExtractionWithRegexResult(name=item.name, value=value))
 
     extracted_data_as_dicts = [item.model_dump() for item in extracted_data]
