@@ -141,7 +141,7 @@ const ProcessedFilesPage = () => {
                 </span>
               </div>
             </div>
-            <div className="h-[400px]">
+            <div>
               {isLoading ? (
                 <div className="flex h-full items-center justify-center">
                   <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />

@@ -89,7 +89,7 @@ export const pt_texts = {
     'Envie arquivos para converter em texto. Use o formulário de regex para melhorar a extração de dados.',
   NAME: 'Nome',
   REGEX: 'Regex',
-  ADD_REGEX_FIELD: 'Adicionar campo de regex',
+  ADD_REGEX_FIELD: 'Adicionar campo de extração',
   MUST_BE_UNIQUE: 'deve ser único',
   IS_REQUIRED: 'é obrigatório',
   PLATFORM: 'Plataforma',
