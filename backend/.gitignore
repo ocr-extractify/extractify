@@ -5,5 +5,5 @@ app/storage
 venv
 .venv
 creds
-uv.lock 
+# uv.lock 
 extractify.egg-info
