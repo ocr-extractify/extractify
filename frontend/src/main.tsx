@@ -6,13 +6,25 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from 'react-router-dom';
-import { FilesSetsPage, FilePage, UploadFilesPage, Base, SignInPage, SignUpPage, NotFoundPage, AppearancePage, UserLanguagePage, FilesSetPage } from '@/pages';
+import {
+  FilesSetsPage,
+  FilePage,
+  UploadFilesPage,
+  Base,
+  SignInPage,
+  SignUpPage,
+  NotFoundPage,
+  AppearancePage,
+  UserLanguagePage,
+  FilesSetPage,
+} from '@/pages';
 import '@/main.css';
 import '@/i18n';
 import { AuthProvider } from '@/providers/AuthProvider';
 import { ThemeProvider } from '@/providers/theme-provider';
-import { ToastProvider, } from '@/components/ui/toast';
-import { Toaster } from "@/components/ui/toaster"
+import { ToastProvider } from '@/components/ui/toast';
+import { Toaster } from '@/components/ui/toaster';
+import ProcessedFilesPage from './pages/stats/ProcessedFiles';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,11 +37,11 @@ const queryClient = new QueryClient({
 const router = createBrowserRouter([
   // public routes
   {
-    path: "/auth/signin",
+    path: '/auth/signin',
     element: <SignInPage />,
   },
   {
-    path: "/auth/signup",
+    path: '/auth/signup',
     element: <SignUpPage />,
   },
   // private routes
@@ -53,20 +65,20 @@ const router = createBrowserRouter([
         path: '/files/sets/:id',
         element: <FilesSetPage />,
       },
-      // {
-      //   path: '/stats',
-      //   element: <StatsPage />,
-      // },
       {
-        path: "/settings/profile",
+        path: '/settings/profile',
       },
       {
-        path: "/settings/language",
-        element: <UserLanguagePage />
+        path: '/settings/language',
+        element: <UserLanguagePage />,
       },
       {
-        path: "/settings/appearance",
+        path: '/settings/appearance',
         element: <AppearancePage />,
+      },
+      {
+        path: '/stats/processed-files',
+        element: <ProcessedFilesPage />,
       },
       // 404 fallback for private routes
       {

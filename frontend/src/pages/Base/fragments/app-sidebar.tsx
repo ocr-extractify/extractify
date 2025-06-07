@@ -1,70 +1,74 @@
-import * as React from "react"
-import {
-  Settings2,
-  FileText,
-} from "lucide-react"
-import { NavMain } from "@/pages/Base/fragments/nav-main"
-import { NavUser } from "@/pages/Base/fragments/nav-user"
-import { TeamSwitcher } from "@/pages/Base/fragments/team-switcher"
+import * as React from 'react';
+import { Settings2, FileText, ChartLine } from 'lucide-react';
+import { NavMain } from '@/pages/Base/fragments/nav-main';
+import { NavUser } from '@/pages/Base/fragments/nav-user';
+import { TeamSwitcher } from '@/pages/Base/fragments/team-switcher';
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-} from "@/components/ui/sidebar"
+} from '@/components/ui/sidebar';
 // TODO: use absolute path for the /public folder
-import TuiutiLogo from "../../../../public/tuiuti_logo.jpeg"
-import { useTranslation } from "react-i18next"
+import TuiutiLogo from '../../../../public/tuiuti_logo.jpeg';
+import { useTranslation } from 'react-i18next';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { t } = useTranslation();
-  const data = { 
+  const data = {
     teams: [
       {
-        name: "Tuiuti",
+        name: 'Tuiuti',
         logo: TuiutiLogo,
-        plan: t("FREE"),
+        plan: t('FREE'),
       },
     ],
     navMain: [
       {
-        title: t("FILES"),
-        url: "#",
+        title: t('FILES'),
+        url: '#',
         icon: FileText,
         isActive: true,
         items: [
           {
-            title: t("UPLOAD"),
-            url: "/files/upload",
+            title: t('UPLOAD'),
+            url: '/files/upload',
           },
           {
-            title: t("FILES"),
-            url: "/files/sets",
+            title: t('FILES'),
+            url: '/files/sets',
           },
-          // {
-          //   title: "Extraction configs",
-          //   url: "/files/extraction-configs",
-          // },
         ],
       },
       {
-        title: "Settings",
-        url: "#",
+        title: t('STATS'),
+        url: '#',
+        icon: ChartLine,
+        items: [
+          {
+            title: t('PROCESSED_FILES'),
+            url: '/stats/processed-files',
+          },
+        ],
+      },
+      {
+        title: t('SETTINGS'),
+        url: '#',
         icon: Settings2,
         items: [
           {
             title: t('APPEARANCE'),
-            url: "/settings/appearance",
+            url: '/settings/appearance',
           },
           {
-            title: t("LANGUAGE"),
-            url: "/settings/language",
-          }
+            title: t('LANGUAGE'),
+            url: '/settings/language',
+          },
         ],
       },
     ],
-  }
+  };
 
   return (
     <Sidebar collapsible="icon" {...props}>
@@ -79,5 +83,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

@@ -2,16 +2,21 @@ import { MAX_FILE_SIZE, VALID_MIMETYPES } from '@/constants/constraints';
 
 export const pt_texts = {
   TITLE: 'Arquivo para texto',
-  FREE: "Grátis",
-  FILES: "Arquivos",
-  FILES_SET: "Grupo de arquivos",
-  DESCRIPTION: 'Aplicativo simples para converter todos os seus arquivos em texto.',
+  FREE: 'Grátis',
+  FILES: 'Arquivos',
+  FILES_SET: 'Grupo de arquivos',
+  DESCRIPTION:
+    'Aplicativo simples para converter todos os seus arquivos em texto.',
   FILES_INPUT_LABEL: 'Arquivos',
   UPLOAD_FILE: 'Enviar um arquivo',
   OR_DRAG_AND_DROP: 'ou arraste e solte',
   FILE_INPUT_MIMETYPES: `${VALID_MIMETYPES.join(', ')
     .replaceAll('image/', '')
-    .replaceAll('application/', '')} até ${(MAX_FILE_SIZE / 1024 / 1024).toString()}MB`,
+    .replaceAll('application/', '')} até ${(
+    MAX_FILE_SIZE /
+    1024 /
+    1024
+  ).toString()}MB`,
   SUBMIT_BUTTON: 'Converter para texto',
   FILENAME: 'Nome do arquivo',
   FILESIZE: 'Tamanho do arquivo',
@@ -28,13 +33,15 @@ export const pt_texts = {
   NO_FILES: 'Nenhum arquivo',
   GET_STARTED: 'Comece enviando um arquivo',
   SEARCH_INPUT_DEFAULT_PLACEHOLDER: 'Buscar...',
-  STATS: 'Arquivos enviados - Estatísticas',
-  STATS_DESCRIPTION: 'Aqui você vê as estatísticas gerais dos arquivos enviados neste app.',
+  STATS: 'Estatísticas',
+  STATS_DESCRIPTION:
+    'Aqui você vê as estatísticas gerais dos arquivos enviados neste app.',
   TOTAL: 'Total',
   TODAY: 'Hoje',
   THIS_WEEK: 'Esta semana',
   THIS_MONTH: 'Este mês',
-  QUOTA_LIMIT_DESCRIPTION: 'Se o limite de cota for atingido, você não poderá enviar mais arquivos.',
+  QUOTA_LIMIT_DESCRIPTION:
+    'Se o limite de cota for atingido, você não poderá enviar mais arquivos.',
   UPLOADS_DAILY_CHART: 'Envios diários',
   WELCOME_BACK: 'Bem-vindo de volta',
   OR_CONTINUE_WITH: 'ou continue com',
@@ -43,7 +50,8 @@ export const pt_texts = {
   SIGN_IN: 'Entrar',
   SIGN_UP: 'Cadastrar-se',
   DONT_HAVE_AN_ACCOUNT: 'Não tem uma conta?',
-  AUTH_SCREEN_TERMS_OF_SERVICE_AGREE: 'Ao clicar em continuar, você concorda com nossos',
+  AUTH_SCREEN_TERMS_OF_SERVICE_AGREE:
+    'Ao clicar em continuar, você concorda com nossos',
   TERMS_OF_SERVICE: 'termos de serviço',
   PRIVACY_POLICY: 'política de privacidade',
   AND: 'e',
@@ -59,7 +67,8 @@ export const pt_texts = {
   DARK: 'Escuro',
   UPDATE_PREFERENCES: 'Atualizar preferências',
   APPEARANCE: 'Aparência',
-  SETTINGS_APPEARANCE_FORM_DESCRIPTION: 'Personalize a aparência do aplicativo. Alterna automaticamente entre temas diurno e noturno.',
+  SETTINGS_APPEARANCE_FORM_DESCRIPTION:
+    'Personalize a aparência do aplicativo. Alterna automaticamente entre temas diurno e noturno.',
   PREFERENCES_UPDATED: 'Preferências atualizadas com sucesso.',
   UPGRADE_TO_PRO: 'Atualizar para Pro',
   ACCOUNT: 'Conta',
@@ -76,7 +85,8 @@ export const pt_texts = {
   SELECT_A_LANGUAGE: 'Selecione um idioma',
   SELECT_YOUR_PREFERRED_LANGUAGE: 'Selecione seu idioma preferido.',
   UPLOAD: 'Upload',
-  UPLOAD_FILES_FORM_DESCRIPTION: 'Envie arquivos para converter em texto. Use o formulário de regex para melhorar a extração de dados.',
+  UPLOAD_FILES_FORM_DESCRIPTION:
+    'Envie arquivos para converter em texto. Use o formulário de regex para melhorar a extração de dados.',
   NAME: 'Nome',
   REGEX: 'Regex',
   ADD_REGEX_FIELD: 'Adicionar campo de regex',
@@ -86,5 +96,16 @@ export const pt_texts = {
   BRL_CURRENCY: 'Moeda (BRL)',
   EXTRACTION_RESULT: 'Resultado da extração',
   EXTRACTION_CONFIG: 'Configuração da extração',
-  EXTRACTION_CONFIG_TAB_DESCRIPTION: 'Esta é sua configuração de extração para este conjunto de arquivos. Você pode refiná-la e processar a extração novamente.',
+  EXTRACTION_CONFIG_TAB_DESCRIPTION:
+    'Esta é sua configuração de extração para este conjunto de arquivos. Você pode refiná-la e processar a extração novamente.',
+  PROCESSED_FILES: 'Arquivos processados',
+  SETTINGS: 'Configurações',
+  PROCESSED_FILES_TITLE: 'Arquivos Processados',
+  TOTAL_PROCESSED_FILES: 'Total de Arquivos Processados',
+  SELECT_RANGE_TYPE: 'Selecione o tipo de intervalo',
+  DAILY: 'Diário',
+  WEEKLY: 'Semanal',
+  MONTHLY: 'Mensal',
+  ERROR_LOADING_DATA: 'Erro ao carregar dados. Por favor, tente novamente.',
+  QTY: 'Quantidade',
 };
