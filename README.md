@@ -1,15 +1,2 @@
-# Docker
-
-`docker compose up --build`
-
-# Deployment (Vercel)
-
-- frontend: https://doc-to-text.vercel.app
-- backend: https://doc-to-text-backend.vercel.app
-
-# References
-
-## GDPR:
-
-- [How to satisfy GDPR's consent requirement for IP logging?](https://law.stackexchange.com/questions/28603/how-to-satisfy-gdprs-consent-requirement-for-ip-logging?newreg=0332f7641c8b4cb99659b2d4f9554d40)
-- [Art. 6 GDPR - Lawfulness of processing](https://gdpr-info.eu/art-6-gdpr/)
+- website: http://195.200.0.115
+- doc: https://tuiutiedu-my.sharepoint.com/:w:/r/personal/leonardo_teixeira_utp_edu_br/_layouts/15/doc2.aspx?sourcedoc=%7B9B00BC91-DE5B-4C00-A8FD-0A6A506E557F%7D&file=TCC%201.docx&action=default&mobileredirect=true
