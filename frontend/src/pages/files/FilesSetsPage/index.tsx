@@ -7,6 +7,7 @@ import { FileText, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
 import { mountBlobApiUri } from '@/utils/api/mount-blob-api-uri';
+
 const FilesSetsPage = () => {
   const { t } = useTranslation();
   const [query, setQuery] = useState('');
