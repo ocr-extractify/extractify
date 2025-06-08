@@ -1,4 +1,4 @@
-import { AppSidebar } from "@/pages/Base/fragments/app-sidebar"
+import { AppSidebar } from '@/pages/Base/fragments/app-sidebar';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,18 +6,18 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
+} from '@/components/ui/breadcrumb';
+import { Separator } from '@/components/ui/separator';
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar"
-import { useAuth } from "@/providers/AuthProvider"
-import { Navigate } from "react-router-dom"
-import { Outlet } from "react-router"
-import { useTranslation } from "react-i18next"
-import { APP_NAME } from "@/constants/ui"
+} from '@/components/ui/sidebar';
+import { useAuth } from '@/providers/AuthProvider';
+import { Navigate } from 'react-router-dom';
+import { Outlet } from 'react-router';
+import { useTranslation } from 'react-i18next';
+import { APP_NAME } from '@/constants/ui';
 
 export default function Base() {
   const { t } = useTranslation();
@@ -35,7 +35,7 @@ export default function Base() {
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
+            {/* <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
                   <BreadcrumbLink href="#">
@@ -47,7 +47,7 @@ export default function Base() {
                   <BreadcrumbPage>{t("UPLOAD")}</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
-            </Breadcrumb>
+            </Breadcrumb> */}
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
@@ -55,5 +55,5 @@ export default function Base() {
         </div>
       </SidebarInset>
     </SidebarProvider>
-  )
+  );
 }
