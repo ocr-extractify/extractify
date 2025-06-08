@@ -6,7 +6,7 @@ import {
   useEffect,
 } from 'react';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
-import { httpClient } from '@/utils/request';
+import { httpClient } from '@/utils/axios';
 import { UserAuth, AccessToken } from '@/utils/types/api/auth';
 import { AxiosResponse } from 'axios';
 import Cookies from 'js-cookie';
@@ -102,10 +102,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         })
         .catch((err) => {
           toast({
-            title: err.response.data.detail // t("PREFERENCES_UPDATED"),
-          })
+            title: err.response.data.detail, // t("PREFERENCES_UPDATED"),
+          });
           throw err;
-        })
+        });
     },
     [setIsAuthenticated, setUser],
   );
@@ -117,7 +117,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     window.location.reload();
   }, [setIsAuthenticated, setUser]);
 
-  console.log("user", user)
+  console.log('user', user);
   const value = useMemo(
     () => ({
       isAuthenticated,

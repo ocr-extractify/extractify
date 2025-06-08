@@ -2,8 +2,9 @@ import uuid
 from typing import Any
 from fastapi import UploadFile
 from app.constants.errors_texts import (
-    FILE_CONTENT_TYPE_IS_MISSING,
-    FILE_CONTENT_TYPE_IS_REQUIRED_IF_FILE_IS_BYTES,
+    # FILE_CONTENT_TYPE_IS_MISSING,
+    FILE_EXTENSION_IS_MISSING,
+    # FILE_CONTENT_TYPE_IS_REQUIRED_IF_FILE_IS_BYTES,
 )
 from firebase_admin.storage import bucket  # type: ignore
 from features_flags import features_flags
@@ -27,14 +28,18 @@ async def upload(
     Returns:
         str: The public URL of the uploaded file.
     """
-    if isinstance(file, UploadFile) and not file.content_type:
-        raise ValueError(FILE_CONTENT_TYPE_IS_MISSING)
+    ext = None
 
-    if isinstance(file, UploadFile):
-        file = await file.read()
+    if not isinstance(file, bytes):
+        ext = file.filename.split(".")[-1] if file.filename else None
 
-    if isinstance(file, bytes) and not content_type:
-        raise ValueError(FILE_CONTENT_TYPE_IS_REQUIRED_IF_FILE_IS_BYTES)
+    file_bytes = file if isinstance(file, bytes) else await file.read()
+
+    # if isinstance(file, UploadFile) and not file.content_type:
+    #     raise ValueError(FILE_CONTENT_TYPE_IS_MISSING)
+
+    # if isinstance(file, bytes) and not content_type:
+    #     raise ValueError(FILE_CONTENT_TYPE_IS_REQUIRED_IF_FILE_IS_BYTES)
 
     # unique id avoid user replace files in firebase and we can keep duplicated filenames in database
     fuuid = uuid.uuid4()
@@ -43,7 +48,7 @@ async def upload(
         bkt: Any = bucket()
         blob = bkt.blob(blob_name=filename)
         blob.upload_from_string(
-            file,
+            file_bytes,
             content_type=(
                 file.content_type if isinstance(file, UploadFile) else content_type
             ),
@@ -52,11 +57,14 @@ async def upload(
         return blob.public_url
 
     if features_flags.STORAGE_TYPE == "local":
+        if not ext:
+            raise ValueError(FILE_EXTENSION_IS_MISSING)
+
         LOCAL_STORAGE_PATH.mkdir(parents=True, exist_ok=True)
-        file_path = LOCAL_STORAGE_PATH / str(fuuid)
+        file_path = LOCAL_STORAGE_PATH / (str(fuuid) + f".{ext}")
 
         with file_path.open("wb") as f:
-            f.write(file)
+            f.write(file_bytes)
 
         return str(file_path)
 

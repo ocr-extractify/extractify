@@ -15,3 +15,4 @@ FILE_CONTENT_TYPE_IS_REQUIRED_IF_FILE_IS_BYTES = (
     "File content type is required if file is bytes"
 )
 STORAGE_TYPE_INVALID = "Invalid storage type. Need to be 'local' or 'firebase'"
+FILE_EXTENSION_IS_MISSING = "File extension is missing. Please, use this function with file as UploadFile object with filename set."

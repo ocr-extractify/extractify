@@ -41,13 +41,14 @@ async def upload_file(
         raise ValueError(UNSUPPORTED_FILE_TYPE)
 
     file_bytes = await file.read()
+    await file.seek(0)  # reset file pointer to the beginning of the file
     if file.content_type == "application/pdf":
         pdf = PdfReader(BytesIO(file_bytes))
         if len(pdf.pages) > config.PDF_PAGE_LIMIT:
             raise ValueError(PDF_TOO_MANY_PAGES)
 
     file_uri = await upload(
-        file=file_bytes,
+        file=file,
         firebase_folder=config.FIREBASE_TMP_FOLDER,
         content_type=file.content_type,
     )
