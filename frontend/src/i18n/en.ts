@@ -2,6 +2,7 @@ import { MAX_FILE_SIZE, VALID_MIMETYPES } from '@/constants/constraints';
 
 export const en_texts = {
   TITLE: 'Extractify',
+  EXTRACTION: 'Extraction',
   FREE: 'Free',
   FILES: 'Files',
   FILES_SET: 'Files set',

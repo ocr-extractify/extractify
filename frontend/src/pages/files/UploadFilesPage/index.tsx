@@ -45,7 +45,7 @@ function UploadFilesPage() {
   const createFileSetMutation = useMutation({
     mutationFn: async (file_ids: string[]) => {
       const api_file_set = await httpClient.post('/files/sets/', {
-        name: t('FILES_SET') + ' ' + new Date().toLocaleString(),
+        name: t('EXTRACTION') + ' ' + new Date().toLocaleString(),
         file_ids: file_ids,
       });
       console.log('api_file_set', api_file_set);
