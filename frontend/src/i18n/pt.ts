@@ -111,4 +111,5 @@ export const pt_texts = {
   MONTHLY: 'Mensal',
   ERROR_LOADING_DATA: 'Erro ao carregar os dados. Por favor, tente novamente.',
   QTY: 'Quantidade',
+  VIEW_MORE: 'Ver mais',
 };

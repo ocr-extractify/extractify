@@ -110,4 +110,5 @@ export const en_texts = {
   MONTHLY: 'Monthly',
   ERROR_LOADING_DATA: 'Error loading data. Please try again.',
   QTY: 'Quantity',
+  VIEW_MORE: 'View more',
 };
