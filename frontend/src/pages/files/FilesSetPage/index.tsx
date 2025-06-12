@@ -1,5 +1,5 @@
 import { httpClient } from '@/utils/axios';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import {
   Tabs,
@@ -10,6 +10,8 @@ import {
 import ExtractionResult from './fragments/ExtractionResult';
 import ExtractionConfig from './fragments/ExtractionConfig';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/components/ui/button';
+import { Download } from 'lucide-react';
 
 // TODO: add types to filesSet
 const FilesSetPage = () => {
@@ -19,11 +21,22 @@ const FilesSetPage = () => {
     queryKey: ['filesSet', id],
     queryFn: () => httpClient.get(`/files/sets/${id}`),
   });
+  const downloadMutation = useMutation({
+    mutationFn: () => httpClient.post(`/files/sets/${id}/download`),
+  });
 
-  console.log('filesSet', filesSet);
   return (
     <>
-      <h1 className="text-2xl">{filesSet.data?.data?.name}</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl">{filesSet.data?.data?.name}</h1>
+        <Button
+          onClick={() => downloadMutation.mutateAsync()}
+          isLoading={downloadMutation.isPending}
+        >
+          {t('EXPORT')}
+          <Download className="w-4 h-4" />
+        </Button>
+      </div>
 
       <Tabs defaultValue="extraction_result">
         <TabsList>
