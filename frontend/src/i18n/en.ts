@@ -112,4 +112,5 @@ export const en_texts = {
   QTY: 'Quantity',
   VIEW_MORE: 'View more',
   FILE: 'File',
+  EXPORT: 'Export',
 };

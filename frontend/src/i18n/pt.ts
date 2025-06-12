@@ -113,4 +113,5 @@ export const pt_texts = {
   QTY: 'Quantidade',
   VIEW_MORE: 'Ver mais',
   FILE: 'Arquivo',
+  EXPORT: 'Exportar',
 };
