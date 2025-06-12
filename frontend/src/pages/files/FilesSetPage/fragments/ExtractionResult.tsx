@@ -3,31 +3,23 @@ import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import {
   Card,
   CardAction,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from '@/components/ui/card';
+import RawTextDialog from './fragments/RawTextDialog';
+import FileDialog from './fragments/FileDialog';
+import { mountBlobApiUri } from '@/utils/api/mount-blob-api-uri';
 import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+  DropdownMenuItem,
+} from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
+import { FileText } from 'lucide-react';
 
 // TODO: add types to filesSet
 const ExtractionResult = () => {
@@ -45,35 +37,56 @@ const ExtractionResult = () => {
           {file.file.ocr_extractions?.map((ocrExtraction: any) => (
             <Card>
               <CardHeader className="flex justify-between items-center">
-                <CardTitle className='truncate'>{file.file.name}</CardTitle>
-                {/* <CardDescription>Card Description</CardDescription> */}
+                <CardTitle className="truncate">{file.file.name}</CardTitle>
                 <CardAction>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button>
-                        {t('RAW_TEXT')}
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-[425px]">
-                      <DialogHeader>
-                        <DialogTitle>{t('RAW_TEXT_RESULT_MODAL_TITLE')}</DialogTitle>
-                        <DialogDescription>
-                          {t('RAW_TEXT_RESULT_MODAL_DESC')}
-                        </DialogDescription>
-                      </DialogHeader>
-                      {ocrExtraction.text}
-                    </DialogContent>
-                  </Dialog>
+                  {/* Mobile Dropdown */}
+                  <div className="md:hidden">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="outline" size="icon">
+                          <FileText className="h-4 w-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent
+                        align="end"
+                        className="flex flex-col"
+                      >
+                        <DropdownMenuItem asChild>
+                          <RawTextDialog
+                            text={ocrExtraction.text}
+                            triggerButtonVariant="none"
+                          />
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <FileDialog
+                            file_uri={mountBlobApiUri(file.file.uri)}
+                            triggerButtonVariant="none"
+                          />
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+
+                  {/* Desktop Buttons */}
+                  <div className="hidden md:flex space-x-2">
+                    <RawTextDialog text={ocrExtraction.text} />
+                    <FileDialog file_uri={mountBlobApiUri(file.file.uri)} />
+                  </div>
                 </CardAction>
               </CardHeader>
               <CardContent>
                 <ul className="*:py-2 divide-y-2 divide-accent">
-                  {ocrExtraction.regex_extractions?.map((regexExtraction: any) => (
-                    <li key={regexExtraction.field} className="flex justify-between">
-                      <span>{regexExtraction.name}</span>
-                      <span>{regexExtraction.value}</span>
-                    </li>
-                  ))}
+                  {ocrExtraction.regex_extractions?.map(
+                    (regexExtraction: any) => (
+                      <li
+                        key={regexExtraction.field}
+                        className="flex justify-between"
+                      >
+                        <span>{regexExtraction.name}</span>
+                        <span>{regexExtraction.value}</span>
+                      </li>
+                    ),
+                  )}
                 </ul>
               </CardContent>
             </Card>

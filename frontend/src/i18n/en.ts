@@ -111,4 +111,5 @@ export const en_texts = {
   ERROR_LOADING_DATA: 'Error loading data. Please try again.',
   QTY: 'Quantity',
   VIEW_MORE: 'View more',
+  FILE: 'File',
 };

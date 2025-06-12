@@ -1,4 +1,7 @@
-import { defaultRegexFields, type DataExtractionRegexField } from '@/constants/dataExtractionRegexFields';
+import {
+  defaultRegexFields,
+  type DataExtractionRegexField,
+} from '@/constants/dataExtractionRegexFields';
 import { httpClient } from '@/utils/axios';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -14,17 +17,13 @@ const ExtractionConfig = () => {
     queryKey: ['filesSet', id],
     queryFn: () => httpClient.get(`/files/sets/${id}`),
   });
-  const [regexFields, setRegexFields] = useState<DataExtractionRegexField[]>(defaultRegexFields);
+  const [regexFields, setRegexFields] =
+    useState<DataExtractionRegexField[]>(defaultRegexFields);
 
   return (
     <div>
-      <p className='font-medium'>
-        {t('EXTRACTION_CONFIG_TAB_DESCRIPTION')}
-      </p>
-      <RegexForm
-        regexFields={regexFields}
-        setRegexFields={setRegexFields}
-      />
+      <p className="font-medium">{t('EXTRACTION_CONFIG_TAB_DESCRIPTION')}</p>
+      <RegexForm regexFields={regexFields} setRegexFields={setRegexFields} />
     </div>
   );
 };

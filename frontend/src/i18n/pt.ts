@@ -112,4 +112,5 @@ export const pt_texts = {
   ERROR_LOADING_DATA: 'Erro ao carregar os dados. Por favor, tente novamente.',
   QTY: 'Quantidade',
   VIEW_MORE: 'Ver mais',
+  FILE: 'Arquivo',
 };
