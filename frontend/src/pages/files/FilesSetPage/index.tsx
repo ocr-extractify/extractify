@@ -12,6 +12,7 @@ import ExtractionConfig from './fragments/ExtractionConfig';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
+import download from '@/utils/download';
 
 // TODO: add types to filesSet
 const FilesSetPage = () => {
@@ -22,7 +23,13 @@ const FilesSetPage = () => {
     queryFn: () => httpClient.get(`/files/sets/${id}`),
   });
   const downloadMutation = useMutation({
-    mutationFn: () => httpClient.post(`/files/sets/${id}/download`),
+    mutationFn: async () => {
+      const response = await httpClient.get(`/files/sets/${id}/export`, {
+        responseType: 'blob',
+      });
+      download(response.data, `export-${id}.csv`);
+      return response.data;
+    },
   });
 
   return (
