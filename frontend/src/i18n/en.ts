@@ -113,4 +113,15 @@ export const en_texts = {
   VIEW_MORE: 'View more',
   FILE: 'File',
   EXPORT: 'Export',
+  EXTRACTIONS: 'Extractions',
+  CREATE_EXTRACTION: 'Create extraction',
+  EXTRACTIONS_LIST: 'Extractions list',
+  CREATE_EXTRACTION_DESCRIPTION:
+    'Create a new extraction to extract data from your files.',
+  DROP_FILES_HERE: 'Drop files here',
+  DRAG_DROP_FILES_HERE: 'Drag and drop files here',
+  YOU_CAN_UPLOAD: 'You can upload',
+  FILES_UPLOAD_LIMIT: 'files (up to {{maxSize}} each)',
+  FILE_UPLOAD_LIMIT: 'a file with {{maxSize}}',
+  CREATE: 'Create',
 };

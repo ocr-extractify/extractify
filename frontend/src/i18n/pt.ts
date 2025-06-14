@@ -114,4 +114,15 @@ export const pt_texts = {
   VIEW_MORE: 'Ver mais',
   FILE: 'Arquivo',
   EXPORT: 'Exportar',
+  EXTRACTIONS: 'Extrações',
+  CREATE_EXTRACTION: 'Criar extração',
+  EXTRACTIONS_LIST: 'Listar extrações',
+  CREATE_EXTRACTION_DESCRIPTION:
+    'Crie uma nova extração para extrair dados dos seus arquivos.',
+  DROP_FILES_HERE: 'Solte os arquivos aqui',
+  DRAG_DROP_FILES_HERE: 'Arraste e solte os arquivos aqui',
+  YOU_CAN_UPLOAD: 'Você pode enviar',
+  FILES_UPLOAD_LIMIT: 'arquivos (até {{maxSize}} cada)',
+  FILE_UPLOAD_LIMIT: 'um arquivo com {{maxSize}}',
+  CREATE: 'Criar',
 };

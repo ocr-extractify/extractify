@@ -1,26 +1,26 @@
-import * as React from "react"
-import { Upload } from "lucide-react"
-import Dropzone, {
-  type FileRejection,
-} from "react-dropzone"
-import { useControllableState } from "@/hooks/use-controllable-state"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { twMerge } from "tailwind-merge"
-import { formatBytes } from "@/utils/datastructures/bytes"
-import { useToast } from "@/hooks/use-toast"
-import isFileWithPreview from "./utils/isFileWithPreview"
-import FileCard from "./fragments/FileCard"
-import type { FileUploaderProps } from "./types"
+import * as React from 'react';
+import { Upload } from 'lucide-react';
+import Dropzone, { type FileRejection } from 'react-dropzone';
+import { useControllableState } from '@/hooks/use-controllable-state';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { twMerge } from 'tailwind-merge';
+import { formatBytes } from '@/utils/datastructures/bytes';
+import { useToast } from '@/hooks/use-toast';
+import isFileWithPreview from './utils/isFileWithPreview';
+import FileCard from './fragments/FileCard';
+import type { FileUploaderProps } from './types';
+import { useTranslation } from 'react-i18next';
 
 export function FileUploader(props: FileUploaderProps) {
+  const { t } = useTranslation();
   const {
     value: valueProp,
     onValueChange,
     onUpload,
     progresses,
     accept = {
-      "image/*": [],
-      "application/pdf": [],
+      'image/*': [],
+      'application/pdf': [],
     },
     maxSize = props.maxSize || 1024 * 1024 * 2, // 2MB
     maxFileCount = props.maxFileCount || 5,
@@ -28,39 +28,39 @@ export function FileUploader(props: FileUploaderProps) {
     disabled = props.disabled || false,
     className,
     ...dropzoneProps
-  } = props
-  const { toast } = useToast()
+  } = props;
+  const { toast } = useToast();
   const [files, setFiles] = useControllableState({
     prop: valueProp,
     onChange: onValueChange,
-  })
+  });
 
   const onDrop = React.useCallback(
     (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
       if (!multiple && maxFileCount === 1 && acceptedFiles.length > 1) {
-        toast({ title: "Cannot upload more than 1 file at a time" })
-        return
+        toast({ title: 'Cannot upload more than 1 file at a time' });
+        return;
       }
 
       if ((files?.length ?? 0) + acceptedFiles.length > maxFileCount) {
-        toast({ title: `Cannot upload more than ${maxFileCount} files` })
-        return
+        toast({ title: `Cannot upload more than ${maxFileCount} files` });
+        return;
       }
 
       const newFiles = acceptedFiles.map((file) =>
         Object.assign(file, {
           preview: URL.createObjectURL(file),
-        })
-      )
+        }),
+      );
 
-      const updatedFiles = files ? [...files, ...newFiles] : newFiles
+      const updatedFiles = files ? [...files, ...newFiles] : newFiles;
 
-      setFiles(updatedFiles)
+      setFiles(updatedFiles);
 
       if (rejectedFiles.length > 0) {
         rejectedFiles.forEach(({ file }) => {
-          toast({ title: `File ${file.name} was rejected ` })
-        })
+          toast({ title: `File ${file.name} was rejected ` });
+        });
       }
 
       // if (
@@ -82,30 +82,30 @@ export function FileUploader(props: FileUploaderProps) {
       // }
     },
 
-    [files, maxFileCount, multiple, onUpload, setFiles]
-  )
+    [files, maxFileCount, multiple, onUpload, setFiles],
+  );
 
   function onRemove(index: number) {
-    if (!files) return
-    const newFiles = files.filter((_, i) => i !== index)
-    setFiles(newFiles)
-    onValueChange?.(newFiles)
+    if (!files) return;
+    const newFiles = files.filter((_, i) => i !== index);
+    setFiles(newFiles);
+    onValueChange?.(newFiles);
   }
 
   // Revoke preview url when component unmounts
   React.useEffect(() => {
     return () => {
-      if (!files) return
+      if (!files) return;
       files.forEach((file) => {
         if (isFileWithPreview(file)) {
-          URL.revokeObjectURL(file.preview)
+          URL.revokeObjectURL(file.preview);
         }
-      })
-    }
+      });
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
-  const isDisabled = disabled || (files?.length ?? 0) >= maxFileCount
+  const isDisabled = disabled || (files?.length ?? 0) >= maxFileCount;
 
   return (
     <div className="relative flex flex-col gap-6 overflow-hidden">
@@ -121,11 +121,11 @@ export function FileUploader(props: FileUploaderProps) {
           <div
             {...getRootProps()}
             className={twMerge(
-              "group relative grid h-52 w-full cursor-pointer place-items-center rounded-lg border-2 border-dashed border-muted-foreground/25 px-5 py-2.5 text-center transition hover:bg-muted/25",
-              "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-              isDragActive && "border-muted-foreground/50",
-              isDisabled && "pointer-events-none opacity-60",
-              className
+              'group relative grid h-52 w-full cursor-pointer place-items-center rounded-lg border-2 border-dashed border-muted-foreground/25 px-5 py-2.5 text-center transition hover:bg-muted/25',
+              'ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+              isDragActive && 'border-muted-foreground/50',
+              isDisabled && 'pointer-events-none opacity-60',
+              className,
             )}
             {...dropzoneProps}
           >
@@ -139,7 +139,7 @@ export function FileUploader(props: FileUploaderProps) {
                   />
                 </div>
                 <p className="font-medium text-muted-foreground">
-                  Drop the files here
+                  {t('DROP_FILES_HERE')}
                 </p>
               </div>
             ) : (
@@ -152,14 +152,20 @@ export function FileUploader(props: FileUploaderProps) {
                 </div>
                 <div className="flex flex-col gap-px">
                   <p className="font-medium text-muted-foreground">
-                    Drag {`'n'`} drop files here, or click to select files
+                    {t('DRAG_DROP_FILES_HERE')}
                   </p>
                   <p className="text-sm text-muted-foreground/70">
-                    You can upload
+                    {t('YOU_CAN_UPLOAD')}
                     {maxFileCount > 1
-                      ? ` ${maxFileCount === Infinity ? "multiple" : maxFileCount}
-                      files (up to ${formatBytes(maxSize)} each)`
-                      : ` a file with ${formatBytes(maxSize)}`}
+                      ? ` ${
+                          maxFileCount === Infinity ? 'multiple' : maxFileCount
+                        }
+                      ${t('FILES_UPLOAD_LIMIT', {
+                        maxSize: formatBytes(maxSize),
+                      })}`
+                      : ` ${t('FILE_UPLOAD_LIMIT', {
+                          maxSize: formatBytes(maxSize),
+                        })}`}
                   </p>
                 </div>
               </div>
@@ -183,5 +189,5 @@ export function FileUploader(props: FileUploaderProps) {
         </ScrollArea>
       ) : null}
     </div>
-  )
+  );
 }

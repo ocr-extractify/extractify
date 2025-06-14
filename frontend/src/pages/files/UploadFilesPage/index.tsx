@@ -78,9 +78,9 @@ function UploadFilesPage() {
     <div className="mx-auto w-full">
       <div className="space-y-6">
         <div>
-          <h3 className="text-lg font-medium">{t('UPLOAD')}</h3>
+          <h3 className="text-lg font-medium">{t('CREATE_EXTRACTION')}</h3>
           <p className="text-sm text-muted-foreground">
-            {t('UPLOAD_FILES_FORM_DESCRIPTION')}
+            {t('CREATE_EXTRACTION_DESCRIPTION')}
           </p>
         </div>
 
@@ -89,7 +89,7 @@ function UploadFilesPage() {
         <RegexForm regexFields={regexFields} setRegexFields={setRegexFields} />
 
         <form className="w-full flex flex-col" onSubmit={handleSubmit}>
-          <Label className="mb-2">Files</Label>
+          <Label className="mb-2">{t('FILES')}</Label>
 
           {/** TODO: use user limits to set FileUploader constraints. */}
           <FileUploader
@@ -104,7 +104,7 @@ function UploadFilesPage() {
             className="w-fit mt-4 flex items-center"
             isLoading={uploadFileMutation.isPending}
           >
-            <span className="uppercase font-medium">{t('UPLOAD')}</span>
+            <span className="uppercase font-medium">{t('CREATE')}</span>
           </Button>
         </form>
       </div>

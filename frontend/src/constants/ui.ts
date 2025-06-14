@@ -1,1 +1,1 @@
-export const APP_NAME = 'extractify';
+export const APP_NAME = 'Extractify';

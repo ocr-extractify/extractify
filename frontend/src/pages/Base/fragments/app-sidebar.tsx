@@ -26,17 +26,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     ],
     navMain: [
       {
-        title: t('FILES'),
+        title: t('EXTRACTIONS'),
         url: '#',
         icon: FileText,
         isActive: true,
         items: [
           {
-            title: t('UPLOAD'),
+            title: t('CREATE_EXTRACTION'),
             url: '/files/upload',
           },
           {
-            title: t('FILES'),
+            title: t('EXTRACTIONS_LIST'),
             url: '/files/sets',
           },
         ],
