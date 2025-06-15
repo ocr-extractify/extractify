@@ -132,4 +132,5 @@ export const en_texts = {
   TOTAL_CURRENCY_VALUE: 'Total currency value',
   ERROR: 'Error',
   FAILED_TO_LOAD_STATISTICS: 'Failed to load statistics.',
+  SEARCH_FILES_SETS: 'Search extractions',
 };

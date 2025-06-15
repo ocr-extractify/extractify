@@ -20,8 +20,12 @@ import {
 import { Button } from '@/components/ui/button';
 import { FileText } from 'lucide-react';
 
+interface ExtractionResultProps {
+  searchQuery: string;
+}
+
 // TODO: add types to filesSet
-const ExtractionResult = () => {
+const ExtractionResult = ({ searchQuery }: ExtractionResultProps) => {
   const { id } = useParams<{ id: string }>();
 
   const filesSet = useQuery({
@@ -29,9 +33,26 @@ const ExtractionResult = () => {
     queryFn: () => httpClient.get(`/files/sets/${id}`),
   });
 
+  const filteredFiles = filesSet.data?.data?.files?.filter((file: any) => {
+    if (!searchQuery) return true;
+
+    const searchLower = searchQuery.toLowerCase();
+    const fileName = file.file.name.toLowerCase();
+    const extractions = file.file.ocr_extractions
+      ?.flatMap((extraction: any) => [
+        extraction.text,
+        ...(extraction.regex_extractions?.map((regex: any) => regex.value) ||
+          []),
+      ])
+      .join(' ')
+      .toLowerCase();
+
+    return fileName.includes(searchLower) || extractions?.includes(searchLower);
+  });
+
   return (
     <>
-      {filesSet.data?.data?.files?.map((file: any) => (
+      {filteredFiles?.map((file: any) => (
         <div key={file.id} className="*:my-4">
           {file.file.ocr_extractions?.map((ocrExtraction: any) => (
             <Card>

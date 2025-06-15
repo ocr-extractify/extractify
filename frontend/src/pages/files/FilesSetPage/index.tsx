@@ -1,5 +1,5 @@
 import { httpClient } from '@/utils/axios';
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import {
   Tabs,
@@ -10,7 +10,7 @@ import {
 import ExtractionResult from './fragments/ExtractionResult';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
-import { Download, Pencil } from 'lucide-react';
+import { Download, Pencil, Search } from 'lucide-react';
 import download from '@/utils/download';
 import Stats from './fragments/Stats';
 import { useState } from 'react';
@@ -19,10 +19,12 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 // TODO: add types to filesSet
 const FilesSetPage = () => {
+  const queryClient = useQueryClient();
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const [isFilesSetNameEditing, setIsFilesSetNameEditing] = useState(false);
   const [filesSetName, setFilesSetName] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const filesSet = useQuery({
     queryKey: ['filesSet', id],
     queryFn: () => httpClient.get(`/files/sets/${id}`),
@@ -40,56 +42,69 @@ const FilesSetPage = () => {
     mutationFn: async (data: { name: string }) => {
       const response = await httpClient.patch(`/files/sets/${id}/`, data);
       filesSet.refetch();
+      queryClient.invalidateQueries({ queryKey: ['filesSets'] });
       return response.data;
     },
   });
 
   return (
     <>
-      <div className="flex justify-between items-center space-x-2">
-        {isFilesSetNameEditing ? (
-          <Input
-            type="text"
-            value={filesSetName || filesSet.data?.data?.name}
-            onChange={(e) => setFilesSetName(e.target.value)}
-            onBlur={() => {
-              renameFilesSetMutation.mutateAsync({ name: filesSetName });
-              setIsFilesSetNameEditing(false);
-            }}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
+      <div className="flex flex-col gap-4">
+        <div className="flex justify-between items-center space-x-2">
+          {isFilesSetNameEditing ? (
+            <Input
+              type="text"
+              value={filesSetName || filesSet.data?.data?.name}
+              onChange={(e) => setFilesSetName(e.target.value)}
+              onBlur={() => {
                 renameFilesSetMutation.mutateAsync({ name: filesSetName });
                 setIsFilesSetNameEditing(false);
-              }
-              if (e.key === 'Escape') {
-                setIsFilesSetNameEditing(false);
-              }
-            }}
-          />
-        ) : (
-          <div className="flex items-center gap-2">
-            {filesSet.isLoading ? (
-              <Skeleton className="w-24 h-4" />
-            ) : (
-              <h1 className="text-2xl">{filesSet.data?.data?.name}</h1>
-            )}
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => setIsFilesSetNameEditing(!isFilesSetNameEditing)}
-            >
-              <Pencil className="w-4 h-4" />
-            </Button>
-          </div>
-        )}
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  renameFilesSetMutation.mutateAsync({ name: filesSetName });
+                  setIsFilesSetNameEditing(false);
+                }
+                if (e.key === 'Escape') {
+                  setIsFilesSetNameEditing(false);
+                }
+              }}
+            />
+          ) : (
+            <div className="flex items-center gap-2">
+              {filesSet.isLoading ? (
+                <Skeleton className="w-24 h-4" />
+              ) : (
+                <h1 className="text-2xl">{filesSet.data?.data?.name}</h1>
+              )}
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => setIsFilesSetNameEditing(!isFilesSetNameEditing)}
+              >
+                <Pencil className="w-4 h-4" />
+              </Button>
+            </div>
+          )}
 
-        <Button
-          onClick={() => downloadMutation.mutateAsync()}
-          isLoading={downloadMutation.isPending}
-        >
-          {t('EXPORT')}
-          <Download className="w-4 h-4" />
-        </Button>
+          <Button
+            onClick={() => downloadMutation.mutateAsync()}
+            isLoading={downloadMutation.isPending}
+          >
+            {t('EXPORT')}
+            <Download className="w-4 h-4" />
+          </Button>
+        </div>
+
+        <div className="relative">
+          <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder={t('SEARCH_FILES')}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-8"
+          />
+        </div>
       </div>
 
       <Tabs defaultValue="extraction_result">
@@ -101,7 +116,7 @@ const FilesSetPage = () => {
         </TabsList>
 
         <TabsContent value="extraction_result">
-          <ExtractionResult />
+          <ExtractionResult searchQuery={searchQuery} />
         </TabsContent>
         <TabsContent value="stats">
           <Stats />

@@ -133,4 +133,5 @@ export const pt_texts = {
   TOTAL_CURRENCY_VALUE: 'Valor total',
   ERROR: 'Erro',
   FAILED_TO_LOAD_STATISTICS: 'Erro ao carregar as estatísticas.',
+  SEARCH_FILES_SETS: 'Buscar extrações',
 };
