@@ -6,4 +6,5 @@ stats_router = APIRouter(
 )
 
 
-from .get_stats_routes import *
+from .get_stats_route import *
+from .get_ocr_extraction_stats_route import *

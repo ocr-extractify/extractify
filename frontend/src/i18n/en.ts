@@ -124,4 +124,8 @@ export const en_texts = {
   FILES_UPLOAD_LIMIT: 'files (up to {{maxSize}} each)',
   FILE_UPLOAD_LIMIT: 'a file with {{maxSize}}',
   CREATE: 'Create',
+  CREATING_FILE_SET: 'Creating file set...',
+  EXTRACTING_DATA_FROM_FILE:
+    'Extracting data from file {{current}}/{{total}}...',
+  FILE_SET_CREATED: 'Extraction created successfully.',
 };

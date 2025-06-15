@@ -125,4 +125,8 @@ export const pt_texts = {
   FILES_UPLOAD_LIMIT: 'arquivos (até {{maxSize}} cada)',
   FILE_UPLOAD_LIMIT: 'um arquivo com {{maxSize}}',
   CREATE: 'Criar',
+  CREATING_FILE_SET: 'Criando conjunto de arquivos...',
+  EXTRACTING_DATA_FROM_FILE:
+    'Extraindo dados do arquivo {{current}}/{{total}}...',
+  FILE_SET_CREATED: 'Extração criada com sucesso.',
 };

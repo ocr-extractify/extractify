@@ -13,10 +13,14 @@ import {
   defaultRegexFields,
 } from '@/constants/dataExtractionRegexFields';
 import RegexForm from './fragments/RegexForm';
+import { useNavigate } from 'react-router-dom';
+import type { AxiosResponse } from 'axios';
 
 function UploadFilesPage() {
   const { t } = useTranslation();
   const { toast } = useToast();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const [files, setFiles] = useState<File[] | []>([]);
   const [regexFields, setRegexFields] =
     useState<DataExtractionRegexField[]>(defaultRegexFields);
@@ -48,32 +52,51 @@ function UploadFilesPage() {
         name: t('EXTRACTION') + ' ' + new Date().toLocaleString(),
         file_ids: file_ids,
       });
-      console.log('api_file_set', api_file_set);
+      return api_file_set.data;
+    },
+    onSuccess: (response) => {
+      console.log('response', response);
+      toast({ title: t('FILE_SET_CREATED') });
+      navigate(`/files/sets/${response.id}`);
     },
   });
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsLoading(true);
+
     if (files.length === 0) {
       toast({ title: NO_FILE });
+      setIsLoading(false);
       return;
     }
 
+    toast({ title: t('CREATING_FILE_SET') });
+
     const filesIds: string[] = [];
     const filesArray: File[] = Array.from(files);
+
     await Promise.all(
-      filesArray.map(async (file: File) => {
+      filesArray.map(async (file: File, index: number) => {
         const file_id = await uploadFileMutation.mutateAsync(file);
         console.log('file_id', file_id);
+
+        toast({
+          title: t('EXTRACTING_DATA_FROM_FILE', {
+            current: index + 1,
+            total: filesArray.length,
+          }),
+        });
+
         createFileOcrExtractionMutation.mutateAsync(file_id);
         filesIds.push(file_id);
       }),
     );
 
-    createFileSetMutation.mutateAsync(filesIds);
+    await createFileSetMutation.mutateAsync(filesIds);
+    setIsLoading(false);
   }
 
-  console.log('regexFields', regexFields);
   return (
     <div className="mx-auto w-full">
       <div className="space-y-6">
@@ -102,7 +125,7 @@ function UploadFilesPage() {
 
           <Button
             className="w-fit mt-4 flex items-center"
-            isLoading={uploadFileMutation.isPending}
+            isLoading={isLoading || uploadFileMutation.isPending}
           >
             <span className="uppercase font-medium">{t('CREATE')}</span>
           </Button>
