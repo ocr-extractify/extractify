@@ -50,15 +50,13 @@ const FilesSetPage = () => {
           <TabsTrigger value="extraction_result">
             {t('EXTRACTION_RESULT')}
           </TabsTrigger>
-          {/* <TabsTrigger value="extraction_config">{t('EXTRACTION_CONFIG')}</TabsTrigger> */}
+          <TabsTrigger value="stats">{t('STATS')}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="extraction_result">
           <ExtractionResult />
         </TabsContent>
-        {/* <TabsContent value="extraction_config">
-          <ExtractionConfig />
-        </TabsContent> */}
+        <TabsContent value="stats"></TabsContent>
       </Tabs>
     </>
   );

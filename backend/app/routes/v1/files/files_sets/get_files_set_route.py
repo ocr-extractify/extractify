@@ -1,5 +1,5 @@
 from uuid import UUID
-from fastapi import status
+from fastapi import status, HTTPException
 from sqlmodel import select, and_
 from app.constants.errors_texts import RESOURCE_NOT_FOUND
 from app.db.models import FileSet
@@ -21,7 +21,10 @@ async def get_files_sets(
     db_result = session.exec(
         select(FileSet).where(and_(FileSet.id == id, FileSet.is_deleted == False))
     ).first()
+
     if not db_result:
-        raise LookupError(RESOURCE_NOT_FOUND)
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=RESOURCE_NOT_FOUND
+        )
 
     return db_result
