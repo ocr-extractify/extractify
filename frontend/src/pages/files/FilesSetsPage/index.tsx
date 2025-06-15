@@ -23,9 +23,8 @@ const FilesSetsPage = () => {
     },
   });
 
-  console.log(filesSet.data);
   return (
-    <div className="grid sm:grid-cols-3 gap-4 w-full max-w-4xl mx-auto p-4">
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-4xl mx-auto p-4">
       {/**TODO: type apiFile properly */}
       {filesSet?.data?.data?.map((apiFileSet: any) => (
         <Card className="relative">
