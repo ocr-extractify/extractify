@@ -27,7 +27,10 @@ export type GoogleDocumentAiAnalysisLayout = {
  */
 export type GoogleDocumentAiAnalysisPage = {
   pageNumber?: number;
-  dimension?: Dimension;
+  dimension?: {
+    width: number;
+    height: number;
+  };
   layout?: GoogleDocumentAiAnalysisLayout;
   detectedLanguages?: Array<GoogleDocumentAiAnalysisDetectedLanguage>;
   blocks?: Array<unknown>;

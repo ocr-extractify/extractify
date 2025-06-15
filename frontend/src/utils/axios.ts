@@ -47,7 +47,8 @@ httpClient.interceptors.request.use(
 );
 
 httpClient.interceptors.response.use(
-  (response: AxiosResponse<ApiResponseData>) => {
+  // TODO: add default response type
+  (response: AxiosResponse<any>) => {
     return response;
   },
   (error) => {

@@ -14,7 +14,6 @@ import {
 } from '@/constants/dataExtractionRegexFields';
 import RegexForm from './fragments/RegexForm';
 import { useNavigate } from 'react-router-dom';
-import type { AxiosResponse } from 'axios';
 
 function UploadFilesPage() {
   const { t } = useTranslation();

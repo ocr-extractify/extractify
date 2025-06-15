@@ -10,7 +10,7 @@ import { mountBlobApiUri } from '@/utils/api/mount-blob-api-uri';
 
 const FilesSetsPage = () => {
   const { t } = useTranslation();
-  const [query, setQuery] = useState('');
+  const [query, _] = useState('');
   const filesSet = useQuery({
     queryKey: ['files', { query }],
     queryFn: () => httpClient.get('/files/sets/'),

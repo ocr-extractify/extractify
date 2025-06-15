@@ -1,6 +1,5 @@
 import { httpClient } from '@/utils/axios';
 import { useQuery } from '@tanstack/react-query';
-import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import {
   Card,
@@ -23,7 +22,6 @@ import { FileText } from 'lucide-react';
 
 // TODO: add types to filesSet
 const ExtractionResult = () => {
-  const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
 
   const filesSet = useQuery({
