@@ -1,5 +1,5 @@
 import { httpClient } from '@/utils/axios';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import {
@@ -20,7 +20,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { FileText } from 'lucide-react';
-import { Input } from '@/components/ui/input';
 
 // TODO: add types to filesSet
 const ExtractionResult = () => {
@@ -31,12 +30,6 @@ const ExtractionResult = () => {
     queryKey: ['filesSet', id],
     queryFn: () => httpClient.get(`/files/sets/${id}`),
   });
-  const renameMutation = useMutation({
-    mutationFn: async (data: { name: string }) => {
-      const response = await httpClient.patch(`/files/sets/${id}/rename`, data);
-      return response.data;
-    },
-  });
 
   return (
     <>
@@ -45,16 +38,7 @@ const ExtractionResult = () => {
           {file.file.ocr_extractions?.map((ocrExtraction: any) => (
             <Card>
               <CardHeader className="flex justify-between items-center">
-                <CardTitle className="truncate">
-                  {file.file.name}
-                  <Input
-                    type="text"
-                    value={file.file.name}
-                    onChange={(e) =>
-                      renameMutation.mutate({ name: e.target.value })
-                    }
-                  />
-                </CardTitle>
+                <CardTitle className="truncate">{file.file.name}</CardTitle>
                 <CardAction>
                   {/* Mobile Dropdown */}
                   <div className="md:hidden">
