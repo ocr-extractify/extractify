@@ -19,15 +19,14 @@ import {
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { FileText, Pencil } from 'lucide-react';
+import { FileText } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { useState } from 'react';
 
 // TODO: add types to filesSet
 const ExtractionResult = () => {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
-  const [isNameEditing, setIsNameEditing] = useState(false);
+
   const filesSet = useQuery({
     queryKey: ['filesSet', id],
     queryFn: () => httpClient.get(`/files/sets/${id}`),
@@ -47,27 +46,15 @@ const ExtractionResult = () => {
             <Card>
               <CardHeader className="flex justify-between items-center">
                 <CardTitle className="truncate">
-                  {isNameEditing ? (
-                    <Input
-                      type="text"
-                      value={file.file.name}
-                      onChange={(e) =>
-                        renameMutation.mutate({ name: e.target.value })
-                      }
-                    />
-                  ) : (
-                    file.file.name
-                  )}
+                  {file.file.name}
+                  <Input
+                    type="text"
+                    value={file.file.name}
+                    onChange={(e) =>
+                      renameMutation.mutate({ name: e.target.value })
+                    }
+                  />
                 </CardTitle>
-                <CardAction>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => setIsNameEditing(!isNameEditing)}
-                  >
-                    <Pencil className="h-4 w-4" />
-                  </Button>
-                </CardAction>
                 <CardAction>
                   {/* Mobile Dropdown */}
                   <div className="md:hidden">
