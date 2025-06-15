@@ -128,4 +128,8 @@ export const en_texts = {
   EXTRACTING_DATA_FROM_FILE:
     'Extracting data from file {{current}}/{{total}}...',
   FILE_SET_CREATED: 'Extraction created successfully.',
+  TOTAL_FILES: 'Total files',
+  TOTAL_CURRENCY_VALUE: 'Total currency value',
+  ERROR: 'Error',
+  FAILED_TO_LOAD_STATISTICS: 'Failed to load statistics.',
 };

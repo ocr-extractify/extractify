@@ -8,12 +8,11 @@ import {
   TabsTrigger,
 } from '@/components/ui/flat-tabs';
 import ExtractionResult from './fragments/ExtractionResult';
-import ExtractionConfig from './fragments/ExtractionConfig';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 import download from '@/utils/download';
-
+import Stats from './fragments/Stats';
 // TODO: add types to filesSet
 const FilesSetPage = () => {
   const { t } = useTranslation();
@@ -56,7 +55,9 @@ const FilesSetPage = () => {
         <TabsContent value="extraction_result">
           <ExtractionResult />
         </TabsContent>
-        <TabsContent value="stats"></TabsContent>
+        <TabsContent value="stats">
+          <Stats />
+        </TabsContent>
       </Tabs>
     </>
   );

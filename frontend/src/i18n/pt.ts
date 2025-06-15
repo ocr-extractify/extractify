@@ -129,4 +129,8 @@ export const pt_texts = {
   EXTRACTING_DATA_FROM_FILE:
     'Extraindo dados do arquivo {{current}}/{{total}}...',
   FILE_SET_CREATED: 'Extração criada com sucesso.',
+  TOTAL_FILES: 'Total de arquivos',
+  TOTAL_CURRENCY_VALUE: 'Valor total',
+  ERROR: 'Erro',
+  FAILED_TO_LOAD_STATISTICS: 'Erro ao carregar as estatísticas.',
 };
