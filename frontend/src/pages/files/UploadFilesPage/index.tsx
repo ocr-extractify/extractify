@@ -2,7 +2,6 @@ import { useMutation } from '@tanstack/react-query';
 import { httpClient } from '@/utils/axios';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import { NO_FILE } from '@/constants/errorsMsgs';
 import { Label } from '@/components/ui/label';
 import { FileUploader } from '@/components/ui/file-uploader';
 import { Separator } from '@radix-ui/react-separator';
@@ -64,8 +63,14 @@ function UploadFilesPage() {
     e.preventDefault();
     setIsLoading(true);
 
+    if (regexFields.length === 0) {
+      toast({ title: t('NO_REGEX_FIELDS') });
+      setIsLoading(false);
+      return;
+    }
+
     if (files.length === 0) {
-      toast({ title: NO_FILE });
+      toast({ title: t('NO_FILE') });
       setIsLoading(false);
       return;
     }

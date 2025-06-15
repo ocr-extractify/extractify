@@ -133,4 +133,16 @@ export const en_texts = {
   ERROR: 'Error',
   FAILED_TO_LOAD_STATISTICS: 'Failed to load statistics.',
   SEARCH_FILES_SETS: 'Search extractions',
+  NO_FILES_SETS_FOUND: 'No extractions found',
+  NO_FILES_SETS_FOUND_DESCRIPTION:
+    'No extractions found. Try adjusting your search or filter to find what you are looking for.',
+  CLEAR_FILTER: 'Clear filter',
+  DELETING_FILE_SET: 'Deleting extraction...',
+  FILE_SET_DELETED_SUCCESSFULLY: 'Extraction deleted successfully.',
+  FAILED_TO_DELETE_FILE_SET: 'Failed to delete extraction.',
+  NO_FILES_SET_IN_DATABASE:
+    'No extractions found in database. Create a new extraction clicking in the button below.',
+  CREATE_FILE_SET: 'Create extraction',
+  NO_FILE: 'You need to upload at least one file',
+  NO_REGEX_FIELDS: 'You need to add at least one regex field',
 };

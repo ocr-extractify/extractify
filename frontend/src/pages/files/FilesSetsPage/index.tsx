@@ -3,14 +3,17 @@ import { Link } from 'react-router-dom';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { httpClient } from '@/utils/axios';
-import { FileText, Trash2, Search } from 'lucide-react';
+import { FileText, Trash2, Search, X, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
 import { mountBlobApiUri } from '@/utils/api/mount-blob-api-uri';
 import { Input } from '@/components/ui/input';
+import { EmptyState } from '@/components/states/EmptyState';
+import { useToast } from '@/hooks/use-toast';
 
 const FilesSetsPage = () => {
   const { t } = useTranslation();
+  const { toast } = useToast();
   const [searchQuery, setSearchQuery] = useState('');
   const filesSet = useQuery({
     queryKey: ['filesSets'],
@@ -19,14 +22,45 @@ const FilesSetsPage = () => {
   const deleteMutation = useMutation({
     mutationKey: ['delete-fileset'],
     mutationFn: (id: string) => httpClient.delete(`/files/sets/${id}`),
+    onMutate: () => {
+      toast({
+        title: t('DELETING_FILE_SET'),
+        description: t('PLEASE_WAIT'),
+      });
+    },
     onSuccess: () => {
       filesSet.refetch();
+      toast({
+        title: t('FILE_SET_DELETED_SUCCESSFULLY'),
+      });
+    },
+    onError: () => {
+      toast({
+        title: t('ERROR'),
+        description: t('FAILED_TO_DELETE_FILE_SET'),
+        variant: 'destructive',
+      });
     },
   });
-
   const filteredFilesSets = filesSet?.data?.data?.filter((fileSet: any) =>
     fileSet.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
+
+  if (!filesSet.isLoading && filesSet.data?.data?.length === 0) {
+    return (
+      <EmptyState
+        title={t('NO_FILES_SETS_FOUND')}
+        description={t('NO_FILES_SET_IN_DATABASE')}
+      >
+        <Button variant="outline" asChild>
+          <Link to="/files/upload">
+            <Plus className="h-4 w-4" />
+            {t('CREATE_FILE_SET')}
+          </Link>
+        </Button>
+      </EmptyState>
+    );
+  }
 
   return (
     <div className="w-full max-w-4xl mx-auto p-4 space-y-4">
@@ -41,52 +75,68 @@ const FilesSetsPage = () => {
         />
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredFilesSets?.map((apiFileSet: any) => (
-          <Card className="relative">
-            <Button
-              variant="outline"
-              className="absolute right-2 top-2"
-              onClick={() => deleteMutation.mutateAsync(apiFileSet.id)}
-            >
-              <Trash2
-                className="size-10 text-muted-foreground"
-                aria-hidden="true"
-              />
-            </Button>
-
-            <CardHeader>
-              {apiFileSet.files?.[0]?.file?.mimetype?.name ===
-              'application/pdf' ? (
-                <FileText
+      {filteredFilesSets?.length === 0 ? (
+        <EmptyState
+          title={t('NO_FILES_SETS_FOUND')}
+          description={t('NO_FILES_SETS_FOUND_DESCRIPTION')}
+        >
+          <Button
+            variant="outline"
+            onClick={() => setSearchQuery('')}
+            className="gap-2"
+          >
+            <X className="h-4 w-4" />
+            {t('CLEAR_FILTER')}
+          </Button>
+        </EmptyState>
+      ) : (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredFilesSets?.map((apiFileSet: any) => (
+            <Card className="relative">
+              <Button
+                variant="outline"
+                className="absolute right-2 top-2"
+                onClick={() => deleteMutation.mutateAsync(apiFileSet.id)}
+              >
+                <Trash2
                   className="size-10 text-muted-foreground"
                   aria-hidden="true"
                 />
-              ) : (
-                <img
-                  src={mountBlobApiUri(apiFileSet.files?.[0]?.file?.uri)}
-                  alt="Image 1"
-                  className="aspect-square object-cover border border-gray-200 w-full rounded-lg overflow-hidden dark:border-gray-800"
-                  width="300"
-                  height="300"
-                />
-              )}
-            </CardHeader>
+              </Button>
 
-            <CardContent>
-              <h2 className="text-lg font-bold">{apiFileSet.name}</h2>
-              <div className="flex items-center space-x-2 mt-2">
-                <Link
-                  to={`/files/sets/${apiFileSet.id}`}
-                  className="text-blue-500 hover:underline"
-                >
-                  {t('VIEW_MORE')}
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+              <CardHeader>
+                {apiFileSet.files?.[0]?.file?.mimetype?.name ===
+                'application/pdf' ? (
+                  <FileText
+                    className="size-10 text-muted-foreground"
+                    aria-hidden="true"
+                  />
+                ) : (
+                  <img
+                    src={mountBlobApiUri(apiFileSet.files?.[0]?.file?.uri)}
+                    alt="Image 1"
+                    className="aspect-square object-cover border border-gray-200 w-full rounded-lg overflow-hidden dark:border-gray-800"
+                    width="300"
+                    height="300"
+                  />
+                )}
+              </CardHeader>
+
+              <CardContent>
+                <h2 className="text-lg font-bold">{apiFileSet.name}</h2>
+                <div className="flex items-center space-x-2 mt-2">
+                  <Link
+                    to={`/files/sets/${apiFileSet.id}`}
+                    className="text-blue-500 hover:underline"
+                  >
+                    {t('VIEW_MORE')}
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

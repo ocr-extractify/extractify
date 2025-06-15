@@ -134,4 +134,16 @@ export const pt_texts = {
   ERROR: 'Erro',
   FAILED_TO_LOAD_STATISTICS: 'Erro ao carregar as estatísticas.',
   SEARCH_FILES_SETS: 'Buscar extrações',
+  NO_FILES_SETS_FOUND: 'Nenhuma extração encontrada',
+  NO_FILES_SETS_FOUND_DESCRIPTION:
+    'Nenhuma extração encontrada. Tente ajustar sua busca ou filtro para encontrar o que você está procurando.',
+  CLEAR_FILTER: 'Limpar filtro',
+  DELETING_FILE_SET: 'Deletando extração...',
+  FILE_SET_DELETED_SUCCESSFULLY: 'Extração deletada com sucesso.',
+  FAILED_TO_DELETE_FILE_SET: 'Erro ao deletar extração.',
+  NO_FILES_SET_IN_DATABASE:
+    'Nenhuma extração encontrada no banco de dados. Crie uma nova extração clicando no botão abaixo.',
+  CREATE_FILE_SET: 'Criar extração',
+  NO_FILE: 'Você precisa anexar pelo menos um arquivo.',
+  NO_REGEX_FIELDS: 'Você precisa adicionar pelo menos um campo regex.',
 };
