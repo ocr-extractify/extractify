@@ -14,7 +14,7 @@ class FileSetSchema(BaseModel):
 
 @files_router.post(
     "/sets/",
-    description="Create a set of existing files",
+    summary="Create a set of existing files",
     status_code=status.HTTP_201_CREATED,
 )
 async def create_file_set(

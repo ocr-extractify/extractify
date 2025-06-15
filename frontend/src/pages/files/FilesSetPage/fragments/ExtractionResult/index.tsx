@@ -1,5 +1,5 @@
 import { httpClient } from '@/utils/axios';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import {
@@ -19,15 +19,24 @@ import {
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { FileText } from 'lucide-react';
+import { FileText, Pencil } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { useState } from 'react';
 
 // TODO: add types to filesSet
 const ExtractionResult = () => {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
+  const [isNameEditing, setIsNameEditing] = useState(false);
   const filesSet = useQuery({
     queryKey: ['filesSet', id],
     queryFn: () => httpClient.get(`/files/sets/${id}`),
+  });
+  const renameMutation = useMutation({
+    mutationFn: async (data: { name: string }) => {
+      const response = await httpClient.patch(`/files/sets/${id}/rename`, data);
+      return response.data;
+    },
   });
 
   return (
@@ -37,7 +46,28 @@ const ExtractionResult = () => {
           {file.file.ocr_extractions?.map((ocrExtraction: any) => (
             <Card>
               <CardHeader className="flex justify-between items-center">
-                <CardTitle className="truncate">{file.file.name}</CardTitle>
+                <CardTitle className="truncate">
+                  {isNameEditing ? (
+                    <Input
+                      type="text"
+                      value={file.file.name}
+                      onChange={(e) =>
+                        renameMutation.mutate({ name: e.target.value })
+                      }
+                    />
+                  ) : (
+                    file.file.name
+                  )}
+                </CardTitle>
+                <CardAction>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => setIsNameEditing(!isNameEditing)}
+                  >
+                    <Pencil className="h-4 w-4" />
+                  </Button>
+                </CardAction>
                 <CardAction>
                   {/* Mobile Dropdown */}
                   <div className="md:hidden">

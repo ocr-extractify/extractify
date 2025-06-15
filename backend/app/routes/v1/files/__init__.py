@@ -16,3 +16,4 @@ from app.routes.v1.files.files_sets.get_files_sets_route import *
 from app.routes.v1.files.files_sets.get_files_set_route import *
 from app.routes.v1.files.files_sets.delete_file_set_route import *
 from app.routes.v1.files.files_sets.export_report import *
+from app.routes.v1.files.files_sets.update_file_set_route import *
