@@ -22,7 +22,7 @@ dependencies = [
     "dnspython==2.7.0",
     "email-validator==2.2.0",
     "exceptiongroup==1.2.1",
-    "fastapi==0.115.8",
+    "fastapi==0.115.13",
     "fastapi-cli==0.0.7",
     "firebase-admin==6.6.0",
     "google-api-core==2.19.1",
@@ -88,9 +88,9 @@ dependencies = [
     "ujson==5.10.0",
     "uritemplate==4.1.1",
     "urllib3==2.3.0",
-    "uvicorn==0.34.0",
-    "uvloop==0.20.0",
-    "watchfiles==0.22.0",
+    "uvicorn==0.34.3",
+    "uvloop==0.21.0",
+    "watchfiles==1.1.0",
     "websockets==15.0",
 ]
 

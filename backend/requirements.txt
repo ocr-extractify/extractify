@@ -13,7 +13,7 @@ cryptography==44.0.1
 dnspython==2.7.0
 email_validator==2.2.0
 exceptiongroup==1.2.1
-fastapi==0.115.12
+fastapi==0.115.13
 fastapi-cli==0.0.7
 firebase-admin==6.6.0
 google-api-core==2.24.2
@@ -79,7 +79,7 @@ typing_extensions==4.12.2
 ujson==5.10.0
 uritemplate==4.1.1
 urllib3==2.3.0
-uvicorn==0.34.0
-uvloop==0.20.0
+uvicorn==0.34.3
+uvloop==0.21.0
 watchfiles==1.0.5
 websockets==15.0
