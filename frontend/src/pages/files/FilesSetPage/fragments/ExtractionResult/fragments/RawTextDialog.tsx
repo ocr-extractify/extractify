@@ -32,7 +32,7 @@ const RawTextDialog = ({
           {t('RAW_TEXT')}
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{t('RAW_TEXT_RESULT_MODAL_TITLE')}</DialogTitle>
           <DialogDescription>

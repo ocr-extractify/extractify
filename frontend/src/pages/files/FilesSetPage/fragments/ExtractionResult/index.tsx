@@ -82,7 +82,11 @@ const ExtractionResult = () => {
                         className="flex justify-between"
                       >
                         <span>{regexExtraction.name}</span>
-                        <span>{regexExtraction.value}</span>
+                        <div className="flex flex-col">
+                          {regexExtraction.value.split(';').map((item: string) => (
+                            <div key={item}>{item}</div>
+                          ))}
+                        </div>
                       </li>
                     ),
                   )}

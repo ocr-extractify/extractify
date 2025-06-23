@@ -49,7 +49,7 @@ async def extract_data_with_regex(
             else:
                 all_matches.append(m.group(0))
 
-        value = ",".join(all_matches)
+        value = ";".join(all_matches)
         extracted_data.append(
             OcrExtractionWithRegexResult(name=item.name, value=value, regex=item.regex)
         )
