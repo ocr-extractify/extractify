@@ -146,4 +146,5 @@ export const en_texts = {
   NO_FILE: 'You need to upload at least one file',
   NO_REGEX_FIELDS: 'You need to add at least one regex field',
   FIELD_NAME: 'Field name',
+  PLEASE_WAIT: 'Please wait...',
 };

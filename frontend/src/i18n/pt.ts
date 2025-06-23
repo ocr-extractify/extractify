@@ -147,4 +147,5 @@ export const pt_texts = {
   NO_FILE: 'Você precisa anexar pelo menos um arquivo.',
   NO_REGEX_FIELDS: 'Você precisa adicionar pelo menos um campo regex.',
   FIELD_NAME: 'Nome do campo',
+  PLEASE_WAIT: 'Por favor, aguarde...',
 };
