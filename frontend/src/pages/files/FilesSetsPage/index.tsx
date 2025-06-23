@@ -17,6 +17,8 @@ const CardsSkeleton = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto p-4 space-y-4">
+      <h1 className="text-2xl">{t('EXTRACTIONS')}</h1>
+      
       <div className="relative">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
         <Input
@@ -105,6 +107,8 @@ const FilesSetsPage = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto p-4 space-y-4">
+      <h1 className="text-2xl">{t('EXTRACTIONS')}</h1>
+
       <div className="relative">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
         <Input
@@ -143,7 +147,7 @@ const FilesSetsPage = () => {
                   className="size-10 text-muted-foreground"
                   aria-hidden="true"
                 />
-              </Button>
+              </Button> 
 
               <CardHeader>
                 {apiFileSet.files?.[0]?.file?.mimetype?.name ===

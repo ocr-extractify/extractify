@@ -105,7 +105,7 @@ const ProcessedFilesPage = () => {
   const total = chartData.reduce((acc, curr) => acc + (curr?.value ?? 0), 0);
 
   return (
-    <div className="container mx-auto py-6">
+    <div className="container mx-auto">
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">

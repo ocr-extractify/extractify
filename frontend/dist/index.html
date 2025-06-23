@@ -6,12 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Extractify</title>
     <!-- react-devtools port  -->
-    <script src="http://localhost:8097"></script>
-    <script type="module" crossorigin src="/assets/index-Dq6aq5BN.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Bx7bh4-3.css">
+    <!-- <script src="http://localhost:8097"></script> -->
+    <script type="module" crossorigin src="/assets/index-GyrYze0p.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BKopMlPx.css">
   </head>
 
   <body>
     <div id="root"></div>
+
+    <!-- VLibras component -->
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+
+    
+    <!-- VLibras -->
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
   </body>
 </html>
