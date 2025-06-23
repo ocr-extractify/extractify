@@ -11,6 +11,43 @@ import { Input } from '@/components/ui/input';
 import { EmptyState } from '@/components/states/EmptyState';
 import { useToast } from '@/hooks/use-toast';
 
+const CardsSkeleton = () => {
+  const { t } = useTranslation();
+  const [searchQuery, setSearchQuery] = useState('');
+
+  return (
+    <div className="w-full max-w-4xl mx-auto p-4 space-y-4">
+      <div className="relative">
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+        <Input
+          type="text"
+          placeholder={t('SEARCH_FILES_SETS')}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="pl-10"
+          disabled
+        />
+      </div>
+      
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {Array.from({ length: 6 }).map((_, index) => (
+          <Card key={index} className="relative animate-pulse">
+            <div className="absolute right-2 top-2 w-10 h-10 bg-gray-200 rounded-md dark:bg-gray-700"></div>
+            
+            <CardHeader>
+              <div className="aspect-square w-full bg-gray-200 rounded-lg dark:bg-gray-700"></div>
+            </CardHeader>
+
+            <CardContent>
+              <div className="h-6 bg-gray-200 rounded-md mb-2 dark:bg-gray-700"></div>
+              <div className="h-4 bg-gray-200 rounded-md w-20 dark:bg-gray-700"></div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+}
 const FilesSetsPage = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -46,6 +83,10 @@ const FilesSetsPage = () => {
     fileSet.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
+  if (filesSet.isLoading) {
+    return <CardsSkeleton />;
+  }
+
   if (!filesSet.isLoading && filesSet.data?.data?.length === 0) {
     return (
       <EmptyState
@@ -60,7 +101,7 @@ const FilesSetsPage = () => {
         </Button>
       </EmptyState>
     );
-  }
+  } 
 
   return (
     <div className="w-full max-w-4xl mx-auto p-4 space-y-4">

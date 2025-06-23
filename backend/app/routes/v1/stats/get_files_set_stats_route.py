@@ -40,14 +40,15 @@ async def get_ocr_extraction_stats(session: SessionDep, id: UUID):
                         ):
                             # Extract numeric value from currency string (e.g., "R$ 515,18" -> 515.18)
                             value_str = regex_extraction["value"]
-                            # Remove currency symbol and spaces, replace comma with dot
-                            value_str = (
-                                value_str.replace("R$", "").strip().replace(",", ".")
-                            )
-                            try:
-                                total_currency_value += float(value_str)
-                            except ValueError:
-                                continue
+                            values = value_str.split(";")
+                            for value in values:
+                                value = (
+                                    value.replace("R$", "").strip().replace(",", ".")
+                                )
+                                try:
+                                    total_currency_value += float(value)
+                                except ValueError:
+                                    continue
 
     return FileSetStats(
         total_currency_value=total_currency_value, total_files=total_files

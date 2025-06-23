@@ -146,4 +146,5 @@ export const pt_texts = {
   CREATE_FILE_SET: 'Criar extração',
   NO_FILE: 'Você precisa anexar pelo menos um arquivo.',
   NO_REGEX_FIELDS: 'Você precisa adicionar pelo menos um campo regex.',
+  FIELD_NAME: 'Nome do campo',
 };

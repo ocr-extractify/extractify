@@ -72,7 +72,7 @@ const RegexForm = ({ regexFields, setRegexFields }: Props) => {
                     <FormLabel>{t("NAME")}</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Field name"
+                        placeholder={t("FIELD_NAME")}
                         {...field}
                         onChange={field.onChange}
                       />
