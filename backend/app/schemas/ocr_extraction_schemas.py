@@ -9,3 +9,4 @@ class OcrExtractionWithRegex(BaseModel):
 class OcrExtractionWithRegexResult(BaseModel):
     name: str
     value: str
+    regex: str

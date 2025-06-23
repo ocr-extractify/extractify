@@ -50,7 +50,9 @@ async def extract_data_with_regex(
                 all_matches.append(m.group(0))
 
         value = ",".join(all_matches)
-        extracted_data.append(OcrExtractionWithRegexResult(name=item.name, value=value))
+        extracted_data.append(
+            OcrExtractionWithRegexResult(name=item.name, value=value, regex=item.regex)
+        )
 
     extracted_data_as_dicts = [item.model_dump() for item in extracted_data]
     db_file_ocr_extraction.regex_extractions = extracted_data_as_dicts  # type: ignore

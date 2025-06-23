@@ -33,7 +33,11 @@ async def get_ocr_extraction_stats(session: SessionDep, id: UUID):
             for extraction in file.ocr_extractions:
                 if extraction.regex_extractions:
                     for regex_extraction in extraction.regex_extractions:
-                        if regex_extraction["name"] == "Valor (dinheiro)":
+                        # calc total currency value
+                        if (
+                            regex_extraction["regex"]
+                            == "(?:R\\$|\\$|€|£|¥|₩)\\s?\\d{1,3}(?:[\\.,]\\d{3})*(?:[\\.,]\\d{2})?"
+                        ):
                             # Extract numeric value from currency string (e.g., "R$ 515,18" -> 515.18)
                             value_str = regex_extraction["value"]
                             # Remove currency symbol and spaces, replace comma with dot
