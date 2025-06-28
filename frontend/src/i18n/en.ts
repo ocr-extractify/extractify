@@ -147,4 +147,6 @@ export const en_texts = {
   NO_REGEX_FIELDS: 'You need to add at least one regex field',
   FIELD_NAME: 'Field name',
   PLEASE_WAIT: 'Please wait...',
+  SELECT_REGEX: 'Select a regex',
+  FORM_VALIDATION_ERROR: 'Form validation error. Please fix the form issues and try again.',
 };

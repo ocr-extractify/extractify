@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { httpClient } from '@/utils/axios';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Label } from '@/components/ui/label';
 import { FileUploader } from '@/components/ui/file-uploader';
 import { Separator } from '@radix-ui/react-separator';
@@ -11,7 +11,7 @@ import {
   DataExtractionRegexField,
   defaultRegexFields,
 } from '@/constants/dataExtractionRegexFields';
-import RegexForm from './fragments/RegexForm';
+import RegexForm, { RegexFormRef } from './fragments/RegexForm';
 import { useNavigate } from 'react-router-dom';
 
 function UploadFilesPage() {
@@ -22,6 +22,7 @@ function UploadFilesPage() {
   const [files, setFiles] = useState<File[] | []>([]);
   const [regexFields, setRegexFields] =
     useState<DataExtractionRegexField[]>(defaultRegexFields);
+  const regexFormRef = useRef<RegexFormRef>(null);
   const uploadFileMutation = useMutation({
     mutationFn: async (file: File) => {
       const formData = new FormData();
@@ -62,6 +63,14 @@ function UploadFilesPage() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsLoading(true);
+
+    // Validate RegexForm before proceeding
+    const isRegexFormValid = await regexFormRef.current?.validateForm();
+    if (!isRegexFormValid) {
+      toast({ title: t('FORM_VALIDATION_ERROR') });
+      setIsLoading(false);
+      return;
+    }
 
     if (regexFields.length === 0) {
       toast({ title: t('NO_REGEX_FIELDS') });
@@ -113,7 +122,11 @@ function UploadFilesPage() {
 
         <Separator />
 
-        <RegexForm regexFields={regexFields} setRegexFields={setRegexFields} />
+        <RegexForm 
+          ref={regexFormRef}
+          regexFields={regexFields} 
+          setRegexFields={setRegexFields} 
+        />
 
         <form className="w-full flex flex-col" onSubmit={handleSubmit}>
           <Label className="mb-2">{t('FILES')}</Label>

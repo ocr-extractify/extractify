@@ -148,4 +148,6 @@ export const pt_texts = {
   NO_REGEX_FIELDS: 'Você precisa adicionar pelo menos um campo regex.',
   FIELD_NAME: 'Nome do campo',
   PLEASE_WAIT: 'Por favor, aguarde...',
+  SELECT_REGEX: 'Selecione uma regex',
+  FORM_VALIDATION_ERROR: 'Erro de validação do formulário. Por favor, corrija os erros do formulário e tente novamente.',
 };
