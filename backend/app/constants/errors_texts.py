@@ -17,3 +17,4 @@ FILE_CONTENT_TYPE_IS_REQUIRED_IF_FILE_IS_BYTES = (
 STORAGE_TYPE_INVALID = "Invalid storage type. Need to be 'local' or 'firebase'"
 FILE_EXTENSION_IS_MISSING = "File extension is missing. Please, use this function with file as UploadFile object with filename set."
 OCR_EXTRACTION_NOT_FOUND = "OCR extraction not found"
+USER_ALREADY_EXISTS = "Esse email já foi utilizado."

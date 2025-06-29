@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { UseMutationResult } from '@tanstack/react-query';
 import { UserAuth } from '@/utils/types/api/auth';
+import { useToast } from '@/hooks/use-toast';
 
 interface Props {
   type: 'signin' | 'signup';
@@ -21,6 +22,7 @@ export function AuthForm({
 }: React.ComponentPropsWithoutRef<'div'> & Props) {
   const { t } = useTranslation();
   const nav = useNavigate();
+  const { toast } = useToast();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -31,6 +33,13 @@ export function AuthForm({
       })
       .then(() => {
         nav('/');
+      })
+      .catch((error) => {
+        console.error(error);
+        toast({
+          title: t('AUTH_ERROR'),
+          description: t(error.response.data.detail),
+        });
       });
   }
 

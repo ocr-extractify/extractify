@@ -22,6 +22,7 @@ class UserResponse(BaseModel):
 
 
 # TODO: add pagination
+# TODO: fix type errors.
 @users_router.get(
     "/", status_code=status.HTTP_200_OK, response_model=list[UserResponse]
 )

@@ -162,4 +162,5 @@ export const pt_texts = {
   USERS_LIST: 'Lista de usuários',
   FILES_QTY: 'Qtd. de arquivos',
   FILES_SETS_QTY: 'Qtd. de extrações',
+  AUTH_ERROR: 'Erro de autenticação',
 };

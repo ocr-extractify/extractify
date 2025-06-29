@@ -161,4 +161,5 @@ export const en_texts = {
   USERS_LIST: 'Users list',
   FILES_QTY: 'Files qty',
   FILES_SETS_QTY: 'Extractions qty',
+  AUTH_ERROR: 'Authentication error',
 };
