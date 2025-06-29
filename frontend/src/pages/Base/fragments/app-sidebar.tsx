@@ -65,6 +65,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             title: t('LANGUAGE'),
             url: '/settings/language',
           },
+          {
+            title: t('PWD_UPDATE'),
+            url: '/settings/pwd-update',
+          },
         ],
       },
       {

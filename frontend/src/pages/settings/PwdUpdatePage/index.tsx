@@ -1,24 +1,24 @@
 import { Separator } from "@/components/ui/separator"
-import { AppearanceForm } from "./fragments/appearance-form"
 import { useTranslation } from "react-i18next"
-import { PaintbrushIcon } from "lucide-react";
+import { PwdUpdateForm } from "./fragments/pwd-update-form"
+import { LockIcon } from "lucide-react"
 
-export default function SettingsAppearancePage() {
+export default function PwdUpdatePage() {
   const { t } = useTranslation();
   
   return (
     <div className="space-y-6">
       <div>
         <div className="flex items-center gap-2">
-          <PaintbrushIcon className="w-4 h-4" />
-          <h3 className="text-lg font-medium">{t("APPEARANCE")}</h3>
+          <LockIcon className="w-4 h-4" />
+          <h1 className="text-lg font-medium">{t("PWD_UPDATE_TITLE")}</h1>
         </div>
         <p className="text-sm text-muted-foreground">
-          {t("SETTINGS_APPEARANCE_FORM_DESCRIPTION")}
+          {t("PWD_UPDATE_DESCRIPTION")}
         </p>
       </div>
       <Separator />
-      <AppearanceForm />
+      <PwdUpdateForm />
     </div>
   )
 }

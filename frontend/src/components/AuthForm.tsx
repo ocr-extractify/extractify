@@ -85,6 +85,12 @@ export function AuthForm({
                       <Link
                         to="#"
                         className="ml-auto text-sm underline-offset-4 hover:underline"
+                        onClick={() => {
+                          toast({
+                            title: t('RESET_PWD_TITLE'),
+                            description: t('RESET_PWD_DESCRIPTION'),
+                          });
+                        }}
                       >
                         {t('FORGOT_YOUR_PASSWORD')}
                       </Link>

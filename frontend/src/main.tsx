@@ -25,6 +25,8 @@ import { ToastProvider } from '@/components/ui/toast';
 import { Toaster } from '@/components/ui/toaster';
 import ProcessedFilesPage from './pages/stats/ProcessedFiles';
 import UsersPage from './pages/users/UsersPage';
+import PwdResetPage from './pages/auth/PwdResetPage';
+import PwdUpdatePage from './pages/settings/PwdUpdatePage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -43,6 +45,10 @@ const router = createBrowserRouter([
   {
     path: '/auth/signup',
     element: <SignUpPage />,
+  },
+  {
+    path: '/auth/pwd-reset',
+    element: <PwdResetPage />,
   },
   // private routes
   {
@@ -75,6 +81,10 @@ const router = createBrowserRouter([
       {
         path: '/settings/appearance',
         element: <AppearancePage />,
+      },
+      {
+        path: '/settings/pwd-update',
+        element: <PwdUpdatePage />,
       },
       {
         path: '/stats/processed-files',

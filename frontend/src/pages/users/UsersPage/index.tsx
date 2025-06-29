@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { httpClient } from '@/utils/axios';
-import { User, Search, X, Mail, Calendar, Trash2 } from 'lucide-react';
+import { User, Search, X, Mail, Calendar, Trash2, UsersIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
 import { Input } from '@/components/ui/input';
@@ -40,6 +40,8 @@ const TableSkeleton = () => {
               <TableHead className="w-12"></TableHead>
               <TableHead>{t('EMAIL')}</TableHead>
               <TableHead>{t('CREATED_AT')}</TableHead>
+              <TableHead>{t('FILES_QTY')}</TableHead>
+              <TableHead>{t('FILES_SETS_QTY')}</TableHead>
               <TableHead className="w-20">{t('ACTIONS')}</TableHead>
             </TableRow>
           </TableHeader>
@@ -118,7 +120,10 @@ const UsersPage = () => {
   return (
     <div className="w-full max-w-6xl mx-auto p-4 space-y-4">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl">{t('USERS')}</h1>
+        <div className="flex items-center gap-2">
+          <UsersIcon className="w-4 h-4" />
+          <h1 className="text-2xl">{t('USERS')}</h1>
+        </div>
       </div>
 
       <div className="relative">

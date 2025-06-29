@@ -13,6 +13,7 @@ import {
 } from '@/constants/dataExtractionRegexFields';
 import RegexForm, { RegexFormRef } from './fragments/RegexForm';
 import { useNavigate } from 'react-router-dom';
+import { FileText } from 'lucide-react';
 
 function UploadFilesPage() {
   const { t } = useTranslation();
@@ -114,7 +115,10 @@ function UploadFilesPage() {
     <div className="mx-auto w-full">
       <div className="space-y-6">
         <div>
-          <h3 className="text-lg font-medium">{t('CREATE_EXTRACTION')}</h3>
+          <div className="flex items-center gap-2">
+            <FileText className="w-4 h-4" />
+            <h1 className="text-lg font-medium">{t('CREATE_EXTRACTION')}</h1>
+          </div>
           <p className="text-sm text-muted-foreground">
             {t('CREATE_EXTRACTION_DESCRIPTION')}
           </p>

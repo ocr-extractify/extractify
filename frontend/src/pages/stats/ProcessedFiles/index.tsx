@@ -30,7 +30,7 @@ import {
   ChartTooltip,
 } from '@/components/ui/chart';
 import { useTranslation } from 'react-i18next';
-
+import { ChartAreaIcon } from 'lucide-react';
 type RangeType = 'daily' | 'weekly' | 'monthly';
 
 const ProcessedFilesPage = () => {
@@ -106,6 +106,11 @@ const ProcessedFilesPage = () => {
 
   return (
     <div className="container mx-auto">
+      <div className="flex items-center gap-2 mb-2"> 
+        <ChartAreaIcon className="w-4 h-4" />
+        <h1 className="text-2xl">{t('STATS')}</h1>
+      </div>
+
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
