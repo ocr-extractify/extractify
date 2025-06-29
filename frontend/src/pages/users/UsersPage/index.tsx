@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import {  useQuery } from '@tanstack/react-query';
 import { httpClient } from '@/utils/axios';
-import { User, Search, X, Mail, Calendar, Trash2, UsersIcon } from 'lucide-react';
+import { User, Search, X, Mail, Calendar, UsersIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
 import { Input } from '@/components/ui/input';
 import { EmptyState } from '@/components/states/EmptyState';
-import { useToast } from '@/hooks/use-toast';
 import {
   Table,
   TableBody,
@@ -75,7 +74,6 @@ const TableSkeleton = () => {
 
 const UsersPage = () => {
   const { t } = useTranslation();
-  const { toast } = useToast();
   const [searchQuery, setSearchQuery] = useState('');
   
   const users = useQuery({
@@ -83,29 +81,29 @@ const UsersPage = () => {
     queryFn: () => httpClient.get('/users'),
   });
 
-  const deleteMutation = useMutation({
-    mutationKey: ['delete-user'],
-    mutationFn: (id: string) => httpClient.delete(`/users/${id}`),
-    onMutate: () => {
-      toast({
-        title: t('DELETING_USER'),
-        description: t('PLEASE_WAIT'),
-      });
-    },
-    onSuccess: () => {
-      users.refetch();
-      toast({
-        title: t('USER_DELETED_SUCCESSFULLY'),
-      });
-    },
-    onError: () => {
-      toast({
-        title: t('ERROR'),
-        description: t('FAILED_TO_DELETE_USER'),
-        variant: 'destructive',
-      });
-    },
-  });
+  // const deleteMutation = useMutation({
+  //   mutationKey: ['delete-user'],
+  //   mutationFn: (id: string) => httpClient.delete(`/users/${id}`),
+  //   onMutate: () => {
+  //     toast({
+  //       title: t('DELETING_USER'),
+  //       description: t('PLEASE_WAIT'),
+  //     });
+  //   },
+  //   onSuccess: () => {
+  //     users.refetch();
+  //     toast({
+  //       title: t('USER_DELETED_SUCCESSFULLY'),
+  //     });
+  //   },
+  //   onError: () => {
+  //     toast({
+  //       title: t('ERROR'),
+  //       description: t('FAILED_TO_DELETE_USER'),
+  //       variant: 'destructive',
+  //     });
+  //   },
+  // });
 
   const filteredUsers = users?.data?.data?.filter((user: any) =>
     user.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -116,9 +114,9 @@ const UsersPage = () => {
     return new Date(dateString).toLocaleDateString();
   };
 
-  const handleDeleteUser = (userId: string) => {
-    deleteMutation.mutate(userId);
-  };
+  // const handleDeleteUser = (userId: string) => {
+  //   deleteMutation.mutate(userId);
+  // };
 
   if (users.isLoading) {
     return <TableSkeleton />;
