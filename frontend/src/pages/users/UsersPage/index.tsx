@@ -49,13 +49,24 @@ const TableSkeleton = () => {
             {Array.from({ length: 5 }).map((_, index) => (
               <TableRow key={index} className="animate-pulse">
                 <TableCell>
-                  <div className="h-6 bg-gray-200 rounded-full w-16 dark:bg-gray-700"></div>
+                  <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                    <User className="h-4 w-4 text-primary" />
+                  </div>
                 </TableCell>
                 <TableCell>
                   <div className="h-4 bg-gray-200 rounded-md w-24 dark:bg-gray-700"></div>
                 </TableCell>
                 <TableCell>
-                  <div className="h-8 w-8 bg-gray-200 rounded-md dark:bg-gray-700"></div>
+                  <div className="h-4 bg-gray-200 rounded-md w-24 dark:bg-gray-700"></div>
+                </TableCell>
+                <TableCell>
+                  <div className="h-4 bg-gray-200 rounded-md w-24 dark:bg-gray-700"></div>
+                </TableCell>
+                <TableCell>
+                  <div className="h-4 bg-gray-200 rounded-md w-24 dark:bg-gray-700"></div>
+                </TableCell>
+                <TableCell>
+                  <div className="h-4 bg-gray-200 rounded-md w-24 dark:bg-gray-700"></div>
                 </TableCell>
               </TableRow>
             ))}
