@@ -159,7 +159,7 @@ export const pt_texts = {
   USER_DELETED_SUCCESSFULLY: 'Usuário deletado com sucesso.',
   FAILED_TO_DELETE_USER: 'Erro ao deletar usuário.',
   ACTIONS: 'Ações',
-  USERS_LIST: 'Lista de usuários',
+  USERS_LIST: 'Listar usuários',
   FILES_QTY: 'Qtd. de arquivos',
   FILES_SETS_QTY: 'Qtd. de extrações',
   AUTH_ERROR: 'Erro de autenticação',
