@@ -42,7 +42,6 @@ const TableSkeleton = () => {
               <TableHead>{t('CREATED_AT')}</TableHead>
               <TableHead>{t('FILES_QTY')}</TableHead>
               <TableHead>{t('FILES_SETS_QTY')}</TableHead>
-              <TableHead className="w-20">{t('ACTIONS')}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -52,9 +51,6 @@ const TableSkeleton = () => {
                   <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
                     <User className="h-4 w-4 text-primary" />
                   </div>
-                </TableCell>
-                <TableCell>
-                  <div className="h-4 bg-gray-200 rounded-md w-24 dark:bg-gray-700"></div>
                 </TableCell>
                 <TableCell>
                   <div className="h-4 bg-gray-200 rounded-md w-24 dark:bg-gray-700"></div>
@@ -172,7 +168,6 @@ const UsersPage = () => {
                 <TableHead>{t('CREATED_AT')}</TableHead>
                 <TableHead>{t('FILES_QTY')}</TableHead>
                 <TableHead>{t('FILES_SETS_QTY')}</TableHead>
-                <TableHead className="w-20">{t('ACTIONS')}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -203,7 +198,7 @@ const UsersPage = () => {
                   <TableCell>
                     <span>{user.files_sets_qty}</span>
                   </TableCell>
-                  <TableCell>
+                  {/* <TableCell>
                     <Button
                       variant="outline"
                       size="sm"
@@ -213,7 +208,7 @@ const UsersPage = () => {
                     >
                       <Trash2 className="h-4 w-4 text-destructive" />
                     </Button>
-                  </TableCell>
+                  </TableCell> */}
                 </TableRow>
               ))}
             </TableBody>

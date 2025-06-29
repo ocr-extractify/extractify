@@ -171,7 +171,7 @@ export const en_texts = {
   PWD_UPDATE_MIN_LENGTH: 'Password must be at least 3 characters long',
   PWD_UPDATE_TITLE: 'Update password',
   PWD_INPUT_LABEL: 'Password',
-  PWD_INPUT_PLACEHOLDER: 'Enter your password',
+  NEW_PWD_INPUT_PLACEHOLDER: 'Enter your new password',
   PWD_INPUT_SHOW_LABEL: 'Show password',
   PWD_INPUT_HIDE_LABEL: 'Hide password',
   UPDATE_PWD: 'Update password',

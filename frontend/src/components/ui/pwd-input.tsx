@@ -34,7 +34,7 @@ const PwdInput = forwardRef<HTMLInputElement, PwdInputProps>(
             ref={ref}
             id={id}
             className={cn("pe-9", className)}
-            placeholder={props.placeholder || t("PWD_INPUT_PLACEHOLDER")}
+            placeholder={props.placeholder || t("NEW_PWD_INPUT_PLACEHOLDER")}
             type={isVisible ? "text" : "password"}
             disabled={loading}
           />

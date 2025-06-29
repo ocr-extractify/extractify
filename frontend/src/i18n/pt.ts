@@ -172,7 +172,7 @@ export const pt_texts = {
   PWD_UPDATE_MIN_LENGTH: 'A senha deve ter pelo menos 3 caracteres',
   PWD_UPDATE_TITLE: 'Atualizar senha',
   PWD_INPUT_LABEL: 'Senha',
-  PWD_INPUT_PLACEHOLDER: 'Digite sua senha',
+  NEW_PWD_INPUT_PLACEHOLDER: 'Digite sua nova senha',
   PWD_INPUT_SHOW_LABEL: 'Mostrar senha',
   PWD_INPUT_HIDE_LABEL: 'Esconder senha',
   UPDATE_PWD: 'Atualizar senha',
