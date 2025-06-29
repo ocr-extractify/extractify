@@ -24,6 +24,7 @@ import { ThemeProvider } from '@/providers/theme-provider';
 import { ToastProvider } from '@/components/ui/toast';
 import { Toaster } from '@/components/ui/toaster';
 import ProcessedFilesPage from './pages/stats/ProcessedFiles';
+import UsersPage from './pages/users/UsersPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
       {
         path: '/stats/processed-files',
         element: <ProcessedFilesPage />,
+      },
+      {
+        path: '/users/',
+        element: <UsersPage />,
       },
       // 404 fallback for private routes
       {

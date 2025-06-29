@@ -8,6 +8,7 @@ from app.db.models._sqlmodel import SQLModel
 
 if TYPE_CHECKING:
     from app.db.models.file_models.file_model import File
+    from app.db.models.user_model import User
 
 
 class FileOcrExtraction(SQLModel, table=True):
@@ -22,9 +23,7 @@ class FileOcrExtraction(SQLModel, table=True):
     updated_at: datetime = Field(default_factory=datetime.now)
 
     file_id: uuid.UUID = Field(foreign_key="file.id")
-    user_id: uuid.UUID = Field(foreign_key="user.id")
+    user_id: uuid.UUID = Field(foreign_key="user.id", ondelete="CASCADE")
 
     file: "File" = Relationship(back_populates="ocr_extractions")
-
-    class Config:
-        arbitrary_types_allowed = True
+    user: "User" = Relationship(back_populates="ocr_extractions")

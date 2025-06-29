@@ -6,6 +6,7 @@ from app.routes.v1.auth import auth_router
 from app.routes.v1.files import files_router
 from app.routes.v1.stats import stats_router
 from app.routes.v1.storage import storage_router
+from app.routes.v1.users import users_router
 from app.utils.storage import setup_firebase
 from app.utils.middlewares import ExceptionHandlerMiddleware
 from config import config
@@ -31,6 +32,7 @@ app.include_router(auth_router)
 app.include_router(files_router)
 app.include_router(stats_router)
 app.include_router(storage_router)
+app.include_router(users_router)
 
 app.add_middleware(
     CORSMiddleware,

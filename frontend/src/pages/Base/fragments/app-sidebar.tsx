@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Settings2, FileText, ChartLine } from 'lucide-react';
+import { Settings2, FileText, ChartLine, Users } from 'lucide-react';
 import { NavMain } from '@/pages/Base/fragments/nav-main';
 import { NavUser } from '@/pages/Base/fragments/nav-user';
 import { TeamSwitcher } from '@/pages/Base/fragments/team-switcher';
@@ -64,6 +64,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           {
             title: t('LANGUAGE'),
             url: '/settings/language',
+          },
+        ],
+      },
+      {
+        title: t('USERS'),
+        url: '#',
+        icon: Users,
+        items: [
+          {
+            title: t('USERS_LIST'),
+            url: '/users',
           },
         ],
       },

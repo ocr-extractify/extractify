@@ -10,6 +10,7 @@ if TYPE_CHECKING:
     from app.db.models.file_models.file_mimetype_model import FileMimetype
     from app.db.models.file_models.file_ocr_extraction_model import FileOcrExtraction
     from app.db.models.file_models.file_set_model import FileSetLink
+    from app.db.models.user_model import User
 
 
 class FileBase(SQLModel):
@@ -23,16 +24,17 @@ class FileBase(SQLModel):
     updated_at: datetime = Field(default_factory=datetime.now)
 
     mimetype_id: int = Field(foreign_key="file_mimetype.id")
-    user_id: uuid.UUID = Field(foreign_key="user.id")
+    user_id: uuid.UUID = Field(foreign_key="user.id", ondelete="CASCADE")
 
 
 class File(FileBase, table=True):
     mimetype: "FileMimetype" = Relationship(back_populates="files")
+    user: "User" = Relationship(back_populates="files")
     ocr_extractions: list["FileOcrExtraction"] = Relationship(
-        back_populates="file",
+        back_populates="file", cascade_delete=True
     )
-    file_set_link: "FileSetLink" = Relationship(
-        back_populates="file",
+    file_set_links: list["FileSetLink"] = Relationship(
+        back_populates="file", cascade_delete=True
     )
 
     # file: "File" = Relationship(back_populates="file_set_links")
