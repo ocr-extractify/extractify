@@ -27,6 +27,10 @@ import ProcessedFilesPage from './pages/stats/ProcessedFiles';
 import UsersPage from './pages/users/UsersPage';
 import PwdResetPage from './pages/auth/PwdResetPage';
 import PwdUpdatePage from './pages/settings/PwdUpdatePage';
+import { initializeTheme } from '@/lib/theme-utils';
+
+// Initialize custom theme on app start
+initializeTheme();
 
 const queryClient = new QueryClient({
   defaultOptions: {

@@ -175,4 +175,7 @@ export const en_texts = {
   PWD_INPUT_SHOW_LABEL: 'Show password',
   PWD_INPUT_HIDE_LABEL: 'Hide password',
   UPDATE_PWD: 'Update password',
+  COLOR_THEME: 'Color theme',
+  SELECT_COLOR_THEME_DESCRIPTION: 'Select the color theme for the app.',
+  THEME_UPDATED_SUCCESSFULLY: 'Theme updated successfully.',
 };

@@ -176,4 +176,7 @@ export const pt_texts = {
   PWD_INPUT_SHOW_LABEL: 'Mostrar senha',
   PWD_INPUT_HIDE_LABEL: 'Esconder senha',
   UPDATE_PWD: 'Atualizar senha',
+  COLOR_THEME: 'Tema de cor',
+  SELECT_COLOR_THEME_DESCRIPTION: 'Selecione o tema de cor para o aplicativo.',
+  THEME_UPDATED_SUCCESSFULLY: 'Tema atualizado com sucesso.',
 };
