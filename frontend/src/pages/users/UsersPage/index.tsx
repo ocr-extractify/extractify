@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {  useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { httpClient } from '@/utils/axios';
 import { User, Search, X, Mail, Calendar, UsersIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';

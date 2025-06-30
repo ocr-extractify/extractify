@@ -178,4 +178,6 @@ export const en_texts = {
   COLOR_THEME: 'Color theme',
   SELECT_COLOR_THEME_DESCRIPTION: 'Select the color theme for the app.',
   THEME_UPDATED_SUCCESSFULLY: 'Theme updated successfully.',
+  FILE_SET_NAME_IS_REQUIRED: 'File set name is required',
+  FILE_SET_NAME_IS_REQUIRED_DESCRIPTION: 'The file set name cannot be empty.',
 };
