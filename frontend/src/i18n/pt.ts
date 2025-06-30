@@ -180,4 +180,6 @@ export const pt_texts = {
   SELECT_COLOR_THEME_DESCRIPTION: 'Selecione o tema de cor para o aplicativo.',
   THEME_UPDATED_SUCCESSFULLY: 'Tema atualizado com sucesso.',
   FILE_SET_NAME_IS_REQUIRED: 'O nome da extração não pode ser vazio.',
+  TIMEZONE: 'Fuso horário',
+  TIMEZONE_DISPLAY: 'Fuso horário: {{timezone}} ({{abbreviation}})',
 };

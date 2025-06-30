@@ -180,4 +180,6 @@ export const en_texts = {
   THEME_UPDATED_SUCCESSFULLY: 'Theme updated successfully.',
   FILE_SET_NAME_IS_REQUIRED: 'File set name is required',
   FILE_SET_NAME_IS_REQUIRED_DESCRIPTION: 'The file set name cannot be empty.',
+  TIMEZONE: 'Timezone',
+  TIMEZONE_DISPLAY: 'Timezone: {{timezone}} ({{abbreviation}})',
 };

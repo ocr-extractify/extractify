@@ -13,6 +13,8 @@ import {
   startOfMonth,
   endOfMonth,
 } from 'date-fns';
+import { formatInTimeZone, toZonedTime } from 'date-fns-tz';
+import { ptBR, enUS } from 'date-fns/locale';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Select,
@@ -34,7 +36,7 @@ import { ChartAreaIcon } from 'lucide-react';
 type RangeType = 'daily' | 'weekly' | 'monthly';
 
 const ProcessedFilesPage = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const chartConfig = {
     value: {
       label: t('QTY'),
@@ -46,6 +48,23 @@ const ProcessedFilesPage = () => {
     to: endOfDay(new Date()),
   });
   const [rangeType, setRangeType] = useState<RangeType>('daily');
+  
+  const dateLocale = i18n.language === 'pt' ? ptBR : enUS;
+  const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  const formatDateForAPI = (date: Date) => {
+    return formatInTimeZone(date, userTimezone, 'yyyy-MM-dd');
+  };
+  
+  const createTimezoneAwareDate = (date: Date, timeOfDay: 'start' | 'end') => {
+    const zonedDate = toZonedTime(date, userTimezone);
+    if (timeOfDay === 'start') {
+      return startOfDay(zonedDate);
+    } else {
+      return endOfDay(zonedDate);
+    }
+  };
+  
   const getDateRanges = () => {
     switch (rangeType) {
       case 'daily':
@@ -53,28 +72,38 @@ const ProcessedFilesPage = () => {
           start: dateRange.from,
           end: dateRange.to,
         }).map((date) => ({
-          start: startOfDay(date),
-          end: endOfDay(date),
-          label: format(date, 'MMM dd'),
+          start: createTimezoneAwareDate(date, 'start'),
+          end: createTimezoneAwareDate(date, 'end'),
+          label: format(date, 'MMM dd', { locale: dateLocale }),
         }));
       case 'weekly':
         return eachWeekOfInterval({
           start: dateRange.from,
           end: dateRange.to,
-        }).map((date) => ({
-          start: startOfWeek(date),
-          end: endOfWeek(date),
-          label: `Week ${format(date, 'w')}`,
-        }));
+        }).map((date) => {
+          const weekStart = startOfWeek(date);
+          const weekEnd = endOfWeek(date);
+          return {
+            start: createTimezoneAwareDate(weekStart, 'start'),
+            end: createTimezoneAwareDate(weekEnd, 'end'),
+            label: i18n.language === 'pt' 
+              ? `Semana ${format(date, 'w', { locale: dateLocale })}` 
+              : `Week ${format(date, 'w', { locale: dateLocale })}`,
+          };
+        });
       case 'monthly':
         return eachMonthOfInterval({
           start: dateRange.from,
           end: dateRange.to,
-        }).map((date) => ({
-          start: startOfMonth(date),
-          end: endOfMonth(date),
-          label: format(date, 'MMM yyyy'),
-        }));
+        }).map((date) => {
+          const monthStart = startOfMonth(date);
+          const monthEnd = endOfMonth(date);
+          return {
+            start: createTimezoneAwareDate(monthStart, 'start'),
+            end: createTimezoneAwareDate(monthEnd, 'end'),
+            label: format(date, 'MMM yyyy', { locale: dateLocale }),
+          };
+        });
     }
   };
 
@@ -83,10 +112,9 @@ const ProcessedFilesPage = () => {
       queryKey: ['processed-files', range.start, range.end, rangeType],
       queryFn: async () => {
         const response = await httpClient.get(
-          `/stats/processed-files-qty?start_date=${format(
+          `/stats/processed-files-qty?start_date=${formatDateForAPI(
             range.start,
-            'yyyy-MM-dd',
-          )}&end_date=${format(range.end, 'yyyy-MM-dd')}`,
+          )}&end_date=${formatDateForAPI(range.end)}&tz=${userTimezone}`,
         );
         return {
           date: range.label,
@@ -104,6 +132,9 @@ const ProcessedFilesPage = () => {
 
   const total = chartData.reduce((acc, curr) => acc + (curr?.value ?? 0), 0);
 
+  // Get user's timezone for display
+  const timezoneAbbr = formatInTimeZone(new Date(), userTimezone, 'zzz');
+
   return (
     <div className="container mx-auto">
       <div className="flex items-center gap-2 mb-2"> 
@@ -114,7 +145,15 @@ const ProcessedFilesPage = () => {
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
-            <CardTitle>{t('PROCESSED_FILES_TITLE')}</CardTitle>
+            <div className="flex flex-col gap-1">
+              <CardTitle>{t('PROCESSED_FILES_TITLE')}</CardTitle>
+              <p className="text-xs text-muted-foreground">
+                {t('TIMEZONE_DISPLAY', { 
+                  timezone: userTimezone, 
+                  abbreviation: timezoneAbbr 
+                })}
+              </p>
+            </div>
             <div className="flex items-center gap-4">
               <Select
                 value={rangeType}
