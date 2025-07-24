@@ -64,7 +64,7 @@ dependencies = [
     "pydantic==2.10.6",
     "pydantic-core==2.27.2",
     "pydantic-settings==2.8.0",
-    "pygments==2.18.0",
+    "pygments==2.19.2",
     "pyjwt==2.10.1",
     "pymongo==4.11.1",
     "pyparsing==3.2.1",
