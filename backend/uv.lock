@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.13"
 
 [[package]]
@@ -297,7 +297,7 @@ dependencies = [
     { name = "uritemplate" },
     { name = "urllib3" },
     { name = "uvicorn" },
-    { name = "uvloop" },
+    { name = "uvloop", marker = "sys_platform != 'win32'" },
     { name = "watchfiles" },
     { name = "websockets" },
 ]
@@ -386,7 +386,7 @@ requires-dist = [
     { name = "uritemplate", specifier = "==4.1.1" },
     { name = "urllib3", specifier = "==2.3.0" },
     { name = "uvicorn", specifier = "==0.34.3" },
-    { name = "uvloop", specifier = "==0.21.0" },
+    { name = "uvloop", marker = "sys_platform != 'win32'", specifier = "==0.21.0" },
     { name = "watchfiles", specifier = "==1.1.0" },
     { name = "websockets", specifier = "==15.0" },
 ]
