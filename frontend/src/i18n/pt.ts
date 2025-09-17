@@ -14,10 +14,10 @@ export const pt_texts = {
   FILE_INPUT_MIMETYPES: `${VALID_MIMETYPES.join(', ')
     .replaceAll('image/', '')
     .replaceAll('application/', '')} até ${(
-    MAX_FILE_SIZE /
-    1024 /
-    1024
-  ).toString()}MB`,
+      MAX_FILE_SIZE /
+      1024 /
+      1024
+    ).toString()}MB`,
   SUBMIT_BUTTON: 'Converter para texto',
   FILENAME: 'Nome do arquivo',
   FILESIZE: 'Tamanho do arquivo',
@@ -148,7 +148,7 @@ export const pt_texts = {
   NO_REGEX_FIELDS: 'Você precisa adicionar pelo menos um campo regex.',
   FIELD_NAME: 'Nome do campo',
   PLEASE_WAIT: 'Por favor, aguarde...',
-  SELECT_REGEX: 'Selecione uma regex',
+  SELECT_REGEX: 'Selecione um regex',
   FORM_VALIDATION_ERROR: 'Erro de validação do formulário. Por favor, corrija os erros do formulário e tente novamente.',
   USERS: 'Usuários',
   NO_USERS_FOUND: 'Nenhum usuário encontrado',

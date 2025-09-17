@@ -71,13 +71,13 @@ export const dataExtractionRegexFields: DataExtractionRegexFieldSample[] = [
       '\\b(?:AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO)\\b',
   },
   {
-    label: 'Data (várias formas: YYYY‑MM‑DD, DD/MM/YYYY, D MMM YYYY)',
+    label: 'Date (várias formas: YYYY‑MM‑DD, DD/MM/YYYY, D MMM YYYY)',
     name: 'date_generic',
     regex:
       '(?:\\d{4}[/-]\\d{1,2}[/-]\\d{1,2}|\\d{1,2}[/-]\\d{1,2}[/-]\\d{4}|\\d{1,2}\\s+[A-Z]{3}\\s+\\d{4})',
   },
   {
-    label: 'Valor monetário (R$, $, €, etc.)',
+    label: 'Currency (R$, $, €, etc.)',
     name: 'currency',
     regex: '(?:R\\$|\\$|€|£|¥|₩)\\s?\\d{1,3}(?:[\\.,]\\d{3})*(?:[\\.,]\\d{2})?',
   },
