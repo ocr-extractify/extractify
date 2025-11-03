@@ -36,7 +36,7 @@
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
     "i18next": "^24.2.2",
-    "i18next-browser-languagedetector": "^8.0.2",
+    "i18next-browser-languagedetector": "^8.2.0",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.477.0",
     "react": "^19.0.0",
